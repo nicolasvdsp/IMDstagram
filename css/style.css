@@ -1,3 +1,17 @@
 .navbar {
-    background-color: rebeccapurple;
+    height: 60px;
+    background-color: lightslategrey;
+    display: flex;
+    justify-content: space-between;
 }
+
+.navbar__btn {
+    background-color: linen;
+    border-radius: 25px;
+    padding-left: 2em;
+    padding-right: 2em;
+    display: flex;
+    align-items: center;
+}
+
+
