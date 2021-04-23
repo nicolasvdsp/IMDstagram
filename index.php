@@ -16,14 +16,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="style/style.css">
-    <title>Foodstagram</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <title>Dinkstagram</title>
 </head>
 <body>
     
     <nav class="navbar">
         <a class="navbar__btn" href="#">home</a>
-        <a class="nabbar__btn" href="#">new</a>
+        <a class="navbar__btn" href="#">new</a>
         <a class="navbar__btn" href="#">settings</a>
     
     </nav>
