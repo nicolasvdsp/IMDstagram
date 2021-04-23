@@ -22,12 +22,14 @@
 </head>
 <body>
     
-    <nav class="navbar">
-        <a class="navbar__btn" href="#">home</a>
-        <a class="navbar__btn" href="#">new</a>
-        <a class="navbar__btn" href="#">settings</a>
-    
-    </nav>
+    <div class="navigation">
+        <nav class="navbar">
+            <a class="navbar__btn" href="#">Home</a>
+            <a class="navbar__btn" href="#">Add</a>
+            <a class="navbar__btn" href="#">User</a>
+            
+        </nav>
+    </div>
     
 </body>
 </html>
