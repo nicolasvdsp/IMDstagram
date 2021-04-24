@@ -55,7 +55,7 @@
     
         <nav class="navbar">
             <a class="navbar__btn" href="#">Home</a>
-            <a class="navbar__btn" href="#">Add</a>
+            <a class="navbar__btn" href="add.php">Add</a>
             <a class="navbar__btn" href="#">User</a>
             
         </nav>
