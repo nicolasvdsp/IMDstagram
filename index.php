@@ -28,25 +28,30 @@
             <a href="#"><img class="search" src="./assets/icon_search.svg" alt="Search button"/></a>
         </div>
 
-
-        <div class="post">
-            <div class="post__head">
-                <img class="post_userImage" src="assets/cesarAlien.jpg" alt="Profile Picture"/>
-                <p class="post_userName">Fons</p>
-            </div>
-            <img class="post__image" src="<?php echo $post['image']; ?>" alt="Post Image"/>
-            <div class="post__foot">
-                <div class="post__likes">
-                    <a href="#"><img src="assets/icon_likes.svg" alt="Number of likes"/></a>
-                    <span>5</span>
+        <section class="posts">
+            <?php foreach($posts as $post): ?>
+            <div class="post">
+                <div class="post__head">
+                    <img class="post__userImage" src="assets/cesarAlien.jpg" alt="Profile Picture"/>
+                    <a class="post__userName" rel="author">Fons</a>
                 </div>
-                <div class="post__comments">
-                    <a href="#"><img src="assets/icon_comments.svg" alt="Number of comments"/></a>
-                    <span>5</span>
+                <div class="post__content">
+                    <p class="post__text"><?php echo $post['text']; ?></p>
+                    <img class="post__image" src="<?php echo $post['image']; ?>" alt="Post Image"/>
+                </div>
+                <div class="post__foot">
+                    <div class="post__likes">
+                        <a href="#"><img src="assets/icon_likes.svg" alt="Number of likes"/></a>
+                        <span>5</span>
+                    </div>
+                    <div class="post__comments">
+                        <a href="#"><img src="assets/icon_comments.svg" alt="Number of comments"/></a>
+                        <span>5</span>
+                    </div>
                 </div>
             </div>
-        </div>
-
+            <?php endforeach; ?>
+        </section>
     
         <nav class="navbar">
             <a class="navbar__btn" href="#">Home</a>

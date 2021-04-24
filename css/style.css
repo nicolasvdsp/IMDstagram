@@ -13,15 +13,62 @@ body {
 
 
 /* ----- POST ----- */
+.posts {
+    padding-top: 30px;
+}
+.post {
+   width: 325px;
+   background-color: white;
+   border-radius: 10px;
+   margin-bottom: 30px;
+   padding: 15px;
+}
+
+.post__head {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.post__userName {
+    margin-left: 15px;
+    font-weight: bold;
+}
+
+.post__text {
+    margin-bottom: 15px;
+    line-height: 20px;
+}
+
 .post__userImage {
-    display: none;
     width: 28px;
     height: 28px;
+    border-radius: 50px;
 }
 
 .post__image {
-    width: 200px;
+    width: 295px;
+    border-radius: 5px;
 }
+
+.post__foot {
+    margin-top: 20px;
+    display: flex;
+    align-items: flex-start;
+}
+
+.post__likes, .post__comments {
+    display: flex;
+    align-items: center;
+}
+
+.post__likes {
+    margin-right: 20px;
+}
+
+.post__likes a, .post__comments a {
+    margin-right: 5px;
+}
+
 /* ----- END OF POST */
 
 
