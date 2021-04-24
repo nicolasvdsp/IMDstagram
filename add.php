@@ -15,7 +15,7 @@
         </div>
 
         <section class="posts">
-            <div class="post__image">Upload your image📷</div>
+            <a class="post__addImage" href="#">Upload your image 📷</a>
             
         </section>
     

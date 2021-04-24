@@ -1,5 +1,7 @@
 :root {
     --dinkRed: #f16958;
+    --dinkRed_25: #f16a5840;
+    --dinkRed_50: #f16a5880;
     --hoverRed: #c74332;
 }
 
@@ -54,7 +56,7 @@ body {
     border-radius: 50px;
 }
 
-.post__image {
+.post__image, .post__addImage {
     width: 295px;
     border-radius: 5px;
 }
@@ -78,7 +80,24 @@ body {
     margin-right: 5px;
 }
 
-/* ----- END OF POST */
+/* ----- END OF POST ----- */
+
+
+/* ----- NEW POSTS ------*/
+.post__addImage {
+    background-color: var(--dinkRed_25);
+    height: 295px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.1s ease-in-out;
+}
+
+.post__addImage:hover {
+    background-color: var(--dinkRed_50);
+}
+
+/* ----- END OF NEW POSTS -----*/
 
 
 /* ----- NAVBAR ----- */
