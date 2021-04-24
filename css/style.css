@@ -11,6 +11,15 @@ body {
     padding: 30px 25px 60px 25px;
 }
 
+
+/* ----- LOGIN -----*/
+.form__input{
+    
+    background-color: red;
+}
+
+/* ----- END OF LOGIN -----*/
+
 /* ---- HOMESCREEN ----- */
 .header {
     display: flex;

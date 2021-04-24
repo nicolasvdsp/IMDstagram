@@ -14,7 +14,18 @@
     <link rel="stylesheet" type="text/css" href="style/style.css">
 </head>
 <body>
-   <h1>yey</h1>
-    
+    <img src="assets/logo_dinkstagram.svg" alt="Logo Dinkstagram">
+    <div class="login">
+        <form action="" method="GET">
+            <div class="form__input">
+                <label for="email">Email</label>
+                <input type="text" id="email" name="email">
+            </div> 
+            <div class="form__input">
+                <label for="password">Password</label>
+                <input type="text" id="password" name="password">
+            </div> 
+        </form>
+    </div>
 </body>
 </html>
