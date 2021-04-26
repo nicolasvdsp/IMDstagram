@@ -11,6 +11,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
@@ -25,7 +26,9 @@
                 <label for="password">Password</label>
                 <input type="text" id="password" name="password" placeholder="• • • • • • • • • •">
             </div> 
+            <input class="btn--login" type="submit" value="Dink in">
         </form>
+        <a class="login-register">Don't have an account yet? <span>Subscribe here!</span></a>
     </div>
 </body>
 </html>
