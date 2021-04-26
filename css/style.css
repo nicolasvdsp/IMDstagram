@@ -13,9 +13,35 @@ body {
 
 
 /* ----- LOGIN -----*/
-.form__input{
-    
-    background-color: red;
+.login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+.logo--login{
+    margin-top: 150px;
+    width: 225px;
+}
+.form__input * {
+    display: block;
+}
+.form__input label{
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+.form__input input{
+    border: none;
+    display: block;
+    border-radius: 10px;
+    height: 40px;
+    width: 100%;
+    margin-bottom: 15px;
+}
+.form__input input:focus{
+    outline: none;
 }
 
 /* ----- END OF LOGIN -----*/
