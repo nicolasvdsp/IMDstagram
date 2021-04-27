@@ -2,10 +2,12 @@
 * Make a new file "settings.php" in the settings folder.
 * Paste following code in the newly created file:
 
+```
 <?php
 
     const SETTINGS = [
         "db" => [
+        
             "host" => "localhost", //localhost
             "db" => "IMDstagram", //name database
             "port" => 8889, //port, you can find this on phpMyAdmin
@@ -13,23 +15,19 @@
             "password" => "root" //password, root for development purposes
     ]
 ];
+```
 
 * Whenever a connection is required, use: $conn = Db::getConnection();
 * Never commit settings.php (it's already listed in the .gitignore file)
 
 
 
-# voor je begint:
+# Before you start:
 
-! pull voor je aan je code begint
+* Always pull before writing code, so you're always up to date
+* Keep the master branch intact: Test and experiment on a branch, only merge to main when it works
+* When contributing, follow the commit conventions (discord channal)
 
-master branch(moet altijd werkende blijven)
-
-develop branch (tussen branch voor mergen met master)
-
-feature/example(feature branch waar je 1 feature op doen) vb. feature/register
-
-klaar met feature branch pull request naar develop en review door teamleden voor merging (zodat er niets kapot gaat van een andere team lid door merge)
 
 # check
 Bas
