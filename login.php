@@ -28,7 +28,7 @@
             </div> 
             <input class="btn--login" type="submit" value="Dink in">
         </form>
-        <a class="login-register" href="register.php">Don't have an account yet? <span>Subscribe here!</span></a>
+        <a href="register.php" class="login-register" href="register.php">Don't have an account yet? <span>Subscribe here!</span></a>
     </div>
 </body>
 </html>

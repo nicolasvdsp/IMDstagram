@@ -27,6 +27,8 @@ echo"GRAPJAS";
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
 
@@ -44,25 +46,33 @@ echo"GRAPJAS";
 
 
 <!--REGISTRATION FORMULIER-->
-<div class="registration">
-    <form action="" method="POST">
-        <input name= "fullname" id="fullname" type="text" placeholder="Full Name" value="<?php if(isset($_POST['fullname'])) echo $_POST['fullname']; ?>"><br>
-        <input name= "username" id="email" type="text" placeholder="Username" value="<?php if(isset($_POST['username'])) echo $_POST['username']; ?>"><br>
-        <input name= "email" id="email" type="text" placeholder="Email" value="<?php if(isset($_POST['email'])) echo $_POST['email']; ?>"><br>
-        <input name= "password" id="password" type="text" placeholder="Password" value=""><br>
-        <button type="submit" name="submit">Register</button>
-    </form>
-</div>
-
-<!--LOGIN INSTELLINGEN-->
-<div class="loginSettings">
-    <!--AL EEN ACCOUNT?-->
-    <p>Already an account? <a href="login.php">Login</a></p>
-
-</div>
-
-
-
+<div class="login">
+        <img class="logo--login" src="assets/logo_dinkstagram.svg" alt="Logo Dinkstagram">
+        <form action="" method="GET">
+            <div class="form__input">
+                <label for="firstName">First name</label>
+                <input type="text" id="firstName" name="firstName" placeholder="Tony">
+            </div> 
+            <div class="form__input">
+                <label for="lastName">Last name</label>
+                <input type="text" id="lastName" name="lastName" placeholder="Miauwkes">
+            </div> 
+            <div class="form__input">
+                <label for="email">Email</label>
+                <input type="text" id="email" name="email" placeholder="vjtony@w&m.be">
+            </div> 
+            <div class="form__input">
+                <label for="password">Password</label>
+                <input type="text" id="password" name="password" placeholder="• • • • • • • • • •">
+            </div> 
+            <div class="form__input">
+                <label for="passwordRepeat">Password repeat</label>
+                <input type="text" id="passwordRepeat" name="passwordRepeat" placeholder="• • • • • • • • • •">
+            </div> 
+            <input class="btn--login" type="submit" value="Dink in">
+        </form>
+        <a href="register.php" class="login-register" href="register.php">You already have an account? <span>Dink in here!</span></a>
+    </div>
 
 
 </body>
