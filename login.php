@@ -1,7 +1,4 @@
 <?php 
-    ini_set('display_errors', true);
-
-    
 
 
 ?><!DOCTYPE html>
@@ -17,7 +14,7 @@
 <body>
     <div class="login">
         <img class="logo--login" src="assets/logo_dinkstagram.svg" alt="Logo Dinkstagram">
-        <form action="" method="GET">
+        <form action="" method="POST">
             <div class="form__input">
                 <label for="email">Email</label>
                 <input type="text" id="email" name="email" placeholder="vjtony@w&m.be">

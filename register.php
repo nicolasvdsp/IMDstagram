@@ -48,7 +48,7 @@ echo"GRAPJAS";
 <!--REGISTRATION FORMULIER-->
 <div class="login">
         <img class="logo--login" src="assets/logo_dinkstagram.svg" alt="Logo Dinkstagram">
-        <form action="" method="GET">
+        <form action="" method="POST">
             <div class="form__input">
                 <label for="firstName">First name</label>
                 <input type="text" id="firstName" name="firstName" placeholder="Tony">
