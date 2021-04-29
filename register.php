@@ -1,23 +1,18 @@
 <?php
+    ini_set('display_errors', true);
+    //include User and Database class
+    include_once(__DIR__ . "/classes/User.php");
+    include_once(__DIR__ . "/classes/Db.php");
 
-//DE NODIGE CLASSES INCLUDEN
-include_once(__DIR__ . "/classes/User.php");
-include_once(__DIR__ . "/classes/Db.php");
 
-
-//ALS DE POSTS NIET LEEG ZIJN, SPREKEN WE DE SETTERS AAN
-if (empty($_POST)){
-
-echo"GRAPJAS";
-
-  /*  try{
-      $user = new User();
-      $user->setFullname($_POST['fullname']);
-      $user->setUsername($_POST['username']);
-      $user->setEmail($_POST['email']);
-      $user->setPassword($_POST['password']);
-    }*/
-}
+    if (!empty($_POST)){
+        $user = new User();
+        $user->setFirstname($_POST['firstname']);
+        $user->setLastname($_POST['lastname']);
+        $user->setEmail($_POST['email']);
+        $user->setPassword($_POST['password']);
+        $user->register();
+    }
 ?>
 
 <!DOCTYPE html>
@@ -51,11 +46,11 @@ echo"GRAPJAS";
         <form action="" method="POST">
             <div class="form__input">
                 <label for="firstName">First name</label>
-                <input type="text" id="firstName" name="firstName" placeholder="Tony">
+                <input type="text" id="firstName" name="firstname" placeholder="Tony">
             </div> 
             <div class="form__input">
                 <label for="lastName">Last name</label>
-                <input type="text" id="lastName" name="lastName" placeholder="Miauwkes">
+                <input type="text" id="lastName" name="lastname" placeholder="Miauwkes">
             </div> 
             <div class="form__input">
                 <label for="email">Email</label>
