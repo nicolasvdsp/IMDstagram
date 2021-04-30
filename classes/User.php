@@ -13,12 +13,13 @@ class User{
     public function getFirstName() {
         return $this->firstname;
     }
-    // public function updateFirstName($firstname) {
-    //     $conn = Db::getConnection();
-    //     $statement = $conn->prepare("UPDATE users SET firstname = :firstname WHERE id = :id");
-    //     $statement->bindValue(":firstname", $firstname);
-    //     $statement->bindVlaue(":id", $id);
-    // }
+    public function updateFirstName($firstname, $id) {
+        $conn = Db::getConnection();
+        $statement = $conn->prepare("UPDATE users SET firstname = :firstname WHERE id = :id");
+        $statement->bindValue(":firstname", $firstname);
+        $statement->bindValue(":id", $id);
+        $statement->execute();
+    }
 
 
     public function setLastname($lastname) {
@@ -107,6 +108,16 @@ class User{
         $statement->execute();
         $result = $statement->fetch();
         return $result['id'];
+    }
+
+    public static function getUserDataFromId($id){
+        $conn = Db::getConnection();
+        $statement = $conn->prepare("SELECT * FROM users WHERE id = :id");
+        $statement->bindValue(':id', $id);
+        $statement->execute();
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+        return $result;
+
     }
 
     public function startSession($e) {
