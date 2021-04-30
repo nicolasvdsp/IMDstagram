@@ -29,7 +29,14 @@ class User{
 
 
     public function setEmail($email) {
-        if(!empty($email)){
+        $conn = Db::getConnection();
+        $statement = $conn->prepare('SELECT * FROM users WHERE email = :email');
+        $statement->bindValue(':email', $email);
+        $statement->execute();
+        $result = count($statement->fetchAll());
+        echo $result;
+
+        if(!empty($email) && $result === 0){
             $this->email = $email;
             return $this;
         } else {
