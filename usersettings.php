@@ -12,16 +12,13 @@
     }
     
     if(!empty($_POST)) {
-        $userData = User::getUserDataFromId($sessionId);
-        var_dump($userData);
-
+        // var_dump($userData);
+        
         $user = new User();
         $user->updateFirstname($_POST['updateFirstname'], $sessionId);
         // $user->updateLastname($_POST['updateLastname']);
         // $user->updateEmail($_POST['updateEmail']);
-
-        
-        
+        $userData = User::getUserDataFromId($sessionId);
     }
 
 ?><!DOCTYPE html>
