@@ -9,6 +9,8 @@
         header('location: login.php');
     } else{
         $sessionId = $_SESSION['id'];
+        $userData = User::getUserDataFromId($sessionId);
+        echo "dag " . $userData['firstname'] . " met id: " . $_SESSION['id'];
     }
     
     if(!empty($_POST)) {
@@ -16,9 +18,9 @@
         
         $user = new User();
         $user->updateFirstname($_POST['updateFirstname'], $sessionId);
-        // $user->updateLastname($_POST['updateLastname']);
+        $user->updateLastname($_POST['updateLastname'], $sessionId);
         // $user->updateEmail($_POST['updateEmail']);
-        
+
         $userData = User::getUserDataFromId($sessionId);
     }
 
@@ -58,7 +60,7 @@
             </div>
             <input class="btn--login" type="submit" value="Wijzigingen opslaan">
         </form>
-        <a href="register.php" class="login-register" href="register.php">You already have an account? <span>Dink in here!</span></a>
+        <a href="login.php" class="login-register"> <span>Uitloggen</span></a>
     </div>
 
     <nav class="navbar">

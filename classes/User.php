@@ -33,6 +33,13 @@ class User{
     public function getLastname() {
         return $this->lastname;
     }
+    public function updateLastName($lastname, $id) {
+        $conn = Db::getConnection();
+        $statement = $conn->prepare("UPDATE users SET lastname = :lastname WHERE id = :id");
+        $statement->bindValue(":lastname", $lastname);
+        $statement->bindValue(":id", $id);
+        $statement->execute();
+    }
 
 
     public function setEmail($email) {

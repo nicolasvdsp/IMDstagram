@@ -7,7 +7,9 @@
     if(!isset($_SESSION['id'])) {
         header('location: login.php');
     } else{
-        echo $_SESSION['id'];
+        $sessionId = $_SESSION['id'];
+        $userData = User::getUserDataFromId($sessionId);
+        echo "dag " . $userData['firstname'] . " met id: " . $_SESSION['id'];
     }
 
     $conn = Db::getConnection();
