@@ -7,7 +7,7 @@ class User{
             $this->firstname = $firstname;
             return $this;
         } else {
-            throw new Exception("Vul je voornaam in a.u.b.");
+            $errorFn = "Vul je voornaam in a.u.b.";
         }
     }
     public function getFirstName() {
@@ -20,7 +20,7 @@ class User{
             $this->lastname = $lastname;
             return $this;
         } else {
-            throw new Exception("Vul je achternaam in a.u.b.");
+            $errorLn = "Vul je achternaam in a.u.b.";
         }
     }
     public function getLastname() {
@@ -29,18 +29,11 @@ class User{
 
 
     public function setEmail($email) {
-        $conn = Db::getConnection();
-        $statement = $conn->prepare('SELECT * FROM users WHERE email = :email');
-        $statement->bindValue(':email', $email);
-        $statement->execute();
-        $result = count($statement->fetchAll());
-        echo $result;
-
-        if(!empty($email) && $result === 0){
+        if(!empty($email)){
             $this->email = $email;
             return $this;
         } else {
-            throw new Exception("Vul je voornaam in a.u.b.");
+            $errorFn = "Vul je emailadress in a.u.b.";
         }
     }
     public function getEmail() {
@@ -77,14 +70,33 @@ class User{
         $statement->bindValue(":password", $password);
         $statement->execute();
         
-        $this->startSession($email, $firstname, $lastname);
+        $this->startSession($email);
     }
 
-    public function startSession($e, $fn, $ln) {
+    public function canLogin($email, $password) {
+        $conn = Db::getConnection();
+        $statement = $conn->prepare("SELECT * FROM users WHERE email = :email");
+        $statement->bindValue(':email', $email);
+        $statement->execute();
+        $result = $statement->fetch();
+        if(!$result) {
+            return false;
+        }
+
+        $pw_hash = $result['password'];
+        if(password_verify($password, $pw_hash)) {
+            return true;
+            //echo $this->getEmail();
+        } else {
+            return false;
+        }
+
+
+    }
+
+    public function startSession($e) {
         session_start();
         $_SESSION['email'] = $e;
-        $_SESSION['firstname'] = $fn;
-        $_SESSION['lastname'] = $ln;
         header('location: index.php');
     }
 
@@ -100,4 +112,25 @@ class User{
 
 
 
+
+
+    // public function setEmail($email) {
+    //     $conn = Db::getConnection();
+    //     $statement = $conn->prepare('SELECT * FROM users WHERE email = :email');
+    //     $statement->bindValue(':email', $email);
+    //     $statement->execute();
+    //     $result = count($statement->fetchAll());
+    //     echo $result;
+
+    //     if(!empty($email) && $result === 0){
+    //         $this->email = $email;
+    //         echo $email;
+    //         return $this;
+    //     } else {
+    //         $errorFn = "Vul je emailadress in a.u.b.";
+    //     }
+    // }
+    // public function getEmail() {
+    //     return $this->email;
+    // }
 }

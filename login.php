@@ -1,5 +1,23 @@
 <?php 
 
+    ini_set('display_errors', true);
+    include_once(__DIR__ . "/classes/User.php");
+    include_once(__DIR__ . "/classes/Db.php");
+    
+    if(!empty($_POST)) {
+        $user = new User();
+        $user->setEmail($_POST['email']);
+        $user->setPassword($_POST['password']);
+
+        if($user->canLogin($_POST['email'], $_POST['password'])) {
+            $user->startSession($_POST['email']);
+            
+        } else{
+            echo "kaas";
+            $errorLogin = "Email en wachtwoord komen niet overeen";
+        }
+        
+    }
 
 ?><!DOCTYPE html>
 <html lang="en">
@@ -23,6 +41,10 @@
                 <label for="password">Password</label>
                 <input type="text" id="password" name="password" placeholder="• • • • • • • • • •">
             </div> 
+            <?php if(isset($errorLogin)): ?>
+                <p class="fail"><?php echo $errorLogin; ?></p>
+            <?php endif; ?>
+
             <input class="btn--login" type="submit" value="Dink in">
         </form>
         <a href="register.php" class="login-register" href="register.php">Don't have an account yet? <span>Subscribe here!</span></a>
