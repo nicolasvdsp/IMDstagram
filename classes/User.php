@@ -77,18 +77,14 @@ class User{
         $statement->bindValue(":password", $password);
         $statement->execute();
         
-        $this->startSession($email);
+        $this->startSession($email, $firstname, $lastname);
     }
 
-    public function yes($fn){
-        if($fn === "nico"){
-            return true;
-        }
-    }
-
-    public function startSession($s) {
+    public function startSession($e, $fn, $ln) {
         session_start();
-        $_SESSION['email'] = $s;
+        $_SESSION['email'] = $e;
+        $_SESSION['firstname'] = $fn;
+        $_SESSION['lastname'] = $ln;
         header('location: index.php');
     }
 

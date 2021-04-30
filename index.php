@@ -1,6 +1,14 @@
 <?php 
     ini_set('display_errors', true);
     include_once(__DIR__ . "/classes/Db.php");
+    include_once(__DIR__ . "/classes/User.php");
+    
+    session_start();
+    if(isset($_SESSION['email'])) {
+        echo "welcome" . $_SESSION['firstname'];
+    } else{
+        header('location: login.php');
+    }
 
     $conn = Db::getConnection();
     $statement = $conn->prepare("SELECT * FROM post");
