@@ -53,6 +53,13 @@ class User{
     public function getEmail() {
         return $this->email;
     }
+    public function updateEmail($email, $id) {
+        $conn = Db::getConnection();
+        $statement = $conn->prepare("UPDATE users SET email = :email WHERE id = :id");
+        $statement->bindValue(":email", $email);
+        $statement->bindValue(":id", $id);
+        $statement->execute();
+    }
 
 
     public function setPassword($password) {
@@ -64,6 +71,15 @@ class User{
     }
     public function getPassword() {
         return $this->password;
+    }
+
+
+    public function updateBiography($biography, $id){
+        $conn = Db::getConnection();
+        $statement = $conn->prepare("UPDATE users SET bio = :biography WHERE id = :id");
+        $statement->bindValue(":biography", $biography);
+        $statement->bindValue(":id", $id);
+        $statement->execute();
     }
 
     

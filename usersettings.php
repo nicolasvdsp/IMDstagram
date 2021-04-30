@@ -19,6 +19,8 @@
         $user = new User();
         $user->updateFirstname($_POST['updateFirstname'], $sessionId);
         $user->updateLastname($_POST['updateLastname'], $sessionId);
+        $user->updateEmail($_POST['updateEmail'], $sessionId);
+        $user->updateBiography($_POST['updateBiography'], $sessionId);
         // $user->updateEmail($_POST['updateEmail']);
 
         $userData = User::getUserDataFromId($sessionId);
@@ -33,6 +35,7 @@
     <title>Login</title>
     <link rel="stylesheet" type="text/css" href="css/reset.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/temporary.css">
 </head>
 <body>
     <div class="header">
@@ -42,6 +45,14 @@
 
     <div class="login">
         <form action="" method="POST">
+            <div class="form__input input--large">
+                <label for="biography">Biografie</label>
+                <!-- <input type="text" id="biography" name="updateBiography" value="<?php echo $userData['bio']; ?>" placeholder="Schrijf hier iets over jezelf."> -->
+                <!-- <textarea id="biography" name="updateBiography" placeholder="Schrijf hier iets over jezelf"><?php echo $userData['bio'] ?></textarea> -->
+                <div class="grow-wrap">
+                    <textarea id="biography" name="updateBiography" placeholder="Schrijf hier iets over jezelf." onInput="this.parentNode.dataset.replicatedValue = this.value"><?php  echo $userData['bio']; ?></textarea>
+                </div>    
+            </div> 
             <div class="form__input">
                 <label for="firstName">First name</label>
                 <input type="text" id="firstName" name="updateFirstname" value="<?php echo $userData['firstname'] ?>" placeholder="<?php echo $userData['firstname']; ?>">
