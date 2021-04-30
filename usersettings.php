@@ -44,15 +44,15 @@
         <form action="" method="POST">
             <div class="form__input">
                 <label for="firstName">First name</label>
-                <input type="text" id="firstName" name="updateFirstname" placeholder="<?php echo $userData['firstname']; ?>">
+                <input type="text" id="firstName" name="updateFirstname" value="<?php echo $userData['firstname'] ?>" placeholder="<?php echo $userData['firstname']; ?>">
             </div> 
             <div class="form__input">
                 <label for="lastName">Last name</label>
-                <input type="text" id="lastName" name="updateLastname" placeholder="<?php echo $userData['lastname']; ?>">
+                <input type="text" id="lastName" name="updateLastname" value="<?php echo $userData['lastname'] ?>" placeholder="<?php echo $userData['lastname']; ?>">
             </div> 
             <div class="form__input">
                 <label for="email">Email</label>
-                <input type="text" id="email" name="updateEmail" placeholder="<?php echo $userData['email']; ?>">
+                <input type="text" id="email" name="updateEmail" value="<?php echo $userData['email'] ?>" placeholder="<?php echo $userData['email']; ?>">
             </div> 
             <div class="form__input">
                 <label for="password">Password</label>
