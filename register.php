@@ -6,12 +6,16 @@
 
 
     if (!empty($_POST)){
-        $user = new User();
-        $user->setFirstname($_POST['firstname']);
-        $user->setLastname($_POST['lastname']);
-        $user->setEmail($_POST['email']);
-        $user->setPassword($_POST['password']);
-        $user->register();
+        if($_POST['password'] === $_POST['passwordRepeat']){
+            $user = new User();
+            $user->setFirstname($_POST['firstname']);
+            $user->setLastname($_POST['lastname']);
+            $user->setEmail($_POST['email']);
+            $user->setPassword($_POST['password']);
+            $user->register();
+        } else {
+            $errorPasswords = "Wachtwoorden komen niet overeen";
+        }
     }
 ?>
 
