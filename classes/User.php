@@ -3,8 +3,12 @@ include_once(__DIR__ . "/Db.php");
 class User{
     /* --- GETTERS - SETTERS - UPDATERS --- */
     public function setFirstName($firstname) {
-        $this->firstname = $firstname;
-        return $this;
+        if(!empty($firstname)){
+            $this->firstname = $firstname;
+            return $this;
+        } else {
+            throw new Exception("Vul je voornaam in a.u.b.");
+        }
     }
     public function getFirstName() {
         return $this->firstname;
@@ -12,8 +16,12 @@ class User{
 
 
     public function setLastname($lastname) {
-        $this->lastname = $lastname;
-        return $this;
+        if(!empty($lastname)){
+            $this->lastname = $lastname;
+            return $this;
+        } else {
+            throw new Exception("Vul je achternaam in a.u.b.");
+        }
     }
     public function getLastname() {
         return $this->lastname;
@@ -21,8 +29,12 @@ class User{
 
 
     public function setEmail($email) {
-        $this->email = $email;
-        return $this;
+        if(!empty($email)){
+            $this->email = $email;
+            return $this;
+        } else {
+            throw new Exception("Vul je voornaam in a.u.b.");
+        }
     }
     public function getEmail() {
         return $this->email;
