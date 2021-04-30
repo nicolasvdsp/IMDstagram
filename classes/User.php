@@ -13,6 +13,12 @@ class User{
     public function getFirstName() {
         return $this->firstname;
     }
+    // public function updateFirstName($firstname) {
+    //     $conn = Db::getConnection();
+    //     $statement = $conn->prepare("UPDATE users SET firstname = :firstname WHERE id = :id");
+    //     $statement->bindValue(":firstname", $firstname);
+    //     $statement->bindVlaue(":id", $id);
+    // }
 
 
     public function setLastname($lastname) {
@@ -94,9 +100,18 @@ class User{
 
     }
 
+    public static function getIdByEmail($email){
+        $conn = Db::getConnection();
+        $statement = $conn->prepare("SELECT id FROM users WHERE email = :email");
+        $statement->bindValue(':email', $email);
+        $statement->execute();
+        $result = $statement->fetch();
+        return $result['id'];
+    }
+
     public function startSession($e) {
         session_start();
-        $_SESSION['email'] = $e;
+        $_SESSION['id'] = $e;
         header('location: index.php');
     }
 

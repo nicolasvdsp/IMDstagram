@@ -21,8 +21,8 @@
     
         <nav class="navbar">
             <a class="navbar__btn" href="index.php">Home</a>
-            <a class="navbar__btn" href="#">Add</a>
-            <a class="navbar__btn" href="#">User</a>
+            <a class="navbar__btn" href="add.php">Add</a>
+            <a class="navbar__btn" href="usersettings.php">User</a>
             
         </nav>
     

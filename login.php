@@ -9,8 +9,12 @@
         $user->setEmail($_POST['email']);
         $user->setPassword($_POST['password']);
 
+
+
         if($user->canLogin($_POST['email'], $_POST['password'])) {
-            $user->startSession($_POST['email']);
+            $id = User::getIdByEmail($user->getEmail());
+            $user->startSession($id);
+            
             
         } else{
             echo "kaas";

@@ -4,10 +4,10 @@
     include_once(__DIR__ . "/classes/User.php");
     
     session_start();
-    if(isset($_SESSION['email'])) {
-        echo "welcome" . $_SESSION['firstname'];
-    } else{
+    if(!isset($_SESSION['id'])) {
         header('location: login.php');
+    } else{
+        echo $_SESSION['id'];
     }
 
     $conn = Db::getConnection();
@@ -62,9 +62,9 @@
         </section>
     
         <nav class="navbar">
-            <a class="navbar__btn" href="#">Home</a>
+            <a class="navbar__btn" href="index.php">Home</a>
             <a class="navbar__btn" href="add.php">Add</a>
-            <a class="navbar__btn" href="#">User</a>
+            <a class="navbar__btn" href="usersettings.php">User</a>
             
         </nav>
     
