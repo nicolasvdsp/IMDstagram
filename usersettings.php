@@ -18,6 +18,7 @@
         $user->updateFirstname($_POST['updateFirstname'], $sessionId);
         // $user->updateLastname($_POST['updateLastname']);
         // $user->updateEmail($_POST['updateEmail']);
+        
         $userData = User::getUserDataFromId($sessionId);
     }
 
