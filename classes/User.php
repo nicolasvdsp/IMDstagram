@@ -100,7 +100,7 @@ class User{
         $statement->bindValue(":password", $password);
         $statement->execute();
         
-        $this->startSession($email);
+        //$this->startSession($email);
     }
 
     public function canLogin($email, $password) {

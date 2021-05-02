@@ -14,6 +14,9 @@
                 $user->setEmail($_POST['email']);
                 $user->setPassword($_POST['password']);
                 $user->register();
+                $id = User::getIdByEmail($user->getEmail());
+                $user->startSession($id);
+
             } else {
                 $errorPasswords = "Wachtwoorden komen niet overeen";
             }

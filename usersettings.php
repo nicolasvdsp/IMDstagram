@@ -45,6 +45,10 @@
 
     <div class="login">
         <form action="" method="POST">
+        <div class="form__input">
+                <label for="profilePicture">Profile picture</label>
+                <input type="text" id="profilePicture" name="profilePicture" value="<?php echo $userData['profile_picture'] ?>" placeholder="<?php echo $userData['firstname']; ?>">
+            </div> 
             <div class="form__input input--large">
                 <label for="biography">Biografie</label>
                 <!-- <input type="text" id="biography" name="updateBiography" value="<?php echo $userData['bio']; ?>" placeholder="Schrijf hier iets over jezelf."> -->
