@@ -2,7 +2,7 @@
     ini_set('display_errors', true);
     include_once(__DIR__ . "/classes/Db.php");
     include_once(__DIR__ . "/classes/User.php");
-    
+ 
     session_start();
     if(!isset($_SESSION['id'])) {
         header('location: login.php');
@@ -22,7 +22,19 @@
         // echo "<img class='post__image' src='". $post['image'] ."' alt='post image'/>";
     }
 
-?><!DOCTYPE html>
+    if(isset($_POST["submit"])){
+        $conn = Db::getConnection();
+        $str = $_POST["search"];
+        $sth = $conn->prepare("SELECT * FROM 'post' WHERE Name= ''$str");
+
+        $sth->setFecthMode(PDO::FETCH_OBJ);
+        $sth->execute();
+    }
+
+?>
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -37,6 +49,16 @@
             <img class="logo" src="./assets/logo_dinkstagram.svg" alt="Logo Dinkstagram"/>
             <a href="#"><img class="search" src="./assets/icon_search.svg" alt="Search button"/></a>
         </div>
+
+        <!--SEARCH-->
+        <form class="search" method="POST">
+            <label>Search</label>
+            <input type="text" name="search">
+            <input type="submit" name="submit">
+        </form>
+
+
+
 
         <section class="posts">
             <?php foreach($posts as $post): ?>
