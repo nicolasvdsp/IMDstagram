@@ -3,17 +3,21 @@
     include_once(__DIR__ . "/classes/Db.php");
     include_once(__DIR__ . "/classes/User.php");
     
-    session_start();
+    /*session_start();
     if(isset($_SESSION['email'])) {
         echo "welcome" . $_SESSION['firstname'];
     } else{
         header('location: login.php');
-    }
+    }*/
 
     $conn = Db::getConnection();
     $statement = $conn->prepare("SELECT * FROM post");
     $statement->execute();
     $posts = $statement->fetchAll();
+
+    $statement = $conn->prepare("SELECT * FROM users");
+    $statement->execute();
+    $user = $statement->fetch();
 
     foreach($posts as $post){
         // echo $post['text'];
@@ -39,9 +43,11 @@
         <section class="posts">
             <?php foreach($posts as $post): ?>
             <div class="post">
+                
                 <div class="post__head">
-                    <img class="post__userImage" src="assets/cesarAlien.jpg" alt="Profile Picture"/>
-                    <a class="post__userName" rel="author">Fons</a>
+                    <img class="post__userImage" src="<?php echo $user["profile_picture"]; ?>" alt="Profile Picture"/>
+                    <a href="profile.php?id=<?php echo $user['id']; ?>" class="post__userName" rel="author"><?php echo $user['firstname']; ?></a>
+                    
                 </div>
                 <div class="post__content">
                     <p class="post__text"><?php echo $post['text']; ?></p>
