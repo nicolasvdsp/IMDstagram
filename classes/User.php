@@ -13,6 +13,13 @@ class User{
     public function getFirstName() {
         return $this->firstname;
     }
+    public function updateFirstName($firstname, $id) {
+        $conn = Db::getConnection();
+        $statement = $conn->prepare("UPDATE users SET firstname = :firstname WHERE id = :id");
+        $statement->bindValue(":firstname", $firstname);
+        $statement->bindValue(":id", $id);
+        $statement->execute();
+    }
 
 
     public function setLastname($lastname) {
@@ -25,6 +32,13 @@ class User{
     }
     public function getLastname() {
         return $this->lastname;
+    }
+    public function updateLastName($lastname, $id) {
+        $conn = Db::getConnection();
+        $statement = $conn->prepare("UPDATE users SET lastname = :lastname WHERE id = :id");
+        $statement->bindValue(":lastname", $lastname);
+        $statement->bindValue(":id", $id);
+        $statement->execute();
     }
 
 
@@ -39,6 +53,13 @@ class User{
     public function getEmail() {
         return $this->email;
     }
+    public function updateEmail($email, $id) {
+        $conn = Db::getConnection();
+        $statement = $conn->prepare("UPDATE users SET email = :email WHERE id = :id");
+        $statement->bindValue(":email", $email);
+        $statement->bindValue(":id", $id);
+        $statement->execute();
+    }
 
 
     public function setPassword($password) {
@@ -50,6 +71,15 @@ class User{
     }
     public function getPassword() {
         return $this->password;
+    }
+
+
+    public function updateBiography($biography, $id){
+        $conn = Db::getConnection();
+        $statement = $conn->prepare("UPDATE users SET bio = :biography WHERE id = :id");
+        $statement->bindValue(":biography", $biography);
+        $statement->bindValue(":id", $id);
+        $statement->execute();
     }
 
     
@@ -70,7 +100,7 @@ class User{
         $statement->bindValue(":password", $password);
         $statement->execute();
         
-        $this->startSession($email);
+        //$this->startSession($email);
     }
 
     public function canLogin($email, $password) {
@@ -94,9 +124,28 @@ class User{
 
     }
 
+    public static function getIdByEmail($email){
+        $conn = Db::getConnection();
+        $statement = $conn->prepare("SELECT id FROM users WHERE email = :email");
+        $statement->bindValue(':email', $email);
+        $statement->execute();
+        $result = $statement->fetch();
+        return $result['id'];
+    }
+
+    public static function getUserDataFromId($id){
+        $conn = Db::getConnection();
+        $statement = $conn->prepare("SELECT * FROM users WHERE id = :id");
+        $statement->bindValue(':id', $id);
+        $statement->execute();
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+        return $result;
+
+    }
+
     public function startSession($e) {
         session_start();
-        $_SESSION['email'] = $e;
+        $_SESSION['id'] = $e;
         header('location: index.php');
     }
 

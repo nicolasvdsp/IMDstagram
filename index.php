@@ -3,12 +3,14 @@
     include_once(__DIR__ . "/classes/Db.php");
     include_once(__DIR__ . "/classes/User.php");
     
-    /*session_start();
-    if(isset($_SESSION['email'])) {
-        echo "welcome" . $_SESSION['firstname'];
-    } else{
+    session_start();
+    if(!isset($_SESSION['id'])) {
         header('location: login.php');
-    }*/
+    } else{
+        $sessionId = $_SESSION['id'];
+        $userData = User::getUserDataFromId($sessionId);
+        echo "dag " . $userData['firstname'] . " met id: " . $_SESSION['id'];
+    }
 
     $conn = Db::getConnection();
     $statement = $conn->prepare("SELECT * FROM post");
@@ -68,9 +70,9 @@
         </section>
     
         <nav class="navbar">
-            <a class="navbar__btn" href="#">Home</a>
+            <a class="navbar__btn" href="index.php">Home</a>
             <a class="navbar__btn" href="add.php">Add</a>
-            <a class="navbar__btn" href="#">User</a>
+            <a class="navbar__btn" href="usersettings.php">User</a>
             
         </nav>
     

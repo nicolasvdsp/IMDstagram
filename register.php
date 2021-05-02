@@ -14,6 +14,9 @@
                 $user->setEmail($_POST['email']);
                 $user->setPassword($_POST['password']);
                 $user->register();
+                $id = User::getIdByEmail($user->getEmail());
+                $user->startSession($id);
+
             } else {
                 $errorPasswords = "Wachtwoorden komen niet overeen";
             }
@@ -74,7 +77,7 @@
             </div> 
             <input class="btn--login" type="submit" value="Dink in">
         </form>
-        <a href="register.php" class="login-register" href="register.php">You already have an account? <span>Dink in here!</span></a>
+        <a href="login.php" class="login-register">You already have an account? <span>Dink in here!</span></a>
     </div>
 
 
