@@ -13,8 +13,7 @@
     }
 
     $conn = Db::getConnection();
-    $statement = $conn->prepare("SELECT * FROM post ORDER BY created_time DESC limit 20; 
-    ");
+    $statement = $conn->prepare("SELECT * FROM post ORDER BY created_time DESC limit 20");
     $statement->execute();
     $posts = $statement->fetchAll();
 

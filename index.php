@@ -13,7 +13,7 @@
     }
 
     $conn = Db::getConnection();
-    $statement = $conn->prepare("SELECT * FROM post");
+    $statement = $conn->prepare("SELECT * FROM post ORDER BY created_time DESC limit 20");
     $statement->execute();
     $posts = $statement->fetchAll();
 
@@ -22,7 +22,8 @@
         // echo "<img class='post__image' src='". $post['image'] ."' alt='post image'/>";
     }
 
-?><!DOCTYPE html>
+?>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -59,8 +60,12 @@
                         <span>5</span>
                     </div>
                 </div>
-            </div>
+            </div>  
             <?php endforeach; ?>
+        </section>
+
+        <section class="posts">
+                <a href=""><button>Load more</button></a>
         </section>
     
         <nav class="navbar">
