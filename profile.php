@@ -3,15 +3,10 @@ include_once(__DIR__ . "/classes/Db.php");
 include_once(__DIR__. "/classes/User.php");
 //echo $id;
 
-$users_id = $_GET['id'];
-$userData = User::getUserDataFromId($users_id);
-
 $conn = Db::getConnection();
 
-/*$statement = $conn->prepare("SELECT * FROM users");
-$statement->execute();
-$user = $statement->fetch();*/
-
+$users_id = $_GET['id'];
+$userData = User::getUserDataFromId($users_id);
 
 $statement = $conn->prepare("SELECT * FROM post WHERE users_id = :id");
 $statement->bindValue(':id', $users_id);
@@ -28,6 +23,7 @@ $posts = $statement->fetchAll();
   <title>Dinkstagram</title>
   <link rel="stylesheet" type="text/css" href="css/reset.css">
   <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="stylesheet" type="text/css" href="css/profile.css">
 </head>
 
 <body>
@@ -36,19 +32,19 @@ $posts = $statement->fetchAll();
     <a href="#"><img class="search" src="./assets/icon_search.svg" alt="Search button" /></a>
   </div>
 
-  <div class="posts">
-    <div class="post__head">
+  <div class="user__profile">
+    <div class="user__head">
       <img class="post__userImage" src="<?php echo $userData['profile_picture'] ?>" alt="Profile Picture" />
-      <p class="post__userName"><?php echo $userData['firstname']; ?></p>
-      <p class="post__userName"><?php echo $userData['lastname']; ?></p>
+      <p class="user__userName"><?php echo $userData['firstname']; ?></p>
+      <p class="user__lastName"><?php echo $userData['lastname']; ?></p>
     </div>
 
-    <p class="user_bio"><?php echo $userData['bio']; ?></p>
-    <a class="user_website"><?php echo $userData['website']; ?></a>
+    <p class="user__bio"><?php echo $userData['bio']; ?></p>
+    <a class="user__website"><?php echo $userData['website']; ?></a>
 
-    <div class="post_collection">
+    <div class="post__collection">
       <?php foreach ($posts as $post) : ?>
-        <img class="post__image" src="<?php echo $post['image']; ?>" alt="Post Image" />
+        <img class="profile__image" src="<?php echo $post['image']; ?>" alt="Post Image" />
       <?php endforeach; ?>
     </div>
   </div>

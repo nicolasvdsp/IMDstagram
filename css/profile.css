@@ -1,0 +1,52 @@
+/* ----- PROFILE PAGE ----- */
+
+.user__profile {
+    padding-top: 30px;
+    padding-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    margin: 2em 10em;
+    border-radius: 1em;
+}
+
+.user__head {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.post__collection {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    padding: 10px;
+}
+
+.profile__image{
+    padding: 10px;
+    border-radius: 1em;
+    width: 225px;
+}
+
+.user__userName {
+    margin-left: 15px;
+    font-weight: bold;
+}
+
+.user__lastName {
+    margin-left: 5px;
+    font-weight: bold;
+}
+
+.user__bio{
+    margin-bottom: 5px;
+}
+
+.user__website{
+    color: rebeccapurple;
+}
+
+/* ----- END OF PROFILE PAGE ----- */

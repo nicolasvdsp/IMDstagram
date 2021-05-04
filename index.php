@@ -17,8 +17,11 @@
     $statement->execute();
     $posts = $statement->fetchAll();
 
-    $statement = $conn->prepare("SELECT * FROM users");
-    
+    //$users = $_GET['id'];
+    //$user = User::getUserDataFromId($users);
+
+    $statement = $conn->prepare("SELECT * FROM users, post WHERE users.id = post.users_id");
+    //$statement->bindValue(':id', $users);
     $statement->execute();
     $user = $statement->fetch();
 
@@ -50,8 +53,8 @@
                 <div class="post__head">
                     <img class="post__userImage" src="<?php echo $user["profile_picture"]; ?>" alt="Profile Picture"/>
                     <a href="profile.php?id=<?php echo $user['id']; ?>" class="post__userName" rel="author"><?php echo $user['firstname']; ?></a>
-                    
                 </div>
+
                 <div class="post__content">
                     <p class="post__text"><?php echo $post['text']; ?></p>
                     <img class="post__image" src="<?php echo $post['image']; ?>" alt="Post Image"/>
