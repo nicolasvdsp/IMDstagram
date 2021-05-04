@@ -18,6 +18,7 @@
     $posts = $statement->fetchAll();
 
     $statement = $conn->prepare("SELECT * FROM users");
+    
     $statement->execute();
     $user = $statement->fetch();
 

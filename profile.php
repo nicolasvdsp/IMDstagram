@@ -1,17 +1,22 @@
 <?php
 include_once(__DIR__ . "/classes/Db.php");
-$id = $_GET['id'];
+include_once(__DIR__. "/classes/User.php");
 //echo $id;
+
+$users_id = $_GET['id'];
+$userData = User::getUserDataFromId($users_id);
 
 $conn = Db::getConnection();
 
-$statement = $conn->prepare("SELECT * FROM users WHERE id = $id");
+/*$statement = $conn->prepare("SELECT * FROM users");
 $statement->execute();
-$user = $statement->fetch();
+$user = $statement->fetch();*/
 
-$statement = $conn->prepare("SELECT * FROM post, users WHERE post.users_id = users.id");
 
+$statement = $conn->prepare("SELECT * FROM post WHERE users_id = :id");
+$statement->bindValue(':id', $users_id);
 $statement->execute();
+
 $posts = $statement->fetchAll();
 ?>
 
@@ -33,13 +38,13 @@ $posts = $statement->fetchAll();
 
   <div class="posts">
     <div class="post__head">
-      <img class="post__userImage" src="<?php echo $user['profile_picture'] ?>" alt="Profile Picture" />
-      <p class="post__userName"><?php echo $user['firstname']; ?></p>
-      <p class="post__userName"><?php echo $user['lastname']; ?></p>
+      <img class="post__userImage" src="<?php echo $userData['profile_picture'] ?>" alt="Profile Picture" />
+      <p class="post__userName"><?php echo $userData['firstname']; ?></p>
+      <p class="post__userName"><?php echo $userData['lastname']; ?></p>
     </div>
 
-    <p class="user_bio"><?php echo $user['bio']; ?></p>
-    <a class="user_website"><?php echo $user['website']; ?></a>
+    <p class="user_bio"><?php echo $userData['bio']; ?></p>
+    <a class="user_website"><?php echo $userData['website']; ?></a>
 
     <div class="post_collection">
       <?php foreach ($posts as $post) : ?>
