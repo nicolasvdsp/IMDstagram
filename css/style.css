@@ -22,7 +22,7 @@ body {
 
 .logo--login{
     margin-top: 100px;
-    margin-bottom: 120px;
+    margin-bottom: 60px;
     width: 225px;
 }
 .form__input * {
@@ -49,6 +49,18 @@ body {
     outline: none;
     text-indent: 15px;
 }
+
+.form__hideShow{
+    position: relative;
+    width: 45px;
+    top: -46px;
+    left: 220px;
+    padding: 3px;
+    background-color: var(--dinkRed);
+    color: white;
+    border-radius: 5px;
+}
+
 .btn--login {
     background-color: var(--dinkRed);
     height: 40px;

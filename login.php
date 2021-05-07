@@ -43,7 +43,7 @@
             </div> 
             <div class="form__input">
                 <label for="password">Password</label>
-                <input type="text" id="password" name="password" placeholder="• • • • • • • • • •">
+                <input type="password" id="password" name="password" placeholder="• • • • • • • • • •">
             </div> 
             <?php if(isset($errorLogin)): ?>
                 <p class="fail"><?php echo $errorLogin; ?></p>

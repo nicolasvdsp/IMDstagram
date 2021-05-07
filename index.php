@@ -9,7 +9,7 @@
     } else{
         $sessionId = $_SESSION['id'];
         $userData = User::getUserDataFromId($sessionId);
-        echo "dag " . $userData['firstname'] . " met id: " . $_SESSION['id'];
+        echo "dag " . $userData['lastname'] . " met id: " . $_SESSION['id'];
     }
 
     $conn = Db::getConnection();
