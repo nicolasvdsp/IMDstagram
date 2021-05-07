@@ -7,7 +7,8 @@ class User{
             $this->firstname = $firstname;
             return $this;
         } else {
-            $errorFn = "Vul je voornaam in a.u.b.";
+            throw new Exception("vul je voornaam in");
+            //$errorFn = "Vul je voornaam in a.u.b.";
         }
     }
     public function getFirstName() {
@@ -27,7 +28,8 @@ class User{
             $this->lastname = $lastname;
             return $this;
         } else {
-            $errorLn = "Vul je achternaam in a.u.b.";
+            throw new Exception("vul je achternaam in");
+            //$errorLn = "Vul je achternaam in a.u.b.";
         }
     }
     public function getLastname() {
@@ -72,6 +74,17 @@ class User{
     public function getPassword() {
         return $this->password;
     }
+    public function updatePassword($password, $id) {
+        $option = [
+            'cost' => 12,
+        ];
+        $newPassword = password_hash($password, PASSWORD_DEFAULT, $option);
+        $conn = Db::getConnection();
+        $statement = $conn->prepare("UPDATE users SET password = :password WHERE id = :id");
+        $statement->bindValue(":password", $newPassword);
+        $statement->bindValue(":id", $id);
+        $statement->execute();
+    }
 
 
     public function updateBiography($biography, $id){
@@ -81,6 +94,19 @@ class User{
         $statement->bindValue(":id", $id);
         $statement->execute();
     }
+
+    // public function updateProfilePicture($profilePicture, $id) {
+    //     $conn = Db::getConnection();
+    //     $statement = $conn->prepare("UPDATE users SET profile_picture = :profilePicture WHERE id = :id");
+    //     $statement->bindValue(":profilePicture", $profilePicture);
+    //     $statement->bindValue(":id", $id);
+    //     $statement->execute();
+    // }
+    
+    
+    // public function getProfilePicture() {
+    //     return $this->profilePicture;
+    // }
 
     
 

@@ -21,6 +21,7 @@
         $user->updateLastname($_POST['updateLastname'], $sessionId);
         $user->updateEmail($_POST['updateEmail'], $sessionId);
         $user->updateBiography($_POST['updateBiography'], $sessionId);
+        $user->updatePassword($_POST['updatePassword'], $sessionId);
         // $user->updateEmail($_POST['updateEmail']);
 
         $userData = User::getUserDataFromId($sessionId);
@@ -32,7 +33,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Settings</title>
     <link rel="stylesheet" type="text/css" href="css/reset.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/temporary.css">
@@ -44,10 +45,10 @@
     </div>
 
     <div class="login">
-        <form action="" method="POST">
+        <form action="" method="POST" enctype="multipart/form-data">
         <div class="form__input">
                 <label for="profilePicture">Profile picture</label>
-                <input type="text" id="profilePicture" name="profilePicture" value="<?php echo $userData['profile_picture'] ?>" placeholder="<?php echo $userData['firstname']; ?>">
+                <input type="file" id="profilePicture" name="profilePicture">
             </div> 
             <div class="form__input input--large">
                 <label for="biography">Biografie</label>
