@@ -8,15 +8,48 @@
     if(!isset($_SESSION['id'])) {
         header('location: login.php');
     } else{
+        $user = new User();
         $sessionId = $_SESSION['id'];
         $userData = User::getUserDataFromId($sessionId);
         echo "dag " . $userData['firstname'] . " met id: " . $_SESSION['id'];
     }
-    
     if(!empty($_POST)) {
+
+    if(isset($_FILES['profilePicture'])) {
+        $file = $_FILES['profilePicture'];
+        
+        $fileName = $_FILES['profilePicture']['name'];
+        $fileTmpName = $_FILES['profilePicture']['tmp_name'];
+        $fileSize = $_FILES['profilePicture']['size'];
+        $fileError = $_FILES['profilePicture']['error'];
+        $fileError = $_FILES['profilePicture']['type'];
+        $fileExtention = strtolower(end(explode('.', $fileName)));
+
+        $allowedExtentions = [
+            'jpg',
+            'jpeg',
+            'png',
+            'gif'
+        ];
+
+        if(in_array($fileExtention, $allowedExtentions)) {
+            if($fileSize < 2097152) {
+                $profilePicture = uniqid('',true) . '.' . $fileExtention;
+                $fileDestination = 'profile_pictures/' . $profilePicture;
+                move_uploaded_file($fileTmpName, $fileDestination);
+                $user->updateProfilePicture($profilePicture, $sessionId);
+                header('refresh:0');
+            } else {
+                $errorFileSize = true;
+            }
+        } else{
+            $errorExtention = true;
+        }
+    }
+    
+    // if(!empty($_POST)) {
         // var_dump($userData);
         
-        $user = new User();
         $user->updateFirstname($_POST['updateFirstname'], $sessionId);
         $user->updateLastname($_POST['updateLastname'], $sessionId);
         $user->updateEmail($_POST['updateEmail'], $sessionId);
@@ -46,9 +79,11 @@
 
     <div class="login">
         <form action="" method="POST" enctype="multipart/form-data">
-        <div class="form__input">
+            <div class="form__input">
                 <label for="profilePicture">Profile picture</label>
+                <img class="form__image" src="profile_pictures/<?php echo $profilePicture; ?>" alt="Profile picture">
                 <input type="file" id="profilePicture" name="profilePicture">
+
             </div> 
             <div class="form__input input--large">
                 <label for="biography">Biografie</label>

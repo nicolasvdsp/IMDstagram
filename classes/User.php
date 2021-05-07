@@ -1,26 +1,26 @@
-<?php
-include_once(__DIR__ . "/Db.php");
-class User{
-    /* --- GETTERS - SETTERS - UPDATERS --- */
-    public function setFirstName($firstname) {
-        if(!empty($firstname)){
-            $this->firstname = $firstname;
-            return $this;
-        } else {
-            throw new Exception("vul je voornaam in");
-            //$errorFn = "Vul je voornaam in a.u.b.";
+    <?php
+    include_once(__DIR__ . "/Db.php");
+    class User{
+        /* --- GETTERS - SETTERS - UPDATERS --- */
+        public function setFirstName($firstname) {
+            if(!empty($firstname)){
+                $this->firstname = $firstname;
+                return $this;
+            } else {
+                throw new Exception("vul je voornaam in");
+                //$errorFn = "Vul je voornaam in a.u.b.";
+            }
         }
-    }
-    public function getFirstName() {
-        return $this->firstname;
-    }
-    public function updateFirstName($firstname, $id) {
-        $conn = Db::getConnection();
-        $statement = $conn->prepare("UPDATE users SET firstname = :firstname WHERE id = :id");
-        $statement->bindValue(":firstname", $firstname);
-        $statement->bindValue(":id", $id);
-        $statement->execute();
-    }
+        public function getFirstName() {
+            return $this->firstname;
+        }
+        public function updateFirstName($firstname, $id) {
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("UPDATE users SET firstname = :firstname WHERE id = :id");
+            $statement->bindValue(":firstname", $firstname);
+            $statement->bindValue(":id", $id);
+            $statement->execute();
+        }
 
 
     public function setLastname($lastname) {
@@ -93,6 +93,16 @@ class User{
         $statement->bindValue(":biography", $biography);
         $statement->bindValue(":id", $id);
         $statement->execute();
+    }
+
+    public function updateProfilePicture($profilePicture, $id) {
+        $conn = Db::getConnection();
+        $statement = $conn->prepare("UPDATE users SET profile_picture = :profilePicture WHERE id = :id");
+        $statement->bindValue(":profilePicture", $profilePicture);
+        $statement->bindValue(":id", $id);
+        $statement->execute();
+        $newProfilePicture = $statement->fetch();
+        return $newProfilePicture;
     }
 
     // public function updateProfilePicture($profilePicture, $id) {
