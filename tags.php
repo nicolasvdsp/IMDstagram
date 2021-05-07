@@ -1,29 +1,21 @@
-<?php 
-    ini_set('display_errors', true);
+<?php
     include_once(__DIR__ . "/classes/Db.php");
-    include_once(__DIR__ . "/classes/User.php");
-    
-    session_start();
-    if(!isset($_SESSION['id'])) {
-        header('location: login.php');
-    } else{
-        $sessionId = $_SESSION['id'];
-        $userData = User::getUserDataFromId($sessionId);
-        echo "dag " . $userData['firstname'] . " met id: " . $_SESSION['id'];
-    }
 
     $conn = Db::getConnection();
-    $statement = $conn->prepare("SELECT * FROM post, users WHERE post.users_id = users.id");
+    
+    $users_id = $_GET['id'];
+    $userData = User::getUserDataFromId($users_id);
+
+    $tag = $_GET['tag'];
+    
+    $statement = $conn->prepare("SELECT * FROM post WHERE tags LIKE '".$tag."%'");
+    $statement->bindValue(':id', $users_id);
     $statement->execute();
+    
     $posts = $statement->fetchAll();
+?>
 
-
-    foreach($posts as $post){
-        // echo $post['text'];
-        // echo "<img class='post__image' src='". $post['image'] ."' alt='post image'/>";
-    }
-
-?><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -42,15 +34,14 @@
         <section class="posts">
             <?php foreach($posts as $post): ?>
             <div class="post">
-                
                 <div class="post__head">
-                    <img class="post__userImage" src="<?php echo $post["profile_picture"]; ?>" alt="Profile Picture"/>
-                    <a href="profile.php?id=<?php echo $post['id']; ?>" class="post__userName" rel="author"><?php echo $post['firstname']; ?></a>
+                    <img class="post__userImage" src="assets/cesarAlien.jpg" alt="Profile Picture"/>
+                    <a class="post__userName" rel="author">Fons</a>
                 </div>
-
                 <div class="post__content">
                     <p class="post__text"><?php echo $post['text']; ?></p>
                     <img class="post__image" src="<?php echo $post['image']; ?>" alt="Post Image"/>
+                    
                 </div>
                 <div class="post__foot">
                     <div class="post__likes">
