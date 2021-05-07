@@ -17,20 +17,17 @@
     $statement->execute();
     $posts = $statement->fetchAll();
 
-    foreach($posts as $post){
-        // echo $post['text'];
-        // echo "<img class='post__image' src='". $post['image'] ."' alt='post image'/>";
-    }
 
-    if(isset($_POST["submit"])){
-        $conn = Db::getConnection();
-        $str = $_POST["search"];
-        $sth = $conn->prepare("SELECT * FROM 'post' WHERE Name= ''$str");
 
-        $sth->setFecthMode(PDO::FETCH_OBJ);
-        $sth->execute();
-    }
+    /*      <?php
+        if(isset($_GET['submit-search'])){
+            $searchUser = substr($conn->quote($_POST['search']), 1, -1);
+            $searchQuery = User::
+        }
+      ?>  */ 
 
+
+   
 ?>
 
 
@@ -50,16 +47,67 @@
             <a href="#"><img class="search" src="./assets/icon_search.svg" alt="Search button"/></a>
         </div>
 
-        <!--SEARCH-->
-        <form class="search" method="POST">
-            <label>Search</label>
+
+
+  
+        <!--Zoekfunctie-->      
+      <form action="index.php" method="POST">
+            <label for="search">Search</label>
             <input type="text" name="search">
-            <input type="submit" name="submit">
-        </form>
+            <input type="submit" name="submit-search" value="Zoeken">
+      </form>   
+
+       <!--Zoekresultaten--> 
+        
+       <?php
+
+$conn = Db::getConnection();
+if (isset($_POST["submit-search"])) {
+	$str = $_POST["search"];
+	$sth = $conn->prepare("SELECT * FROM `users` WHERE firstname = '$str'");
+
+	$sth->setFetchMode(PDO:: FETCH_OBJ);
+	$sth -> execute();
+
+	if($row = $sth->fetch())
+	{
+		?>
+		<br><br><br>
+		<table>
+			<tr>
+				<th>Resultaten:</th>
+
+			</tr>
+			<tr>
+				<td><a href=""><?php echo $row->firstname; ?></a></td>
+				<td><a href=""><?php echo $row->lastname; ?></td>
+
+			</tr>
+
+            <tr>
+                <td><a href=""><?php echo $row->date_of_birth; ?></td>
+				<td><a href=""><?php echo $row->bio; ?></td>
+			</tr>
+
+
+		</table>
+<?php 
+	}
+		else{
+			echo "Geen resultaten";
+		}
+
+}
+
+?>
 
 
 
 
+
+
+
+        <!--Post-->
         <section class="posts">
             <?php foreach($posts as $post): ?>
             <div class="post">
