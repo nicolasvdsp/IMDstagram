@@ -1,17 +1,15 @@
 <?php
     include_once(__DIR__ . "/classes/Db.php");
+    include_once(__DIR__. "/classes/User.php");
 
     $conn = Db::getConnection();
     
-    $users_id = $_GET['id'];
-    $userData = User::getUserDataFromId($users_id);
+    $tags_id = $_GET['id'];
+    $userData = User::getUserDataFromId($tags_id);
 
-    $tag = $_GET['tag'];
-    
-    $statement = $conn->prepare("SELECT * FROM post WHERE tags LIKE '".$tag."%'");
-    $statement->bindValue(':id', $users_id);
+    $conn = Db::getConnection();
+    $statement = $conn->prepare("SELECT * FROM post, users, tags WHERE post.users_id = users.id AND post.tags_id = tags.id AND tags.id = $tags_id");
     $statement->execute();
-    
     $posts = $statement->fetchAll();
 ?>
 
@@ -31,17 +29,23 @@
             <a href="#"><img class="search" src="./assets/icon_search.svg" alt="Search button"/></a>
         </div>
 
+        
+        <p>Meer in deze #tag ?!</p>
+        
+
         <section class="posts">
             <?php foreach($posts as $post): ?>
             <div class="post">
+                
                 <div class="post__head">
-                    <img class="post__userImage" src="assets/cesarAlien.jpg" alt="Profile Picture"/>
-                    <a class="post__userName" rel="author">Fons</a>
+                    <img class="post__userImage" src="<?php echo $post["profile_picture"]; ?>" alt="Profile Picture"/>
+                    <a href="profile.php?id=<?php echo $post['users_id']; ?>" class="post__userName" rel="author"><?php echo $post['firstname']; ?></a>
                 </div>
+
                 <div class="post__content">
                     <p class="post__text"><?php echo $post['text']; ?></p>
                     <img class="post__image" src="<?php echo $post['image']; ?>" alt="Post Image"/>
-                    
+                    <a href="tags.php?id=<?php echo $post['tags_id']; ?>" class="post__tag"><?php echo '#'.$post['tags_name']; ?></a>
                 </div>
                 <div class="post__foot">
                     <div class="post__likes">
@@ -56,6 +60,7 @@
             </div>
             <?php endforeach; ?>
         </section>
+        
     
         <nav class="navbar">
             <a class="navbar__btn" href="index.php">Home</a>

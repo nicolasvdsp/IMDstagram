@@ -13,10 +13,9 @@
     }
 
     $conn = Db::getConnection();
-    $statement = $conn->prepare("SELECT * FROM post, users WHERE post.users_id = users.id");
+    $statement = $conn->prepare("SELECT * FROM post, users, tags WHERE post.users_id = users.id AND post.tags_id = tags.id");
     $statement->execute();
     $posts = $statement->fetchAll();
-
 
     foreach($posts as $post){
         // echo $post['text'];
@@ -45,12 +44,13 @@
                 
                 <div class="post__head">
                     <img class="post__userImage" src="<?php echo $post["profile_picture"]; ?>" alt="Profile Picture"/>
-                    <a href="profile.php?id=<?php echo $post['id']; ?>" class="post__userName" rel="author"><?php echo $post['firstname']; ?></a>
+                    <a href="profile.php?id=<?php echo $post['users_id']; ?>" class="post__userName" rel="author"><?php echo $post['firstname']; ?></a>
                 </div>
 
                 <div class="post__content">
                     <p class="post__text"><?php echo $post['text']; ?></p>
                     <img class="post__image" src="<?php echo $post['image']; ?>" alt="Post Image"/>
+                    <a href="tags.php?id=<?php echo $post['tags_id']; ?>" class="post__tag"><?php echo '#'.$post['tags_name']; ?></a>
                 </div>
                 <div class="post__foot">
                     <div class="post__likes">
