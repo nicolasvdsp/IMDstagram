@@ -23,7 +23,7 @@ $posts = $statement->fetchAll();
   <title>Dinkstagram</title>
   <link rel="stylesheet" type="text/css" href="css/reset.css">
   <link rel="stylesheet" type="text/css" href="css/style.css">
-  <link rel="stylesheet" type="text/css" href="css/profile.css">
+  <link rel="stylesheet" type="text/css" href="css/temp.css">
 </head>
 
 <body>
@@ -33,20 +33,25 @@ $posts = $statement->fetchAll();
   </div>
 
   <div class="user__profile">
+    <div class="user__content">
     <div class="user__head">
       <img class="post__userImage" src="<?php echo $userData['profile_picture'] ?>" alt="Profile Picture" />
       <p class="user__userName"><?php echo $userData['firstname']; ?></p>
       <p class="user__lastName"><?php echo $userData['lastname']; ?></p>
     </div>
 
-    <p class="user__bio"><?php echo $userData['bio']; ?></p>
-    <a class="user__website"><?php echo $userData['website']; ?></a>
-
+    <div class="user__information">
+      <p class="user__bio"><?php echo $userData['bio']; ?></p>
+      <a class="user__website"><?php echo $userData['website']; ?></a>
+    </div>
+    
     <div class="post__collection">
       <?php foreach ($posts as $post) : ?>
         <img class="profile__image" src="<?php echo $post['image']; ?>" alt="Post Image" />
       <?php endforeach; ?>
     </div>
+    </div>
+    
   </div>
 
   <nav class="navbar">
