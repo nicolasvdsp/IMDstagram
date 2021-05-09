@@ -10,7 +10,7 @@
     } else{
         $sessionId = $_SESSION['id'];
         $userData = User::getUserDataFromId($sessionId);
-        echo "dag " . $userData['firstname'] . " met id: " . $_SESSION['id'];
+        //echo "dag " . $userData['firstname'] . " met id: " . $_SESSION['id'];
     }
 
     $conn = Db::getConnection();
@@ -40,6 +40,14 @@
         <div class="header">
             <img class="logo" src="./assets/logo_dinkstagram.svg" alt="Logo Dinkstagram"/>
             <a href="#"><img class="search" src="./assets/icon_search.svg" alt="Search button"/></a>
+        </div>
+        <br><br>
+        <div class="followers">
+            <h1>14 volgers</h1>
+        </div>
+
+        <div class="following">
+            <h1>3 volgend</h1>
         </div>
 
 
