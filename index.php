@@ -2,7 +2,8 @@
     ini_set('display_errors', true);
     include_once(__DIR__ . "/classes/Db.php");
     include_once(__DIR__ . "/classes/User.php");
- 
+   // include_once(__DIR__ . "/classes/Search.php");
+
     session_start();
     if(!isset($_SESSION['id'])) {
         header('location: login.php');
@@ -19,12 +20,6 @@
 
 
 
-    /*      <?php
-        if(isset($_GET['submit-search'])){
-            $searchUser = substr($conn->quote($_POST['search']), 1, -1);
-            $searchQuery = User::
-        }
-      ?>  */ 
 
 
    
@@ -50,27 +45,31 @@
 
 
   
-        <!--Zoekfunctie-->      
+        <!--Zoekfunctie/ SEARCH FUNCTION-->      
       <form action="index.php" method="POST">
             <label for="search">Search</label>
             <input type="text" name="search">
             <input type="submit" name="submit-search" value="Zoeken">
       </form>   
 
-       <!--Zoekresultaten--> 
+       <!--Zoekresultaten/ SEARCH RESULTS--> 
         
        <?php
 
-$conn = Db::getConnection();
-if (isset($_POST["submit-search"])) {
-	$str = $_POST["search"];
-	$sth = $conn->prepare("SELECT * FROM `users` WHERE firstname = '$str'");
+    $conn = Db::getConnection();
+    if (isset($_POST["submit-search"])) {
+        $str = $_POST["search"];
+        $sth = $conn->prepare("SELECT * FROM `users` WHERE firstname = '$str'");
 
-	$sth->setFetchMode(PDO:: FETCH_OBJ);
-	$sth -> execute();
+        
+        $userData = User::getUserDataFromId($sessionId);
+        echo "dag " . $userData['firstname'] . " met id: " . $_SESSION['id'];
 
-	if($row = $sth->fetch())
-	{
+        $sth->setFetchMode(PDO:: FETCH_OBJ);
+        $sth -> execute();
+
+        if($row = $sth->fetch())
+	    {
 		?>
 		<br><br><br>
 		<table>
@@ -94,15 +93,12 @@ if (isset($_POST["submit-search"])) {
 <?php 
 	}
 		else{
-			echo "Geen resultaten";
+			echo "No results found";
 		}
 
-}
+    }
 
 ?>
-
-
-
 
 
 

@@ -2,20 +2,32 @@
 include_once(__DIR__ . "/Db.php");
 
 class Search{
-    public static function search($search){
+    /*public static function search($search)
+    {
+
+    }*/
+
+    public static function searchUser($searchUser){
         $conn = Db::getConnection();
-        $statement = $conn->prepare("SELECT id FROM users WHERE email = :email");
-        $statement->bindValue(":email", $email);
-        $statement->execute();
+        $searchQuerry = $conn->prepare("SELECT * FROM `users` WHERE firstname LIKE :search OR lastname LIKE :search"); //or die($mysqli->error);
+        $searchQuerry->bindValue(":search", '%'.$searchUser.'%');
+        $searchQuerry->execute();
+        $searchQuerry->execute();
 
-        $id = $statement->fecth(PDO::FETCH_COLUMN);
-
-
-        $statement = $conn->prepare("SELECT users.id, firstname, lastname, email, profile_picture FROM users
-        INNER JOIN post on users.users_id=post.users_id WHERE 
-        ");
- 
     }
+
 }
+
+
+
+ /*   public static function getPostData($search){
+        $conn = Db::getConnection();
+        $statement = $conn->prepare("SELECT * FROM post WHERE id = :id");
+        $statement->bindValue(':id', $search);
+        $statement->execute();
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+        return $result;
+    }*/
+
 
 ?>
