@@ -2,8 +2,14 @@
     ini_set('display_errors', true);
     include_once(__DIR__ . "/classes/Db.php");
     include_once(__DIR__ . "/classes/User.php");
+<<<<<<< Updated upstream
    // include_once(__DIR__ . "/classes/Search.php");
 
+=======
+    include_once(__DIR__ . "/classes/Search.php");
+
+ 
+>>>>>>> Stashed changes
     session_start();
     if(!isset($_SESSION['id'])) {
         header('location: login.php');
@@ -19,10 +25,13 @@
     $posts = $statement->fetchAll();
 
 
+<<<<<<< Updated upstream
 
 
 
    
+=======
+>>>>>>> Stashed changes
 ?>
 
 
@@ -46,6 +55,7 @@
             <h1>14 volgers</h1>
         </div>
 
+<<<<<<< Updated upstream
         <div class="following">
             <h1>3 volgend</h1>
         </div>
@@ -108,6 +118,10 @@
 
 ?>
 
+=======
+        <!--SEARCH-->
+        <?php include_once(__DIR__ ."/includes/search.inc.php");?>
+>>>>>>> Stashed changes
 
 
 

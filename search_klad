@@ -1,0 +1,14 @@
+if(isset($_POST["submit"])){
+        $conn = Db::getConnection();
+        $str = $_POST["search"];
+        $sth = $conn->prepare("SELECT * FROM 'post' WHERE Name= ''$str");
+        $sth->execute();
+
+        $search = $sth->fetchAll();
+
+       // $sth->setFecthMode(Db::FETCH_OBJ);
+
+        if($row = $sth->fetch()){
+
+        }
+    }
