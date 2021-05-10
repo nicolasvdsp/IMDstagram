@@ -100,6 +100,9 @@
         $this->profilePicture = $profilePicture;
         return $this;
     }
+    public function getProfilePicture() {
+        return $this->profilePicture;
+    }
 
     public function uploadProfilePicture($profilePicture, $id) {
         $conn = Db::getConnection();
@@ -107,6 +110,7 @@
         $statement->bindValue(":profilePicture", $profilePicture);
         $statement->bindValue(":id", $id);
         $statement->execute();
+        header('location: usersettings.php');
     }
 
     // public function updateProfilePicture($profilePicture, $id) {

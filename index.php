@@ -35,7 +35,11 @@
 <body>
         <div class="header">
             <img class="logo" src="./assets/logo_dinkstagram.svg" alt="Logo Dinkstagram"/>
-            <a href="#"><img class="search" src="./assets/icon_search.svg" alt="Search button"/></a>
+            <div class="header__user">
+                <a  class="search" href="#"><img src="./assets/icon_search.svg" alt="Search button"/></a>
+                <img class="header__profilePicture" src="profile_pictures/<?php echo $userData['profile_picture']; ?>" alt="Profile picture">
+                <span class="header__username"><?php echo $userData['firstname'] ?></span>
+            </div>
         </div>
 
         <section class="posts">

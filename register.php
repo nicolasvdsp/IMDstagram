@@ -91,9 +91,9 @@
                 <input type="password" id="passwordRepeat" name="passwordRepeat" class="passwordRep" placeholder="• • • • • • • • • •">
                 <a href="#" class="form__hideShow hideShowRep">Show</a>
             </div> 
-            <input class="btn--login" type="submit" value="Dink in">
+            <input class="btn--login" type="submit" value="Dink euh registreren">
         </form>
-        <a href="login.php" class="login-register">You already have an account? <span>Dink in here!</span></a>
+        <a href="login.php" class="login-register">Heb je reeds een dink-account? <span>Dink hier in!</span></a>
     </div>
 
 <script src="javascript/app.js"></script>

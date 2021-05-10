@@ -22,7 +22,7 @@
         $fileError = $_FILES['profilePicture']['error'];
         $fileError = $_FILES['profilePicture']['type'];
         
-        $fileTarget = 'uploads/' . basename($fileName);
+        $fileTarget = 'profile_pictures/' . basename($fileName);
         
         $fileExtention = strtolower(pathinfo($fileTarget,PATHINFO_EXTENSION));
         
@@ -118,8 +118,8 @@
     <div class="login">
         <form action="" method="POST" enctype="multipart/form-data" >
             <div class="form__input">
-                <img class="form__image" src="uploads/<?php echo $profilePicture; ?>" alt="Profile picture">
-                <label for="profilePicture">profielfoto</label>
+                <label for="profilePicture">Profiel foto</label>
+                <img class="form__image" src="profile_pictures/<?php echo $userData['profile_picture']; ?>" alt="Profile picture">
                 <input type="file" id="profilePicture" name="profilePicture">
                 <input class="btn--login"  type="submit" name="submitProfilePicture" value="Upload profielfoto">
             </div> 
@@ -129,8 +129,6 @@
         <form action="" method="POST">
             <div class="form__input input--large">
                 <label for="biography">Biografie</label>
-                <!-- <input type="text" id="biography" name="updateBiography" value="<?php echo $userData['bio']; ?>" placeholder="Schrijf hier iets over jezelf."> -->
-                <!-- <textarea id="biography" name="updateBiography" placeholder="Schrijf hier iets over jezelf"><?php echo $userData['bio'] ?></textarea> -->
                 <div class="grow-wrap">
                     <textarea id="biography" name="updateBiography" placeholder="Schrijf hier iets over jezelf." onInput="this.parentNode.dataset.replicatedValue = this.value"><?php  echo $userData['bio']; ?></textarea>
                 </div>    
@@ -153,7 +151,7 @@
             </div>
             <input class="btn--login" type="submit" value="Wijzigingen opslaan" name="submitUpdates">
         </form>
-        <a href="login.php" class="login-register"> <span>Uitloggen</span></a>
+        <a href="logout.php" class="login-register"> <span>Uitloggen</span></a>
     </div>
 
     <nav class="navbar">
