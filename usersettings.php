@@ -13,9 +13,7 @@
         $userData = User::getUserDataFromId($sessionId);
         echo "dag " . $userData['firstname'] . " met id: " . $_SESSION['id'];
     }
-    if(!empty($_POST)) {
-
-    if(isset($_FILES['profilePicture'])) {
+    if(!empty($_POST['submitProfilePicture'])) {
         $file = $_FILES['profilePicture'];
         
         $fileName = $_FILES['profilePicture']['name'];
@@ -23,31 +21,71 @@
         $fileSize = $_FILES['profilePicture']['size'];
         $fileError = $_FILES['profilePicture']['error'];
         $fileError = $_FILES['profilePicture']['type'];
-        $fileExtention = strtolower(end(explode('.', $fileName)));
-
-        $allowedExtentions = [
-            'jpg',
-            'jpeg',
-            'png',
-            'gif'
-        ];
-
-        if(in_array($fileExtention, $allowedExtentions)) {
-            if($fileSize < 2097152) {
-                $profilePicture = uniqid('',true) . '.' . $fileExtention;
-                $fileDestination = 'profile_pictures/' . $profilePicture;
-                move_uploaded_file($fileTmpName, $fileDestination);
-                $user->updateProfilePicture($profilePicture, $sessionId);
-                header('refresh:0');
-            } else {
-                $errorFileSize = true;
-            }
-        } else{
-            $errorExtention = true;
+        
+        $fileTarget = 'uploads/' . basename($fileName);
+        
+        $fileExtention = strtolower(pathinfo($fileTarget,PATHINFO_EXTENSION));
+        
+        $check = getimagesize($fileTmpName);
+        //Checks if file is an image
+        if($check !== false) {
+            $uploadOk = 1;
+        } else {
+            $errorImage = 'Uw geupload bestand is geen afbeelding.';
+            $uploadOk = 0;
         }
+
+        //Checks if file already exists
+        if(file_exists($fileTarget)) {
+            $uploadOk = 1;
+        }
+
+        //Checks the file-size
+        if($fileSize > 2097152) {
+            $errorSize = 'Je afbeelding is te groot, probeer een kleiner formaat.';
+            $uploadOk = 0;
+        }
+
+        //Allows only JPG, JPEG, PNG and GIF format
+       if($fileExtention != 'jpg' && $fileExtention != 'jpeg' && $fileExtention != 'png' && $fileExtention != 'gif' && !empty($fileName)) {
+           $errorExtention = 'Dit bestandstype wordt niet ondersteund. Probeer een jpg, png of gif.';
+           $uploadOk = 0;
+       }
+
+       //Uploads file if no errors occured
+       if($uploadOk === 1) {
+            if(move_uploaded_file($fileTmpName, $fileTarget)) {
+                $profilePicture = basename($fileName);
+                $user->setProfilePicture($profilePicture);
+                $user->uploadProfilePicture($profilePicture, $sessionId);
+            }
+       }
+        
+        /*
+            $allowedExtentions = [
+                'jpg',
+                'jpeg',
+                'png',
+                'gif'
+            ];*/
+
+            /*if(in_array($fileExtention, $allowedExtentions)) {
+                if($fileSize < 2097152) {
+                    $profilePicture = uniqid('',true) . '.' . $fileExtention;
+                    $fileDestination = 'profile_pictures/' . $profilePicture;
+                    move_uploaded_file($fileTmpName, $fileDestination);
+                    $user->updateProfilePicture($profilePicture, $sessionId);
+                    header('refresh:0');
+                } else {
+                    $errorFileSize = true;
+                }
+            } else{
+                $errorExtention = true;
+            }
+        }*/
     }
     
-    // if(!empty($_POST)) {
+    if(!empty($_POST['submitUpdates'])) {
         // var_dump($userData);
         
         $user->updateFirstname($_POST['updateFirstname'], $sessionId);
@@ -78,13 +116,17 @@
     </div>
 
     <div class="login">
-        <form action="" method="POST" enctype="multipart/form-data">
+        <form action="" method="POST" enctype="multipart/form-data" >
             <div class="form__input">
-                <label for="profilePicture">Profile picture</label>
-                <img class="form__image" src="profile_pictures/<?php echo $profilePicture; ?>" alt="Profile picture">
+                <img class="form__image" src="uploads/<?php echo $profilePicture; ?>" alt="Profile picture">
+                <label for="profilePicture">profielfoto</label>
                 <input type="file" id="profilePicture" name="profilePicture">
-
+                <input class="btn--login"  type="submit" name="submitProfilePicture" value="Upload profielfoto">
             </div> 
+        </form>
+
+
+        <form action="" method="POST">
             <div class="form__input input--large">
                 <label for="biography">Biografie</label>
                 <!-- <input type="text" id="biography" name="updateBiography" value="<?php echo $userData['bio']; ?>" placeholder="Schrijf hier iets over jezelf."> -->
@@ -109,7 +151,7 @@
                 <label for="password">Password</label>
                 <input type="text" id="password" name="updatePassword" placeholder="• • • • • • • • • •">
             </div>
-            <input class="btn--login" type="submit" value="Wijzigingen opslaan">
+            <input class="btn--login" type="submit" value="Wijzigingen opslaan" name="submitUpdates">
         </form>
         <a href="login.php" class="login-register"> <span>Uitloggen</span></a>
     </div>

@@ -95,14 +95,18 @@
         $statement->execute();
     }
 
-    public function updateProfilePicture($profilePicture, $id) {
+
+    public function setProfilePicture($profilePicture) {
+        $this->profilePicture = $profilePicture;
+        return $this;
+    }
+
+    public function uploadProfilePicture($profilePicture, $id) {
         $conn = Db::getConnection();
         $statement = $conn->prepare("UPDATE users SET profile_picture = :profilePicture WHERE id = :id");
         $statement->bindValue(":profilePicture", $profilePicture);
         $statement->bindValue(":id", $id);
         $statement->execute();
-        $newProfilePicture = $statement->fetch();
-        return $newProfilePicture;
     }
 
     // public function updateProfilePicture($profilePicture, $id) {
