@@ -2,6 +2,7 @@
     ini_set('display_errors', true);
     include_once(__DIR__ . "/classes/Db.php");
     include_once(__DIR__ . "/classes/User.php");
+    include_once(__DIR__ . "/classes/Post.php");
     
     session_start();
     if(!isset($_SESSION['id'])) {
@@ -9,18 +10,13 @@
     } else{
         $sessionId = $_SESSION['id'];
         $userData = User::getUserDataFromId($sessionId);
-        echo "dag " . $userData['lastname'] . " met id: " . $_SESSION['id'];
     }
 
-    $conn = Db::getConnection();
-    $statement = $conn->prepare("SELECT * FROM post");
-    $statement->execute();
-    $posts = $statement->fetchAll();
+    $p = new Post;
+    $allPosts = $p->getAllPosts();
+    //var_dump($allPosts['id']);
 
-    foreach($posts as $post){
-        // echo $post['text'];
-        // echo "<img class='post__image' src='". $post['image'] ."' alt='post image'/>";
-    }
+
 
 ?><!DOCTYPE html>
 <html lang="en">
@@ -31,6 +27,7 @@
     <link rel="stylesheet" type="text/css" href="css/reset.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <title>Dinkstagram</title>
+    <link rel="shortcut icon" type="image/svg" href="assets/favicon.svg">
 </head>
 <body>
         <div class="header">
@@ -43,15 +40,16 @@
         </div>
 
         <section class="posts">
-            <?php foreach($posts as $post): ?>
+            <?php foreach($allPosts as $post): ?>
+                
             <div class="post">
                 <div class="post__head">
-                    <img class="post__userImage" src="assets/cesarAlien.jpg" alt="Profile Picture"/>
-                    <a class="post__userName" rel="author">Fons</a>
+                    <img class="post__userImage" src="profile_pictures/<?php echo $p->getUserdataByPostId($post['id'])['profile_picture']; ?>" alt="Profile Picture"/>
+                    <a class="post__userName" rel="author"><?php echo $p->getUserdataByPostId($post['id'])['firstname']; ?></a>
                 </div>
                 <div class="post__content">
                     <p class="post__text"><?php echo $post['text']; ?></p>
-                    <img class="post__image" src="<?php echo $post['image']; ?>" alt="Post Image"/>
+                    <img class="post__image" src="post_pictures/<?php echo $p->getUserdataByPostId($post['id'])['image'];; ?>" alt="Post Image"/>
                 </div>
                 <div class="post__foot">
                     <div class="post__likes">
@@ -64,6 +62,7 @@
                     </div>
                 </div>
             </div>
+       
             <?php endforeach; ?>
         </section>
     
