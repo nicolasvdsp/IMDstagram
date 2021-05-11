@@ -18,5 +18,16 @@ class Post {
         return $username;
     }
 
+    public function createPost( $picture, $description, $tag, $location, $users_id) {
+        $conn = Db::getConnection();
+        $statement = $conn->prepare("INSERT INTO posts (text, image, users_id, upload_location, tag) VALUES (:description, :picture, :users_id, :location, :tag)");
+        $statement->bindValue('description', $description);
+        $statement->bindValue('picture', $picture);
+        $statement->bindValue('users_id', $users_id);
+        $statement->bindValue('location', $location);
+        $statement->bindValue('tag', $tag);
+        $statement->execute();
+        header('location: index.php');
+    }
 
 }

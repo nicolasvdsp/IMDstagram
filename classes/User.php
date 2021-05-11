@@ -113,19 +113,6 @@
         header('location: usersettings.php');
     }
 
-    // public function updateProfilePicture($profilePicture, $id) {
-    //     $conn = Db::getConnection();
-    //     $statement = $conn->prepare("UPDATE users SET profile_picture = :profilePicture WHERE id = :id");
-    //     $statement->bindValue(":profilePicture", $profilePicture);
-    //     $statement->bindValue(":id", $id);
-    //     $statement->execute();
-    // }
-    
-    
-    // public function getProfilePicture() {
-    //     return $this->profilePicture;
-    // }
-
     
 
     /* --- LOGIN AND REGISTER --- */
@@ -143,8 +130,6 @@
         $statement->bindValue(":email", $email);
         $statement->bindValue(":password", $password);
         $statement->execute();
-        
-        //$this->startSession($email);
     }
 
     public function canLogin($email, $password) {
@@ -192,38 +177,4 @@
         $_SESSION['id'] = $e;
         header('location: index.php');
     }
-
-    // public function checkPassword($password, $passwordRepeat) {
-    //     $option = [
-    //         'cost' => 12,
-    //     ];
-    //     $passwordRepeatHashed = password_hash($passwordRepeat, PASSWORD_DEFAULT, $option);
-    //     if($password === $passwordRepeatHashed){
-    //         return true;
-    //     }
-    // }
-
-
-
-
-
-    // public function setEmail($email) {
-    //     $conn = Db::getConnection();
-    //     $statement = $conn->prepare('SELECT * FROM users WHERE email = :email');
-    //     $statement->bindValue(':email', $email);
-    //     $statement->execute();
-    //     $result = count($statement->fetchAll());
-    //     echo $result;
-
-    //     if(!empty($email) && $result === 0){
-    //         $this->email = $email;
-    //         echo $email;
-    //         return $this;
-    //     } else {
-    //         $errorFn = "Vul je emailadress in a.u.b.";
-    //     }
-    // }
-    // public function getEmail() {
-    //     return $this->email;
-    // }
 }
