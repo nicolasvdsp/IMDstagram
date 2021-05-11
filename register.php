@@ -58,7 +58,7 @@
             <div class="form__input">
                 <label for="firstName">First name</label>
                 <?php if(!empty($_POST)): ?>
-                <input type="text" id="firstName" name="firstname" placeholder="Tony" value="<?php echo $_POST['firstname']; ?>">
+                <input type="text" id="firstName" name="firstname" placeholder="Tony" value="<?php echo htmlspecialchars($_POST['firstname']); ?>">
                 <?php else: ?>
                 <input type="text" id="firstName" name="firstname" placeholder="Tony">
                 <?php endif; ?>
@@ -66,7 +66,7 @@
             <div class="form__input">
                 <label for="lastName">Last name</label>
                 <?php if(!empty($_POST)): ?>
-                <input type="text" id="lastname" name="lastname" placeholder="Miauwkes" value="<?php echo $_POST['lastname']; ?>">
+                <input type="text" id="lastname" name="lastname" placeholder="Miauwkes" value="<?php echo htmlspecialchars($_POST['lastname']); ?>">
                 <?php else: ?>
                 <input type="text" id="lastname" name="lastname" placeholder="Miauwkes">
                 <?php endif; ?>
@@ -74,7 +74,7 @@
             <div class="form__input">
                 <label for="email">Email</label>
                 <?php if(!empty($_POST)): ?>
-                <input type="text" id="email" name="email" placeholder="vjtony@w&m.be" value="<?php echo $_POST['email']; ?>">
+                <input type="text" id="email" name="email" placeholder="vjtony@w&m.be" value="<?php echo htmlspecialchars($_POST['email']); ?>">
                 <?php else: ?>
                 <input type="text" id="email" name="email" placeholder="vjtony@w&m.be">
                 <?php endif; ?>

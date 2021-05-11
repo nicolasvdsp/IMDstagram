@@ -35,7 +35,7 @@
             <div class="header__user">
                 <a  class="search" href="#"><img src="./assets/icon_search.svg" alt="Search button"/></a>
                 <img class="header__profilePicture" src="profile_pictures/<?php echo $userData['profile_picture']; ?>" alt="Profile picture">
-                <span class="header__username"><?php echo $userData['firstname'] ?></span>
+                <span class="header__username"><?php echo htmlspecialchars($userData['firstname']); ?></span>
             </div>
         </div>
 
@@ -48,7 +48,7 @@
                     <a class="post__userName" rel="author"><?php echo $p->getUserdataByPostId($post['id'])['firstname']; ?></a>
                 </div>
                 <div class="post__content">
-                    <p class="post__text"><?php echo $post['text']; ?></p>
+                    <p class="post__text"><?php echo htmlspecialchars($post['text']); ?></p>
                     <img class="post__image" src="post_pictures/<?php echo $p->getUserdataByPostId($post['id'])['image'];; ?>" alt="Post Image"/>
                 </div>
                 <div class="post__foot">

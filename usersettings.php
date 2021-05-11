@@ -131,20 +131,20 @@
             <div class="form__input input--large">
                 <label for="biography">Biografie</label>
                 <div class="grow-wrap">
-                    <textarea id="biography" name="updateBiography" placeholder="Schrijf hier iets over jezelf." onInput="this.parentNode.dataset.replicatedValue = this.value"><?php  echo $userData['bio']; ?></textarea>
+                    <textarea id="biography" name="updateBiography" placeholder="Schrijf hier iets over jezelf." onInput="this.parentNode.dataset.replicatedValue = this.value"><?php  echo htmlspecialchars($userData['bio']); ?></textarea>
                 </div>    
             </div> 
             <div class="form__input">
                 <label for="firstName">First name</label>
-                <input type="text" id="firstName" name="updateFirstname" value="<?php echo $userData['firstname'] ?>" placeholder="<?php echo $userData['firstname']; ?>">
+                <input type="text" id="firstName" name="updateFirstname" value="<?php echo htmlspecialchars($userData['firstname']); ?>" placeholder="<?php echo htmlspecialchars($userData['firstname']); ?>">
             </div> 
             <div class="form__input">
                 <label for="lastName">Last name</label>
-                <input type="text" id="lastName" name="updateLastname" value="<?php echo $userData['lastname'] ?>" placeholder="<?php echo $userData['lastname']; ?>">
+                <input type="text" id="lastName" name="updateLastname" value="<?php echo htmlspecialchars($userData['lastname']); ?>" placeholder="<?php echo htmlspecialchars($userData['lastname']); ?>">
             </div> 
             <div class="form__input">
                 <label for="email">Email</label>
-                <input type="text" id="email" name="updateEmail" value="<?php echo $userData['email'] ?>" placeholder="<?php echo $userData['email']; ?>">
+                <input type="text" id="email" name="updateEmail" value="<?php echo htmlspecialchars($userData['email']); ?>" placeholder="<?php echo htmlspecialchars($userData['email']); ?>">
             </div> 
             <div class="form__input">
                 <label for="password">Password</label>

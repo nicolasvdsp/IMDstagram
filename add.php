@@ -93,7 +93,7 @@
                     <label for="postDescription">Beschrijving</label>
                     <?php if(!empty($_POST)): ?>
                         <div class="grow-wrap">
-                            <textarea id="postDescription" name="postDescription" placeholder="Vertel over je dag." onInput="this.parentNode.dataset.replicatedValue = this.value"><?php  echo $_POST['postDescription']; ?></textarea>
+                            <textarea id="postDescription" name="postDescription" placeholder="Vertel over je dag." onInput="this.parentNode.dataset.replicatedValue = this.value"><?php  echo htmlspecialchars($_POST['postDescription']); ?></textarea>
                         </div>    
                     <?php else: ?>
                         <div class="grow-wrap">
@@ -105,7 +105,7 @@
                 <div class="form__input">
                     <label for="tags">Tags</label>
                     <?php if(!empty($_POST)): ?>
-                        <input type="text" id="tags" name="tags" value="<?php echo $_POST['tags']; ?>" placeholder="<?php echo $_POST['tags']; ?>">
+                        <input type="text" id="tags" name="tags" value="<?php echo htmlspecialchars($_POST['tags']); ?>" placeholder="Voeg trendy tags toe">
                     <?php else: ?>
                         <input type="text" id="tags" name="tags" placeholder="voeg trendy tags toe">
                     <?php endif; ?>
@@ -114,7 +114,7 @@
                 <div class="form__input">
                     <label for="location">Locatie</label>
                     <?php if(!empty($_POST)): ?>
-                        <input type="text" id="location" name="location" value="<?php echo $_POST['location']; ?>" placeholder="<?php echo $_POST['location']; ?>">
+                        <input type="text" id="location" name="location" value="<?php echo htmlspecialchars($_POST['location']); ?>" placeholder="Voeg je locatie toe">
                     <?php else: ?>
                         <input type="text" id="location" name="location" placeholder="voeg je locatie toe">
                     <?php endif; ?>

@@ -40,7 +40,7 @@
             <div class="form__input">
                 <label for="email">Email</label>
                 <?php if(!empty($_POST)): ?>
-                    <input type="text" id="email" name="email" placeholder="vjtony@w&m.be" value="<?php echo $_POST['email']; ?>">
+                    <input type="text" id="email" name="email" placeholder="vjtony@w&m.be" value="<?php echo htmlspecialchars($_POST['email']); ?>">
                 <?php else: ?>
                     <input type="text" id="email" name="email" placeholder="vjtony@w&m.be">
                 <?php endif; ?>
