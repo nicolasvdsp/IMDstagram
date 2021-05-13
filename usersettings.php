@@ -11,7 +11,6 @@
         $user = new User();
         $sessionId = $_SESSION['id'];
         $userData = User::getUserDataFromId($sessionId);
-        echo "dag " . $userData['firstname'] . " met id: " . $_SESSION['id'];
     }
     if(!empty($_POST['submitProfilePicture'])) {
         $file = $_FILES['profilePicture'];
@@ -92,7 +91,10 @@
         $user->updateLastname($_POST['updateLastname'], $sessionId);
         $user->updateEmail($_POST['updateEmail'], $sessionId);
         $user->updateBiography($_POST['updateBiography'], $sessionId);
-        $user->updatePassword($_POST['updatePassword'], $sessionId);
+        
+        if(!empty($_POST['updatePassword'])){
+            $user->updatePassword($_POST['updatePassword'], $sessionId);
+        }
         // $user->updateEmail($_POST['updateEmail']);
 
         $userData = User::getUserDataFromId($sessionId);

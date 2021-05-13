@@ -1,21 +1,38 @@
-let hideShow = document.querySelector(".hideShow");
-let hideShowRep = document.querySelector(".hideShowRep");
-let password = document.querySelector('.password');
-let passwordRep = document.querySelector('.passwordRep');
+let btnAddComment = document.querySelector("#btnAddComment");
+let commentText = document.querySelector("#commentText");
 
-hideShow.addEventListener('click', function(e){
-    if (password.type === "password") {
-        password.type = "text";
-      } else {
-        password.type = "password";
-      }
+btnAddComment.addEventListener('click', addComment);
+commentText.addEventListener("keyup", function(e){
+  if(e.keyCode === 13) {
+      e.preventDefault();
+      document.querySelector("#btnAddComment").click();
+  }
 });
 
-hideShowRep.addEventListener('click', function(e){
-    console.log('rep');
-    if (passwordRep.type === "password") {
-        passwordRep.type = "text";
-      } else {
-        passwordRep.type = "password";
-      }
-});
+function addComment() {
+    let postId = this.dataset.postid;
+    let text = document.querySelector("#commentText").value;
+
+    console.log(postId);
+    console.log(text);
+
+    // post naar database (AJAX)
+    let formData = new FormData();
+    formData.append("text", text);
+    formData.append("postId", postId);
+
+    fetch("ajax/savecomment.php", {
+        method: "POST",
+        body: formData
+    })
+        .then(response => response.json())
+        .then(result => {
+            let newComment = document.createElement("li");
+            newComment.innerHTML = result.body;
+            document.querySelector(".post__comments__list").appendChild(newComment);
+            document.querySelector("#commentText").value = "";
+        })
+        .catch(error => {
+            console.error("Error:", error);
+        });
+};

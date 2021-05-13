@@ -32,6 +32,7 @@
     <title>Login</title>
     <link rel="stylesheet" type="text/css" href="css/reset.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="shortcut icon" type="image/svg" href="assets/favicon.svg">
 </head>
 <body>
     <div class="login">

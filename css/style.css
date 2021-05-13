@@ -3,6 +3,7 @@
     --dinkRed_25: #f16a5840;
     --dinkRed_50: #f16a5880;
     --hoverRed: #c74332;
+    --softGrey: #a0a3af;
 }
 
 body {
@@ -178,16 +179,16 @@ body {
     align-items: flex-start;
 }
 
-.post__likes, .post__comments {
+.post__foot__likes, .post__foot__comments {
     display: flex;
     align-items: center;
 }
 
-.post__likes {
+.post__foot__likes {
     margin-right: 20px;
 }
 
-.post__likes a, .post__comments a {
+.post__foot__likes a, .post__foot__comments a {
     margin-right: 5px;
 }
 
@@ -213,6 +214,33 @@ body {
 }
 
 /* ----- END OF NEW POSTS -----*/
+
+
+/* ----- POST COMMENTS -----*/
+.comments__container {
+    margin-top: 10px;
+    border-top: 1px rgb(160, 163, 175) solid;
+}
+
+.post__comments__list li{
+    border-left: 1px solid var(--softGrey);
+    padding-left: 15px;
+    margin-bottom: 30px;
+}
+.post__comments__list div{
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+.post__comments__list img{
+    border-radius: 100%;
+    height: 20px;
+    width: 20px;
+    object-fit: cover;
+    margin-right: 10px;
+}
+/* ----- END OF POST COMMENTS -----*/
 
 
 /* ----- NAVBAR ----- */
