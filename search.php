@@ -1,36 +1,33 @@
-<?php
+<?php 
+ini_set('display_errors', true);
+include_once(__DIR__ . "/classes/Db.php");
 
-include_once(__DIR__ . "/Db.php");
-include_once(__DIR__ . "/User.php");
-//include_once(__DIR__ . "/Search.php");
-
-$search = $_GET["search"];
-
-
-   /* foreach($posts as $post){
-        // echo $post['text'];
-        // echo "<img class='post__image' src='". $post['image'] ."' alt='post image'/>";
-    }
-
-   /* if(isset($_POST["submit"])){
-        $conn = Db::getConnection();
-        $str = $_POST["search"];
-        $sth = $conn->prepare("SELECT * FROM 'post' WHERE Name= ''$str");
-
-      //  $sth->setFecthMode(PDO::FETCH_OBJ);
-        $sth->execute();
-    }
-    
-*/
-
-//$search = Post::search(strtolower($_GET['search']));
+//database connectie
+$conn = Db::getConnection();
+//$names = $conn->query('SELECT firstname, lastname, profile_picture, bio FROM users where firstname = "a"');
 
 
+//Zoekfunctie
+if (isset($_GET['q']) and !empty($_GET['q'])) {
+	$q = htmlspecialchars($_GET['q']);
+//	$names = $conn->query('SELECT firstname, lastname, profile_picture, bio FROM users WHERE firstname LIKE "%'.$q.'%"  OR lastname LIKE "%'.$q.'%"');
+  //$names = $conn->query("SELECT users.firstname, users.lastname, post.tag, post.upload_location FROM users  JOIN post ON users.id = post.users_id WHERE firstname LIKE 'maryam' OR lastname LIKE 'maryam' OR tag LIKE 'maryam' OR upload_location LIKE 'maryam'");
+
+ // $names = $conn->query("SELECT * FROM users NATURAL JOIN post LIKE 'fons'");
+
+ //$names = $conn->query('SELECT * FROM users FULL JOIN post WHERE firstname 
+ //LIKE "%'.$q.'%" OR lastname LIKE "%'.$q.'%" OR tag LIKE "%'.$q.'%" OR upload_location LIKE "%'.$q.'%"');
+
+  $names = $conn->query("SELECT * FROM(
+  select id as uid, firstname, lastname, null as tag, null as upload_location from users
+  union select null as uid, null as firstname, null as lastname, tag, upload_location from post) AS t WHERE firstname LIKE '%'.$q.'%' ");
+
+
+
+  //Resultaat niet gevonden
+  }
 
 ?>
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -38,31 +35,41 @@ $search = $_GET["search"];
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zoekresultaten</title>
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <title>Search</title>
 </head>
 <body>
-    <!--h5><?php //echo htmlspecialchars($_GET['search']); ?></h5-->
+        <div class="header">
+          <a href="index.php"><img class="logo" src="./assets/logo_dinkstagram.svg" alt="Logo Dinkstagram"/></a>
+        </div>
+ <section class="posts">		
+
+<form method="GET">
+	<input type="search" name="q" placeholder="Search ..." />
+	<input type="submit" value="Enter" />
+</form>
+<br><br>
+
+<ul>
+
+<?php while($search_user = $names->fetch()) { ?>
+	<li style="font-size: 20px;"><a href="index.php"><img style="width: 50px; height:50px; border-radius: 100%;" src="<?php echo $search_user['profile_picture']; ?>" alt="avatar">
+    <?=$search_user['firstname'].' '.$search_user['lastname']?></a><br><br></li>
+
+  <li><?=$search_user['tag']?><br><br></li>
+  <!--Tags-->  
+ 
+<?php } ?>
+
+</ul> 
 
 
-      <!--Navigatie-->  
-        <a href="index.php">Terug naar home</a>
-      <!--Zoekfunctie-->      
-        <!--  <form action="search.php" method="POST">
-        <label for="search">Search</label>
-        <input type="text">
-        <input type="submit">
-        </form>   -->
-
-      <!--Zoekresultaten--> 
-      <section>
-      <h1>Zoekresultaten</h1>  
-       <div class="search_result">
-        <p>Hier komen de zoekresultaten</p>
-       
-       </div> 
+   </section>
+        <nav class="navbar">
+            <a class="navbar__btn" href="index.php">Home</a>
+            <a class="navbar__btn" href="add.php">Add</a>
+            <a class="navbar__btn" href="usersettings.php">User</a>
+        </nav>
     
-      </section>
-
-
 </body>
-</html>

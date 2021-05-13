@@ -13,6 +13,7 @@
         //echo "dag " . $userData['firstname'] . " met id: " . $_SESSION['id'];
     }
 
+    //POST
     $conn = Db::getConnection();
     $statement = $conn->prepare("SELECT * FROM post");
     $statement->execute();
@@ -34,75 +35,19 @@
 </head>
 <body>
         <div class="header">
-            <img class="logo" src="./assets/logo_dinkstagram.svg" alt="Logo Dinkstagram"/>
-            <a href="#"><img class="search" src="./assets/icon_search.svg" alt="Search button"/></a>
+            <a href="index.php"><img class="logo" src="./assets/logo_dinkstagram.svg" alt="Logo Dinkstagram"/></a>
+            <a href="search.php"><img class="search" src="./assets/icon_search.svg" alt="Search button"/></a>
         </div>
         <br><br>
         <div class="followers">
-            <h1>14 volgers</h1>
+            <h1 style= "font-size: 50px;">14 volgers</h1>
         </div>
 
         <div class="following">
-            <h1>3 volgend</h1>
+            <h1 style= "font-size: 50px;">3 volgend</h1>
         </div>
 
 
-
-  
-        <!--Zoekfunctie/ SEARCH FUNCTION-->      
-      <form action="index.php" method="POST">
-            <label for="search">Search</label>
-            <input type="text" name="search">
-            <input type="submit" name="submit-search" value="Zoeken">
-      </form>   
-
-       <!--Zoekresultaten/ SEARCH RESULTS--> 
-        
-       <?php
-
-    $conn = Db::getConnection();
-    if (isset($_POST["submit-search"])) {
-        $str = $_POST["search"];
-        $sth = $conn->prepare("SELECT * FROM `users` WHERE firstname = '$str'");
-
-        
-        $userData = User::getUserDataFromId($sessionId);
-        echo "dag " . $userData['firstname'] . " met id: " . $_SESSION['id'];
-
-        $sth->setFetchMode(PDO:: FETCH_OBJ);
-        $sth -> execute();
-
-        if($row = $sth->fetch())
-	    {
-		?>
-		<br><br><br>
-		<table>
-			<tr>
-				<th>Resultaten:</th>
-
-			</tr>
-			<tr>
-				<td><a href=""><?php echo $row->firstname; ?></a></td>
-				<td><a href=""><?php echo $row->lastname; ?></td>
-
-			</tr>
-
-            <tr>
-                <td><a href=""><?php echo $row->date_of_birth; ?></td>
-				<td><a href=""><?php echo $row->bio; ?></td>
-			</tr>
-
-
-		</table>
-<?php 
-	}
-		else{
-			echo "No results found";
-		}
-
-    }
-
-?>
 
 
 
