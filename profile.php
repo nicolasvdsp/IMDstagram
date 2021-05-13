@@ -1,15 +1,23 @@
 <?php
+ini_set('display_errors', true);
 include_once(__DIR__ . "/classes/Db.php");
-include_once(__DIR__. "/classes/User.php");
-//echo $id;
+include_once(__DIR__ . "/classes/User.php");
+include_once(__DIR__ . "/classes/Post.php");
+
+session_start();
+if(!isset($_SESSION['id'])) {
+    header('location: login.php');
+} else{
+    $sessionId = $_SESSION['id'];
+    $userData = User::getUserDataFromId($sessionId);
+}
 
 $conn = Db::getConnection();
-
-$users_id = $_GET['id'];
-$userData = User::getUserDataFromId($users_id);
+$usersId = $_GET['id'];
+$userData = User::getUserDataFromId($usersId);
 
 $statement = $conn->prepare("SELECT * FROM post WHERE users_id = :id");
-$statement->bindValue(':id', $users_id);
+$statement->bindValue(':id', $usersId);
 $statement->execute();
 
 $posts = $statement->fetchAll();
@@ -44,6 +52,11 @@ $posts = $statement->fetchAll();
       <p class="user__bio"><?php echo $userData['bio']; ?></p>
       <a class="user__website"><?php echo $userData['website']; ?></a>
     </div>
+
+    <?php if($sessionId === $usersId) : ?>
+      <a href="logout">Logout</a>
+      <a href="usersettings.php"> Settings</a>
+    <?php endif; ?>
     
     <div class="post__collection">
       <?php foreach ($posts as $post) : ?>
