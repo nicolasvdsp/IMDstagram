@@ -45,7 +45,7 @@
             <div class="post">
                 <div class="post__head">
                     <img class="post__userImage" src="profile_pictures/<?php echo $p->getUserdataByPostId($post['id'])['profile_picture']; ?>" alt="Profile Picture"/>
-                    <a class="post__userName" rel="author"><?php echo $p->getUserdataByPostId($post['id'])['firstname']; ?></a>
+                    <a class="post__userName" rel="author"><?php echo $p->getUserdataByPostId($post['id'])['firstname'] . " " . substr($p->getUserdataByPostId($post['id'])['lastname'], 0, 1) . "."; ?></a>
                 </div>
                 <div class="post__content">
                     <p class="post__text"><?php echo htmlspecialchars($post['text']); ?></p>
