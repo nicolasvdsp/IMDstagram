@@ -8,24 +8,19 @@ $conn = Db::getConnection();
 
 
 //Zoekfunctie
-if (isset($_GET['q']) and !empty($_GET['q'])) {
-	$q = htmlspecialchars($_GET['q']);
+/*if (isset($_GET['q']) and !empty($_GET['q'])) {
+	$q = htmlspecialchars($_GET['q']);*/
 //	$names = $conn->query('SELECT firstname, lastname, profile_picture, bio FROM users WHERE firstname LIKE "%'.$q.'%"  OR lastname LIKE "%'.$q.'%"');
   //$names = $conn->query("SELECT users.firstname, users.lastname, post.tag, post.upload_location FROM users  JOIN post ON users.id = post.users_id WHERE firstname LIKE 'maryam' OR lastname LIKE 'maryam' OR tag LIKE 'maryam' OR upload_location LIKE 'maryam'");
 
  // $names = $conn->query("SELECT * FROM users NATURAL JOIN post LIKE 'fons'");
 
- //$names = $conn->query('SELECT * FROM users FULL JOIN post WHERE firstname 
+ //$search_result = $conn->query('SELECT * FROM users FULL JOIN post WHERE firstname 
  //LIKE "%'.$q.'%" OR lastname LIKE "%'.$q.'%" OR tag LIKE "%'.$q.'%" OR upload_location LIKE "%'.$q.'%"');
 
-  $names = $conn->query("SELECT * FROM(
-  select id as uid, firstname, lastname, null as tag, null as upload_location from users
-  union select null as uid, null as firstname, null as lastname, tag, upload_location from post) AS t WHERE firstname LIKE '%'.$q.'%' ");
+  //Resultaat niet gevonden }
 
 
-
-  //Resultaat niet gevonden
-  }
 
 ?>
 
@@ -53,14 +48,30 @@ if (isset($_GET['q']) and !empty($_GET['q'])) {
 
 <ul>
 
-<?php while($search_user = $names->fetch()) { ?>
+<?php 
+
+if (isset($_GET['q']) and !empty($_GET['q'])) {
+	$q = htmlspecialchars($_GET['q']);
+$search_result = $conn->query('SELECT * FROM( select id as uid, firstname, lastname, null as tag, null as 
+upload_location from users union select null as uid, null as firstname, null as lastname, tag, upload_location from post ) AS t WHERE firstname LIKE "%'.$q.'%" OR lastname LIKE "%'.$q.'%" OR tag LIKE "%'.$q.'%" OR upload_location LIKE "%'.$q.'%"');
+
+
+
+
+while($search_user = $search_result->fetch()) { ?>
+
+
 	<li style="font-size: 20px;"><a href="index.php"><img style="width: 50px; height:50px; border-radius: 100%;" src="<?php echo $search_user['profile_picture']; ?>" alt="avatar">
     <?=$search_user['firstname'].' '.$search_user['lastname']?></a><br><br></li>
 
-  <li><?=$search_user['tag']?><br><br></li>
+  <li>#<?=$search_user['tag']?><br><br></li>
+  <li>Location: <?=$search_user['upload_location']?><br><br></li>
   <!--Tags-->  
  
-<?php } ?>
+<?php }} ?>
+
+
+
 
 </ul> 
 
