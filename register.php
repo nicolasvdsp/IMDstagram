@@ -35,6 +35,7 @@
     <title>Register</title>
     <link rel="stylesheet" type="text/css" href="css/reset.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="shortcut icon" type="image/svg" href="assets/favicon.svg">
 </head>
 <body>
 
@@ -58,7 +59,7 @@
             <div class="form__input">
                 <label for="firstName">First name</label>
                 <?php if(!empty($_POST)): ?>
-                <input type="text" id="firstName" name="firstname" placeholder="Tony" value="<?php echo $_POST['firstname']; ?>">
+                <input type="text" id="firstName" name="firstname" placeholder="Tony" value="<?php echo htmlspecialchars($_POST['firstname']); ?>">
                 <?php else: ?>
                 <input type="text" id="firstName" name="firstname" placeholder="Tony">
                 <?php endif; ?>
@@ -66,7 +67,7 @@
             <div class="form__input">
                 <label for="lastName">Last name</label>
                 <?php if(!empty($_POST)): ?>
-                <input type="text" id="lastname" name="lastname" placeholder="Miauwkes" value="<?php echo $_POST['lastname']; ?>">
+                <input type="text" id="lastname" name="lastname" placeholder="Miauwkes" value="<?php echo htmlspecialchars($_POST['lastname']); ?>">
                 <?php else: ?>
                 <input type="text" id="lastname" name="lastname" placeholder="Miauwkes">
                 <?php endif; ?>
@@ -74,7 +75,7 @@
             <div class="form__input">
                 <label for="email">Email</label>
                 <?php if(!empty($_POST)): ?>
-                <input type="text" id="email" name="email" placeholder="vjtony@w&m.be" value="<?php echo $_POST['email']; ?>">
+                <input type="text" id="email" name="email" placeholder="vjtony@w&m.be" value="<?php echo htmlspecialchars($_POST['email']); ?>">
                 <?php else: ?>
                 <input type="text" id="email" name="email" placeholder="vjtony@w&m.be">
                 <?php endif; ?>
@@ -91,11 +92,11 @@
                 <input type="password" id="passwordRepeat" name="passwordRepeat" class="passwordRep" placeholder="• • • • • • • • • •">
                 <a href="#" class="form__hideShow hideShowRep">Show</a>
             </div> 
-            <input class="btn--login" type="submit" value="Dink in">
+            <input class="btn--login" type="submit" value="Dink euh registreren">
         </form>
-        <a href="login.php" class="login-register">You already have an account? <span>Dink in here!</span></a>
+        <a href="login.php" class="login-register">Heb je reeds een dink-account? <span>Dink hier in!</span></a>
     </div>
 
-<script src="javascript/app.js"></script>
+<script src="javascript/password.js"></script>
 </body>
 </html>

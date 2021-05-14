@@ -32,6 +32,7 @@
     <title>Login</title>
     <link rel="stylesheet" type="text/css" href="css/reset.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="shortcut icon" type="image/svg" href="assets/favicon.svg">
 </head>
 <body>
     <div class="login">
@@ -39,7 +40,11 @@
         <form action="" method="POST">
             <div class="form__input">
                 <label for="email">Email</label>
-                <input type="text" id="email" name="email" placeholder="vjtony@w&m.be">
+                <?php if(!empty($_POST)): ?>
+                    <input type="text" id="email" name="email" placeholder="vjtony@w&m.be" value="<?php echo htmlspecialchars($_POST['email']); ?>">
+                <?php else: ?>
+                    <input type="text" id="email" name="email" placeholder="vjtony@w&m.be">
+                <?php endif; ?>
             </div> 
             <div class="form__input">
                 <label for="password">Password</label>
@@ -51,7 +56,7 @@
 
             <input class="btn--login" type="submit" value="Dink in">
         </form>
-        <a href="register.php" class="login-register" href="register.php">Don't have an account yet? <span>Subscribe here!</span></a>
+        <a href="register.php" class="login-register" href="register.php">Heb je nog geen account? <span>Registreer hier!</span></a>
     </div>
 </body>
 </html>
