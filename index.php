@@ -44,7 +44,8 @@
         </div>
 
         <section class="posts">
-            <?php foreach($allPosts as $post): ?>
+            <?php foreach($allPosts as $post): ?>  
+            <?php $allComments = Comment::getAll($post['id']); ?>
                 <div class="post">
                 <!-- Head of the post -->
                     <div class="post__head">
@@ -66,7 +67,7 @@
                         </div>
                         <div class="post__foot__comments">
                             <a href="#"><img src="assets/icon_comments.svg" alt="Number of comments"/></a>
-                            <span>5</span>
+                            <span class="commentCount"><?php echo count($allComments); ?></span>
                         </div>
                     </div>
 
@@ -80,7 +81,6 @@
                         </div>  
                 
                         <ul class="post__comments__list">
-                            <?php $allComments = Comment::getAll($post['id']); ?>
                             <?php  foreach($allComments as $comment):  ?>
                                 <li>
                                     <div>
