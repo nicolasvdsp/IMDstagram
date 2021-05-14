@@ -31,7 +31,6 @@ $posts = $statement->fetchAll();
   <title>Dinkstagram</title>
   <link rel="stylesheet" type="text/css" href="css/reset.css">
   <link rel="stylesheet" type="text/css" href="css/style.css">
-  <link rel="stylesheet" type="text/css" href="css/temp.css">
 </head>
 
 <body>
@@ -54,8 +53,10 @@ $posts = $statement->fetchAll();
     </div>
 
     <?php if($sessionId === $usersId) : ?>
-      <a href="logout">Logout</a>
-      <a href="usersettings.php"> Settings</a>
+      <div class="user__self">
+        <a class="user__btn" href="usersettings.php"> Settings</a>
+        <a class="user__btn" href="logout">Logout</a>
+      </div> 
     <?php endif; ?>
     
     <div class="post__collection">
