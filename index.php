@@ -15,12 +15,7 @@
 
     $p = new Post;
     $allPosts = $p->getAllPosts();
-
-    
-
     //var_dump($allPosts[3]['id']);
-
-
 
 ?><!DOCTYPE html>
 <html lang="en">

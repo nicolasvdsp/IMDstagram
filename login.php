@@ -9,18 +9,13 @@
         $user->setEmail($_POST['email']);
         $user->setPassword($_POST['password']);
 
-
-
         if($user->canLogin($_POST['email'], $_POST['password'])) {
             $id = User::getIdByEmail($user->getEmail());
-            $user->startSession($id);
-            
-            
+            $user->startSession($id);   
         } else{
             echo "kaas";
             $errorLogin = "Email en wachtwoord komen niet overeen";
         }
-        
     }
 
 ?><!DOCTYPE html>

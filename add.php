@@ -63,12 +63,9 @@
                 $postTag = $_POST['tags'];
                 $p->createPost($postPicture, $postDescription, $postTag, $postLocation, $postUsers_id);
             }
-       }
-        
+       }   
     }
-
-
-
+    
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
