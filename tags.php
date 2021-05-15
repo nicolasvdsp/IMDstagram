@@ -2,13 +2,24 @@
     include_once(__DIR__ . "/classes/Db.php");
     include_once(__DIR__. "/classes/User.php");
 
-    $conn = Db::getConnection();
+
+    session_start();
+        if(!isset($_SESSION['id'])) {
+            header('location: login.php');
+        } else{
+            $sessionId = $_SESSION['id'];
+            //echo $sessionId;
+            $userData = User::getUserDataFromId($sessionId);
+        }
     
-    $tags_id = $_GET['id'];
+    $tagsId = $_GET['id'];
     $userData = User::getUserDataFromId($tags_id);
 
+    //$posts = (new Post)->getTag($tagsId);
+
     $conn = Db::getConnection();
-    $statement = $conn->prepare("SELECT * FROM post, users, tags WHERE post.users_id = users.id AND post.tags_id = tags.id AND tags.id = $tags_id");
+    $statement = $conn->prepare("SELECT * FROM posts INNER JOIN users ON posts.users_id = users.id INNER JOIN tags ON posts.tags_id = tags.id WHERE tags.id = :tagsId");
+    $statement->bindValue(':tagsId', $tagsId);
     $statement->execute();
     $posts = $statement->fetchAll();
 ?>
@@ -62,13 +73,13 @@
             <?php endforeach; ?>
         </section>
         
-    
         <nav class="navbar">
             <a class="navbar__btn" href="index.php">Home</a>
             <a class="navbar__btn" href="add.php">Add</a>
             <a class="navbar__btn" href="usersettings.php">User</a>
             
         </nav>
+        
     
 </body>
 </html>

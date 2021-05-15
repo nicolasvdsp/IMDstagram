@@ -16,8 +16,6 @@
     $p = new Post;
     $allPosts = $p->getAllPosts();
 
-    
-
     //var_dump($allPosts[3]['id']);
 
 
@@ -34,14 +32,7 @@
     <link rel="shortcut icon" type="image/svg" href="assets/favicon.svg">
 </head>
 <body>
-        <div class="header">
-            <img class="logo" src="./assets/logo_dinkstagram.svg" alt="Logo Dinkstagram"/>
-            <div class="header__user">
-                <a  class="search" href="#"><img src="./assets/icon_search.svg" alt="Search button"/></a>
-                <img class="header__profilePicture" src="profile_pictures/<?php echo $userData['profile_picture']; ?>" alt="Profile picture">
-                <span class="header__username"><?php echo htmlspecialchars($userData['firstname']); ?></span>
-            </div>
-        </div>
+        <?php include "header.php" ?>
 
         <section class="posts">
             <?php foreach($allPosts as $post): ?>
@@ -49,13 +40,14 @@
                 <!-- Head of the post -->
                     <div class="post__head">
                         <img class="post__userImage" src="profile_pictures/<?php echo $p->getUserdataByPostId($post['id'])['profile_picture']; ?>" alt="Profile Picture"/>
-                        <a class="post__userName" rel="author"><?php echo $p->getUserdataByPostId($post['id'])['firstname'] . " " . substr($p->getUserdataByPostId($post['id'])['lastname'], 0, 1) . "."; ?></a>
+                        <a href="profile.php?id=<?php echo $post['users_id']; ?>" class="post__userName" rel="author"><?php echo $p->getUserdataByPostId($post['id'])['firstname'] . " " . substr($p->getUserdataByPostId($post['id'])['lastname'], 0, 1) . "."; ?></a>
                         <?php echo ''/*'post id: ' . $post['id'];*/ ?></div>
 
                 <!-- Content of the post -->
                     <div class="post__content">
                         <p class="post__text"><?php echo htmlspecialchars($post['text']); ?></p>
                         <img class="post__image" src="post_pictures/<?php echo $p->getUserdataByPostId($post['id'])['image'];; ?>" alt="Post Image"/>
+                        <a href="tags.php?id=<?php echo $p->getTagByPostId($post['id'])['tags_id']; ?>" class="post__tag"><?php echo "#".$p->getTagByPostId($post['id'])['tags_name']; ?></a>
                     </div>
 
                 <!-- Foot of the post -->
@@ -96,13 +88,9 @@
        
             <?php endforeach; ?>
         </section>
-    
-        <nav class="navbar">
-            <a class="navbar__btn" href="index.php">Home</a>
-            <a class="navbar__btn" href="add.php">Add</a>
-            <a class="navbar__btn" href="usersettings.php">User</a>
-            
-        </nav>
+        
+        <?php include "navbar.php" ?>
+        
         <script src="javascript/app.js"></script>
 </body>
 </html>

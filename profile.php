@@ -9,18 +9,14 @@ if(!isset($_SESSION['id'])) {
     header('location: login.php');
 } else{
     $sessionId = $_SESSION['id'];
+    //echo $sessionId;
     $userData = User::getUserDataFromId($sessionId);
 }
 
-$conn = Db::getConnection();
 $usersId = $_GET['id'];
 $userData = User::getUserDataFromId($usersId);
+$posts = (new Post)->getAllPostsOfUser($usersId);
 
-$statement = $conn->prepare("SELECT * FROM post WHERE users_id = :id");
-$statement->bindValue(':id', $usersId);
-$statement->execute();
-
-$posts = $statement->fetchAll();
 ?>
 
 <!DOCTYPE html>
@@ -34,15 +30,12 @@ $posts = $statement->fetchAll();
 </head>
 
 <body>
-  <div class="header">
-    <img class="logo" src="./assets/logo_dinkstagram.svg" alt="Logo Dinkstagram" />
-    <a href="#"><img class="search" src="./assets/icon_search.svg" alt="Search button" /></a>
-  </div>
+  <?php include "header.php" ?>
 
   <div class="user__profile">
     <div class="user__content">
     <div class="user__head">
-      <img class="post__userImage" src="<?php echo $userData['profile_picture'] ?>" alt="Profile Picture" />
+      <img class="post__userImage" src="profile_pictures/<?php echo $userData['profile_picture']; ?>" alt="Profile Picture" />
       <p class="user__userName"><?php echo $userData['firstname']; ?></p>
       <p class="user__lastName"><?php echo $userData['lastname']; ?></p>
     </div>
@@ -55,24 +48,20 @@ $posts = $statement->fetchAll();
     <?php if($sessionId === $usersId) : ?>
       <div class="user__self">
         <a class="user__btn" href="usersettings.php"> Settings</a>
-        <a class="user__btn" href="logout">Logout</a>
+        <a class="user__btn" href="logout.php">Logout</a>
       </div> 
     <?php endif; ?>
     
     <div class="post__collection">
       <?php foreach ($posts as $post) : ?>
-        <img class="profile__image" src="<?php echo $post['image']; ?>" alt="Post Image" />
+        <img class="profile__image" src="post_pictures/<?php echo $post['image']; ?>" alt="Post Image" />
       <?php endforeach; ?>
     </div>
     </div>
     
   </div>
 
-  <nav class="navbar">
-    <a class="navbar__btn" href="#">Home</a>
-    <a class="navbar__btn" href="add.php">Add</a>
-    <a class="navbar__btn" href="#">User</a>
-  </nav>
+  <?php include "navbar.php" ?>
   
 </body>
 
