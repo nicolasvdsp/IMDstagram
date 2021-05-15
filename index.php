@@ -71,7 +71,7 @@
                         <div class="post__comments__form">
                             <div class="form__input comments__container">
                                 <input type="text" id="commentText" placeholder="What's on your mind">
-                                <a style="display:none" href="#" class="btn" id="btnAddComment" data-postid="<?php echo $post['id'];  ?>">+</a>
+                                <a style="display:none" href="#" class="btn" id="btnAddComment" data-postid="<?php echo $post['id']; ?>" data-username="<?php echo $userData['firstname']; ?>" data-profilepicture="<?php echo $userData['profile_picture']; ?>">+</a>
                             </div>
                         </div>  
                 
@@ -79,7 +79,7 @@
                             <?php  foreach($allComments as $comment):  ?>
                                 <li>
                                     <div>
-                                        <span><img src="profile_pictures/<?php echo $comment['profile_picture']; ?>" alt="Profile picture"></span>
+                                        <img src="profile_pictures/<?php echo $comment['profile_picture']; ?>" alt="Profile picture">
                                         <span><?php echo '- ' . $comment['firstname']; ?></span>
                                     </div>
                                     <p><?php echo $comment['text']; ?></p>
