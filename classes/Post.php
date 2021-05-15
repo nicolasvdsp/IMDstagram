@@ -27,24 +27,6 @@ class Post {
         return $result;
     }
 
-    public function getTagByPostId($postId){
-        $conn = Db::getConnection();
-        $statement = $conn->prepare("SELECT * FROM tags INNER JOIN posts ON tags.id = posts.tags_id WHERE posts.id = :postId");
-        $statement->bindValue(':postId', $postId);
-        $statement->execute();
-        $result = $statement->fetch(PDO::FETCH_ASSOC);
-        return $result;
-    }
-    
-
-    public function getTag($tagsId){
-        $conn = Db::getConnection();
-        $statement = $conn->prepare("SELECT * FROM posts INNER JOIN users ON posts.users_id = users.id INNER JOIN tags ON posts.tags_id = tags.id WHERE tags.id = :tagsId");
-        $statement->bindValue(':tagsId', $tagsId);
-        $statement->execute();
-        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-        return $result;
-    }
 
     public function createPost( $picture, $description, $tag, $location, $users_id) {
         $conn = Db::getConnection();
