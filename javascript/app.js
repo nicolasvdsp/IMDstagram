@@ -6,33 +6,41 @@ let commentText = document.querySelectorAll("#commentText");
 
 posts.forEach((e) => {
     e.querySelector("#btnAddComment").addEventListener('click', function(f){
-      f.preventDefault();
-      let postId = this.dataset.postid;
-      let text = e.querySelector("#commentText").value;
-  
-      console.log(postId);
-      console.log(text);
-  
-      // post naar database (AJAX)
-      let formData = new FormData();
-      formData.append("text", text);
-      formData.append("postId", postId);
-  
-      fetch("ajax/savecomment.php", {
-          method: "POST",
-          body: formData
-      })
-          .then(response => response.json())
-          .then(result => {
-              let newComment = document.createElement("li");
-              newComment.innerHTML = result.body;
-              e.querySelector(".post__comments__list").appendChild(newComment);
-              e.querySelector("#commentText").value = "";
-          })
-          .catch(error => {
-              console.error("Error:", error);
-          });
+        f.preventDefault();
+        let postId = this.dataset.postid;
+        let text = e.querySelector("#commentText").value;
+    
+        console.log(postId);
+        console.log(text);
+    
+        // post naar database (AJAX)
+        let formData = new FormData();
+        formData.append("text", text);
+        formData.append("postId", postId);
+    
+        fetch("ajax/savecomment.php", {
+            method: "POST",
+            body: formData
+        })
+            .then(response => response.json())
+            .then(result => {
+                let newComment = document.createElement("li");
+                newComment.innerHTML = result.body;
+                e.querySelector(".post__comments__list").appendChild(newComment);
+                e.querySelector("#commentText").value = "";
+            })
+            .catch(error => {
+                console.error("Error:", error);
+            });
+
+
+        let commentCount = parseInt(e.querySelector(".commentCount").innerHTML);
+        commentCount++;
+        e.querySelector('.commentCount').innerHTML = commentCount;
+        // e.querySelector('.commentCount').innerHTML = "<?php echo count($allComments) + 1; ?>";
     });
+
+    
 
     //triggers add button on enter
     e.querySelector("#commentText").addEventListener("keyup", function(f){

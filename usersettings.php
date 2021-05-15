@@ -59,43 +59,18 @@
                 $user->uploadProfilePicture($profilePicture, $sessionId);
             }
        }
-        
-        /*
-            $allowedExtentions = [
-                'jpg',
-                'jpeg',
-                'png',
-                'gif'
-            ];*/
-
-            /*if(in_array($fileExtention, $allowedExtentions)) {
-                if($fileSize < 2097152) {
-                    $profilePicture = uniqid('',true) . '.' . $fileExtention;
-                    $fileDestination = 'profile_pictures/' . $profilePicture;
-                    move_uploaded_file($fileTmpName, $fileDestination);
-                    $user->updateProfilePicture($profilePicture, $sessionId);
-                    header('refresh:0');
-                } else {
-                    $errorFileSize = true;
-                }
-            } else{
-                $errorExtention = true;
-            }
-        }*/
     }
     
     if(!empty($_POST['submitUpdates'])) {
-        // var_dump($userData);
-        
-        $user->updateFirstname($_POST['updateFirstname'], $sessionId);
-        $user->updateLastname($_POST['updateLastname'], $sessionId);
-        $user->updateEmail($_POST['updateEmail'], $sessionId);
-        $user->updateBiography($_POST['updateBiography'], $sessionId);
+        $firstname = $_POST['updateFirstname'];
+        $lastname = $_POST['updateLastname'];
+        $email = $_POST['updateEmail'];
+        $biography = $_POST['updateBiography'];
+        $user->updateDetails($firstname, $lastname, $email, $biography, $sessionId);
         
         if(!empty($_POST['updatePassword'])){
             $user->updatePassword($_POST['updatePassword'], $sessionId);
         }
-        // $user->updateEmail($_POST['updateEmail']);
 
         $userData = User::getUserDataFromId($sessionId);
     }

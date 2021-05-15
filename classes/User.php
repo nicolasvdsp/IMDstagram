@@ -95,6 +95,24 @@
         $statement->execute();
     }
 
+    public function updateDetails($firstname, $lastname, $email, $biography, $sessionId){
+        $conn = new PDO('mysql:host=localhost;dbname=dinkstagram;port=8889', "root", "root");
+        $statement = $conn->prepare("UPDATE users SET firstname = :firstname, lastname = :lastname, email = :email, bio = :biography WHERE id = :sessionId");
+        $statement->bindValue(":firstname", $firstname);
+        $statement->bindValue(":lastname", $lastname);
+        $statement->bindValue(":email", $email);
+        $statement->bindValue(":biography", $biography);
+        $statement->bindValue(":sessionId", $sessionId);
+        
+
+        $this->firstname = $firstname;
+        $this->lastname = $lastname;
+        $this->email = $email;
+        $this->biography = $biography;
+
+        $statement->execute();
+    }
+
 
     public function setProfilePicture($profilePicture) {
         $this->profilePicture = $profilePicture;
