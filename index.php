@@ -15,12 +15,6 @@
 
     //POST
     $conn = Db::getConnection();
-<<<<<<< Updated upstream
-    $statement = $conn->prepare("SELECT * FROM post");
-    $statement->execute();
-    $posts = $statement->fetchAll();
-
-=======
     $statement = $conn->prepare("SELECT * FROM post ORDER BY created_time DESC limit 2");
     $statement->execute();
     $posts = $statement->fetchAll();
@@ -28,7 +22,6 @@
     foreach($posts as $post){
 
     }
->>>>>>> Stashed changes
 
     //LOAD MORE
 
@@ -62,17 +55,9 @@
 
 
 
-<<<<<<< Updated upstream
-
-
-
-        <!--Post-->
-        <section class="posts">
-=======
         <form class="loadmore" action="POST">
 
         <section id="posts" class="posts">
->>>>>>> Stashed changes
             <?php foreach($posts as $post): ?>
             <div class="post">
                 <div class="post__head">
@@ -95,9 +80,6 @@
                 </div>
             </div>
             <?php endforeach; ?>
-<<<<<<< Updated upstream
-        </section>
-=======
 
         <input type="hidden" id="result_no" value="2">
         <input href="#" type="button" id="loadBtn" data-postid="1" value="Load More">
@@ -106,7 +88,6 @@
 
 
         </form>
->>>>>>> Stashed changes
     
         <nav class="navbar">
             <a class="navbar__btn" href="index.php">Home</a>
