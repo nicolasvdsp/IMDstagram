@@ -45,7 +45,10 @@
                     <div class="post__content">
                         <p class="post__text"><?php echo htmlspecialchars($post['text']); ?></p>
                         <img class="post__image" src="post_pictures/<?php echo $p->getUserdataByPostId($post['id'])['image'];; ?>" alt="Post Image"/>
-                        <a href="tags.php?id=<?php echo $p->getTagsByPostId($post['id'])['tags_id']; ?>" class="post__tag"><?php echo "#".$p->getTagsByPostId($post['id'])['tags_name']; ?></a>
+                        <?php if (!empty($post['tags_id'])): ?>
+                        <a href="tags.php?id=<?php echo $p->getTagsByPostId($post['id'])['tags_id'] ?>" class="post__tag"><?php echo "#".$p->getTagsByPostId($post['id'])['tags_name']; ?></a>
+                        <?php endif; ?>
+                        
                     </div>
 
                 <!-- Foot of the post -->
