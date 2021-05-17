@@ -62,7 +62,7 @@
             $statement->bindValue(":postId", $postId);
             $result = $statement->execute();
             $allLikes = $statement->fetchAll(PDO::FETCH_ASSOC);
-            var_dump($result);
+            //var_dump($result);
             return $allLikes;
         }
 
