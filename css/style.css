@@ -382,6 +382,15 @@ body {
 
 /* ----- END OF TAG PAGE ----- */
 
+
+
+/* ----- HOVERBUBBLE -----*/
+.hoverBubble {
+    display: none;
+}
+
+/* ----- END OF HOVERBUBBLE -----*/
+
 /* ----- FIX AUTO-ADJUSTING TEXTAREA ----- */
 
 /*!!Disclaimer,  textarea fix is not my own code. source: https://css-tricks.com/the-cleanest-trick-for-autogrowing-textarea*

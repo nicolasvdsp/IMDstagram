@@ -4,6 +4,7 @@
     include_once(__DIR__ . "/classes/User.php");
     include_once(__DIR__ . "/classes/Post.php");
     include_once(__DIR__ . "/classes/Comment.php");
+    include_once(__DIR__ . "/classes/Like.php");
     
     session_start();
     if(!isset($_SESSION['id'])) {
@@ -34,25 +35,35 @@
         <section class="posts">
             <?php foreach($allPosts as $post): ?>  
             <?php $allComments = Comment::getAll($post['id']); ?>
+            <?php $allLikes = Like::getAll($post['id']); ?>
                 <div class="post">
                 <!-- Head of the post -->
                     <div class="post__head">
                         <img class="post__userImage" src="profile_pictures/<?php echo $p->getUserdataByPostId($post['id'])['profile_picture']; ?>" alt="Profile Picture"/>
                         <a href="profile.php?id=<?php echo $post['users_id']; ?>" class="post__userName" rel="author"><?php echo $p->getUserdataByPostId($post['id'])['firstname'] . " " . substr($p->getUserdataByPostId($post['id'])['lastname'], 0, 1) . "."; ?></a>
-                        <?php echo ''/*'post id: ' . $post['id'];*/ ?></div>
+                        <?php /*echo '|         post id: ' . $post['id'];*/ ?></div>
 
                 <!-- Content of the post -->
                     <div class="post__content">
                         <p class="post__text"><?php echo htmlspecialchars($post['text']); ?></p>
-                        <img class="post__image" src="post_pictures/<?php echo $p->getUserdataByPostId($post['id'])['image'];; ?>" alt="Post Image"/>
+                        <img class="post__image" src="post_pictures/<?php echo $p->getUserdataByPostId($post['id'])['image']; ?>" alt="Post Image"/>
                     </div>
 
                 <!-- Foot of the post -->
                     <div class="post__foot">
                         <div class="post__foot__likes">
-                            <a href="#"><img src="assets/icon_likes.svg" alt="Number of likes"/></a>
-                            <span>5</span>
+                            <?php if(Like::isPostLiked($user['id'], $post['id'])): ?>
+                                <a href="#" id="btnAddLike" data-postid="<?php echo $post['id']; ?>" data-isLiked="false"><img class="iconLike" src="assets/icon_likes.svg" alt="Number of likes"/></a>
+                            <?php else: ?>
+                                <a href="#" id="btnAddLike" data-postid="<?php echo $post['id']; ?>" data-isLiked="true"><img class="iconLike" src="assets/icon_likes-toggled.svg" alt="Number of likes"  style="width: 23px"/></a>
+                            <?php endif; ?>
+                            <span class="likeCount"><?php echo count($allLikes); ?></span>
                         </div>
+                        <ul class="hoverBubble">
+                            <?php foreach($allLikes as $like): ?>
+                                <li class="hoverBubble__text"><?php echo $like['firstname'] ?></li>
+                            <?php endforeach; ?>
+                        </ul>
                         <div class="post__foot__comments">
                             <a href="#"><img src="assets/icon_comments.svg" alt="Number of comments"/></a>
                             <span class="commentCount"><?php echo count($allComments); ?></span>
@@ -88,5 +99,6 @@
         <?php include "navbar.php" ?>
         
         <script src="javascript/app.js"></script>
+        <script src="ajax/savelike.js"></script>
 </body>
 </html>
