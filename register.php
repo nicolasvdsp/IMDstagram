@@ -24,9 +24,7 @@
             $error = $th->getMessage();
         }
     }
-?>
-
-<!DOCTYPE html>
+?><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -35,6 +33,7 @@
     <title>Register</title>
     <link rel="stylesheet" type="text/css" href="css/reset.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="shortcut icon" type="image/svg" href="assets/favicon.svg">
 </head>
 <body>
 
@@ -96,6 +95,6 @@
         <a href="login.php" class="login-register">Heb je reeds een dink-account? <span>Dink hier in!</span></a>
     </div>
 
-<script src="javascript/app.js"></script>
+<script src="javascript/password.js"></script>
 </body>
 </html>

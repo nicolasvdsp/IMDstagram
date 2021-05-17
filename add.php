@@ -63,12 +63,9 @@
                 $postTag = $_POST['tags'];
                 $p->createPost($postPicture, $postDescription, $postTag, $postLocation, $postUsers_id);
             }
-       }
-        
+       }   
     }
-
-
-
+    
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -77,6 +74,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="css/reset.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="shortcut icon" type="image/svg" href="assets/favicon.svg">
     <title>Add a post</title>
 </head>
 <body>

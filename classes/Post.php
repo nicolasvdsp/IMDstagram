@@ -18,6 +18,16 @@ class Post {
         return $username;
     }
 
+    public function getAllPostsOfUser($usersId){
+        $conn = Db::getConnection();
+        $statement = $conn->prepare("SELECT * FROM posts WHERE users_id = :id");
+        $statement->bindValue(':id', $usersId);
+        $statement->execute();
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+
     public function createPost( $picture, $description, $tag, $location, $users_id) {
         $conn = Db::getConnection();
         $statement = $conn->prepare("INSERT INTO posts (text, image, users_id, upload_location, tag) VALUES (:description, :picture, :users_id, :location, :tag)");
@@ -29,5 +39,4 @@ class Post {
         $statement->execute();
         header('location: index.php');
     }
-
 }
