@@ -92,7 +92,7 @@
                                         <img src="profile_pictures/<?php echo $comment['profile_picture']; ?>" alt="Profile picture">
                                         <span><?php echo '- ' . htmlspecialchars($comment['firstname']); ?></span>
                                     </div>
-                                    <p><?php echo htmlspecialchars($comment['test']); ?></p>
+                                    <p><?php echo htmlspecialchars($comment['text']); ?></p>
                                 </li>
                             <?php  endforeach;  ?>
                         </ul>
