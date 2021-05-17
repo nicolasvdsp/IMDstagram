@@ -88,10 +88,8 @@
     <link rel="shortcut icon" type="image/svg" href="assets/favicon.svg">
 </head>
 <body>
-    <div class="header">
-        <img class="logo" src="./assets/logo_dinkstagram.svg" alt="Logo Dinkstagram"/>
-        <a href="#"><img class="search" src="./assets/icon_search.svg" alt="Search button"/></a>
-    </div>
+    
+    <?php include "header.php" ?>
 
     <div class="login">
         <form action="" method="POST" enctype="multipart/form-data" >
@@ -132,11 +130,6 @@
         <a href="logout.php" class="login-register"> <span>Uitloggen</span></a>
     </div>
 
-    <nav class="navbar">
-            <a class="navbar__btn" href="index.php">Home</a>
-            <a class="navbar__btn" href="add.php">Add</a>
-            <a class="navbar__btn" href="usersettings.php">User</a>
-            
-        </nav>
+    <?php include "navbar.php" ?>
 </body>
 </html>

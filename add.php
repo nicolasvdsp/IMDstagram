@@ -78,10 +78,7 @@
     <title>Add a post</title>
 </head>
 <body>
-        <div class="header">
-            <img class="logo" src="./assets/logo_dinkstagram.svg" alt="Logo Dinkstagram"/>
-            <p style="font-weight: bold;">Create a new post</p>
-        </div>
+        <?php include "header.php" ?>
 
         <section class="posts">
             <form action="" method="POST" enctype="multipart/form-data">
@@ -123,12 +120,7 @@
             </form>
         </section>
     
-        <nav class="navbar">
-            <a class="navbar__btn" href="index.php">Home</a>
-            <a class="navbar__btn" href="add.php">Add</a>
-            <a class="navbar__btn" href="usersettings.php">User</a>
-            
-        </nav>
+        <?php include "navbar.php" ?>
     
 </body>
 </html>
