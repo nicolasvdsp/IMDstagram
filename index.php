@@ -63,9 +63,9 @@
                             <ul class="hoverBubble">
                                 <?php foreach($allLikes as $like): ?>
                                     <?php if($like['user_id'] == $sessionId): ?>
-                                        <li data-likeuserid="current-user"><?php echo $like['firstname'] ?></li>
+                                        <li data-likeuserid="current-user"><?php echo htmlspecialchars($like['firstname']) ?></li>
                                     <?php else: ?>
-                                        <li data-likeuserid="<?php echo $like['user_id']; ?>"><?php echo $like['firstname'] ?></li>
+                                        <li data-likeuserid="<?php echo $like['user_id']; ?>"><?php echo htmlspecialchars($like['firstname']); ?></li>
                                     <?php endif; ?>
                                 <?php endforeach; ?>
                             </ul>
@@ -81,7 +81,7 @@
                         <div class="post__comments__form">
                             <div class="form__input comments__container">
                                 <input type="text" id="commentText" placeholder="What's on your mind">
-                                <a style="display:none" href="#" class="btn" id="btnAddComment" data-postid="<?php echo $post['id']; ?>" data-username="<?php echo $userData['firstname']; ?>" data-profilepicture="<?php echo $userData['profile_picture']; ?>">+</a>
+                                <a style="display:none" href="#" class="btn" id="btnAddComment" data-postid="<?php echo $post['id']; ?>" data-username="<?php echo htmlspecialchars($userData['firstname']); ?>" data-profilepicture="<?php echo htmlspecialchars($userData['profile_picture']); ?>">+</a>
                             </div>
                         </div>  
                 
@@ -90,9 +90,9 @@
                                 <li>
                                     <div>
                                         <img src="profile_pictures/<?php echo $comment['profile_picture']; ?>" alt="Profile picture">
-                                        <span><?php echo '- ' . $comment['firstname']; ?></span>
+                                        <span><?php echo '- ' . htmlspecialchars($comment['firstname']); ?></span>
                                     </div>
-                                    <p><?php echo $comment['text']; ?></p>
+                                    <p><?php echo htmlspecialchars($comment['test']); ?></p>
                                 </li>
                             <?php  endforeach;  ?>
                         </ul>
