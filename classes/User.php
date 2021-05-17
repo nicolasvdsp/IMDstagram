@@ -35,13 +35,6 @@
     public function getLastname() {
         return $this->lastname;
     }
-    public function updateLastName($lastname, $id) {
-        $conn = Db::getConnection();
-        $statement = $conn->prepare("UPDATE users SET lastname = :lastname WHERE id = :id");
-        $statement->bindValue(":lastname", $lastname);
-        $statement->bindValue(":id", $id);
-        $statement->execute();
-    }
 
 
     public function setEmail($email) {
@@ -55,13 +48,6 @@
     public function getEmail() {
         return $this->email;
     }
-    public function updateEmail($email, $id) {
-        $conn = Db::getConnection();
-        $statement = $conn->prepare("UPDATE users SET email = :email WHERE id = :id");
-        $statement->bindValue(":email", $email);
-        $statement->bindValue(":id", $id);
-        $statement->execute();
-    }
 
 
     public function setPassword($password) {
@@ -74,6 +60,7 @@
     public function getPassword() {
         return $this->password;
     }
+
     public function updatePassword($password, $id) {
         $option = [
             'cost' => 12,
@@ -82,15 +69,6 @@
         $conn = Db::getConnection();
         $statement = $conn->prepare("UPDATE users SET password = :password WHERE id = :id");
         $statement->bindValue(":password", $newPassword);
-        $statement->bindValue(":id", $id);
-        $statement->execute();
-    }
-
-
-    public function updateBiography($biography, $id){
-        $conn = Db::getConnection();
-        $statement = $conn->prepare("UPDATE users SET bio = :biography WHERE id = :id");
-        $statement->bindValue(":biography", $biography);
         $statement->bindValue(":id", $id);
         $statement->execute();
     }

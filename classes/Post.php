@@ -56,5 +56,4 @@ class Post {
         $statement->execute();
         header('location: index.php');
     }
-
 }

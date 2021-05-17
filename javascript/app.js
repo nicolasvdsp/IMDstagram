@@ -7,9 +7,12 @@ let commentText = document.querySelectorAll("#commentText");
 posts.forEach((e) => {
     e.querySelector("#btnAddComment").addEventListener('click', function(f){
         f.preventDefault();
+        let firstname = this.dataset.username;
+        let profile_picture = this.dataset.profilepicture;
         let postId = this.dataset.postid;
         let text = e.querySelector("#commentText").value;
-    
+
+        console.log(this.dataset);
         console.log(postId);
         console.log(text);
     
@@ -25,8 +28,20 @@ posts.forEach((e) => {
             .then(response => response.json())
             .then(result => {
                 let newComment = document.createElement("li");
-                newComment.innerHTML = result.body;
+                let text = document.createElement("p");
+                let container = document.createElement("div");
+                let profilePicture = document.createElement("img");
+                let firstName = document.createElement("span");
+
+                text.innerHTML = result.body;
+                profilePicture.src = "profile_pictures/" + profile_picture;
+                firstName.innerHTML = "- " + firstname;
                 e.querySelector(".post__comments__list").appendChild(newComment);
+                newComment.appendChild(container);
+                container.appendChild(profilePicture);
+                container.appendChild(firstName);
+                newComment.appendChild(text);
+
                 e.querySelector("#commentText").value = "";
             })
             .catch(error => {
@@ -50,93 +65,3 @@ posts.forEach((e) => {
       }
     });
 });
-
-
-//btnAddComment.addEventListener('click', addComment);
-// commentText.addEventListener("keyup", function(e){
-//   if(e.keyCode === 13) {
-//       e.preventDefault();
-//       document.querySelector("#btnAddComment").click();
-//   }
-// });
-
-// function addComment() {
-//     let postId = this.dataset.postid;
-//     let text = document.querySelector("#commentText").value;
-
-//     console.log(postId);
-//     console.log(text);
-
-//     // post naar database (AJAX)
-//     let formData = new FormData();
-//     formData.append("text", text);
-//     formData.append("postId", postId);
-
-//     fetch("ajax/savecomment.php", {
-//         method: "POST",
-//         body: formData
-//     })
-//         .then(response => response.json())
-//         .then(result => {
-//             let newComment = document.createElement("li");
-//             newComment.innerHTML = result.body;
-//             document.querySelector(".post__comments__list").appendChild(newComment);
-//             document.querySelector("#commentText").value = "";
-//         })
-//         .catch(error => {
-//             console.error("Error:", error);
-//         });
-// };
-
-
-
-
-
-
-
-
-// let posts = document.querySelector('.posts');
-
-
-// posts.forEach((post) => {
-  
-//   let btnAddComment = post.querySelector("#btnAddComment");
-//   let commentText = post.querySelector("#commentText");
-
-
-//     btnAddComment.addEventListener('click', addComment);
-//     commentText.addEventListener("keyup", function(e){
-//       if(e.keyCode === 13) {
-//           e.preventDefault();
-//           post.querySelector("#btnAddComment").click();
-//       }
-//     });
-
-//     function addComment() {
-//         let postId = this.dataset.postid;
-//         let text = post.querySelector("#commentText").value;
-
-//         console.log(postId);
-//         console.log(text);
-
-//         // post naar database (AJAX)
-//         let formData = new FormData();
-//         formData.append("text", text);
-//         formData.append("postId", postId);
-
-//         fetch("ajax/savecomment.php", {
-//             method: "POST",
-//             body: formData
-//         })
-//             .then(response => response.json())
-//             .then(result => {
-//                 let newComment = post.createElement("li");
-//                 newComment.innerHTML = result.body;
-//                 post.querySelector(".post__comments__list").appendChild(newComment);
-//                 post.querySelector("#commentText").value = "";
-//             })
-//             .catch(error => {
-//                 console.error("Error:", error);
-//             });
-//     };
-// });

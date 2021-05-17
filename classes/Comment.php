@@ -57,7 +57,7 @@
         }
 
         public static function getAll($postId) {
-            $conn = new PDO('mysql:host=localhost;dbname=dinkstagram;port=3306', "root", "root");
+            $conn = Db::getConnection();
             $statement = $conn->prepare('SELECT * FROM users INNER JOIN comments ON users.id = comments.user_id WHERE post_id = :postId');
             $statement->bindValue(":postId", $postId);
             $statement->execute();
