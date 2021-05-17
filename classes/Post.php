@@ -3,7 +3,7 @@
 class Post {
     public function getAllPosts(){
         $conn = Db::getConnection();
-        $statement = $conn->prepare("SELECT * FROM posts");
+        $statement = $conn->prepare("SELECT * FROM posts ORDER BY created_time DESC");
         $statement->execute();
         $allPosts = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $allPosts;
