@@ -4,6 +4,9 @@
     --dinkRed_50: #f16a5880;
     --hoverRed: #c74332;
     --softGrey: #a0a3af;
+    --dinkGreen_25: #02b79940;
+    --dinkGreen_50: #02b79980;
+    --dinkGreen: #02b799;
 }
 
 body {
@@ -21,7 +24,7 @@ body {
     justify-content: center;    
 }
 
-.logo--login{
+.logo--login {
     margin-top: 100px;
     margin-bottom: 60px;
     width: 225px;
@@ -30,27 +33,30 @@ body {
     display: block;
     width: 275px;
 }
-.form__input label{
+.form__input label {
     font-size: 14px;
     font-weight: bold;
     margin-bottom: 15px;
 }
-.form__input input, .form__input textarea{
+.form__input input, .form__input textarea {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     border: none;
     display: block;
-    border-radius: 10px;
-    height: 40px;
     width: 100%;
+    border-radius: 10px;
     margin-bottom: 15px;
     text-indent: 15px;
 }
-.form__input input:focus, .form__input textarea:focus{
+.form__input input {
+    height: 40px;
+    width: 100%;
+}
+.form__input input:focus, .form__input textarea:focus {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     outline: none;
     text-indent: 15px;
 }
-.form__image{
+.form__image {
     width: 200px;
     height: 200px;
     border-radius: 100%;
@@ -58,7 +64,7 @@ body {
     object-fit: cover;
 }
 
-.form__hideShow{
+.form__hideShow {
     position: relative;
     width: 45px;
     top: -46px;
@@ -86,7 +92,7 @@ body {
     display: flex;
     justify-content: space-between;
 }
-.login-register span{
+.login-register span {
     color: var(--dinkRed);
 }
 
@@ -105,6 +111,7 @@ body {
     left: 0;
     padding: 15px 20px;
     filter: drop-shadow(0px -4px 8px rgb(0,0,0,0.25));
+    z-index: 10;
 }
 
 .search {
@@ -222,18 +229,18 @@ body {
     border-top: 1px rgb(160, 163, 175) solid;
 }
 
-.post__comments__list li{
+.post__comments__list li {
     border-left: 1px solid var(--softGrey);
     padding-left: 15px;
     margin-bottom: 30px;
 }
-.post__comments__list div{
+.post__comments__list div {
     display: flex;
     align-items: center;
     font-weight: 500;
     margin-bottom: 5px;
 }
-.post__comments__list img{
+.post__comments__list img {
     border-radius: 100%;
     height: 20px;
     width: 20px;
@@ -283,7 +290,7 @@ body {
     background-position-x: 15px;
     background-position-y: 10px;
 }
-.navbar__btn:nth-of-type(2){
+.navbar__btn:nth-of-type(2) {
     background-image: url(../assets/icon_add.svg);
 }
  .navbar__btn:nth-of-type(3) {
@@ -313,7 +320,7 @@ body {
     align-items: center;
 }
 
-.user__information{
+.user__information {
     padding: 10px 45px 20px 45px;
     border-bottom: solid rgba(0, 0, 0, 0.164) 1px;
 }
@@ -324,10 +331,13 @@ body {
     padding: 10px;
 }
 
-.profile__image{
+.profile__image {
     padding: 10px;
+    margin-bottom: 10px;
     border-radius: 5px;
     width: 225px;
+    height: 180px;
+    object-fit: cover;
     box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.082);
 }
 
@@ -341,11 +351,11 @@ body {
     font-weight: bold;
 }
 
-.user__bio{
+.user__bio {
     margin-bottom: 5px;
 }
 
-.user__website{
+.user__website {
     color: rebeccapurple;
 }
 
@@ -362,7 +372,7 @@ body {
     
 }
 
-@media (max-width: 600px){
+@media (max-width: 600px) {
     .post__collection {
         display: grid;
         grid-template-columns: 230px;
@@ -374,7 +384,7 @@ body {
 
 /* ----- TAG PAGE ----- */
 
-.tags__head{
+.tags__head {
     text-align: center;
     font-weight: bold;
     font-size: 1.6em;
@@ -387,6 +397,64 @@ body {
 
 
 /* ----- END OF COMMENTS ----- */
+
+
+/* ----- HOVERBUBBLE -----*/
+.likesContainer {
+    position: relative;
+}
+.hoverBubble {
+    visibility: hidden;
+    width: 120px;
+    background-color: rgba(0, 0, 0, 0.63);
+    padding: 10px 10px;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 10;
+
+    top: -5px;
+    right: 120%
+}
+.hoverBubble li {
+    color: white;
+}
+
+.post__foot__likes:hover ~ .hoverBubble {
+    visibility: visible;
+}
+
+.hoverBubble::after {
+    content: " ";
+    position: absolute;
+    top: 15px;
+    left: 100%;
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent transparent rgba(0, 0, 0, 0.63);
+}
+
+.hide {
+    display: none;
+}
+
+.feedback {
+    margin-top: 40px;
+    padding: 8px 8px 8px 20px;
+    color: white;
+    border-radius: 5px;
+}
+.fail {
+    background-color: var(--dinkRed_50);
+}
+.success {
+    background-color: var(--dinkGreen_50);
+}
+/* .iconLike:hover .hoverBubble {
+    visibility: visible; */
+/* } */
+
+/* ----- END OF HOVERBUBBLE -----*/
 
 /* ----- FIX AUTO-ADJUSTING TEXTAREA ----- */
 
