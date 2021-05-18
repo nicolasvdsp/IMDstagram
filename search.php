@@ -1,10 +1,23 @@
 <?php
+include_once(__DIR__ . "/classes/Db.php");
+include_once(__DIR__. "/classes/User.php");
+include_once(__DIR__ . "/classes/Post.php");
 
 ini_set('display_errors', true);
-include_once(__DIR__ . "/classes/Db.php");
 
 //database connectie
 $conn = Db::getConnection();
+
+//Sessie starten
+session_start();
+if(!isset($_SESSION['id'])) {
+    header('location: login.php');
+} else{
+    $sessionId = $_SESSION['id'];
+}
+
+$tagsId = $_GET['id'];
+$posts = (new Post)->getPostsByTagId($tagsId);
 
 ?>
 <!DOCTYPE html>
@@ -28,31 +41,30 @@ $conn = Db::getConnection();
 
 
 <div class="tab">
-  <button class="tablinks" onclick="openCity(event, 'London')">Accounts</button>
-  <button class="tablinks" onclick="openCity(event, 'Paris')">#Tags</button>
-  <button class="tablinks" onclick="openCity(event, 'Tokyo')">Locations</button>
+  <button class="tablinks" onclick="openCity(event, 'Accounts')">Accounts</button>
+  <button class="tablinks" onclick="openCity(event, 'Tags')">#Tags</button>
+  <button class="tablinks" onclick="openCity(event, 'Locations')">Locations</button>
 </div>
 
-<div id="London" class="tabcontent">
-  <h3>Accounts</h3>
+<!--Accounts-->
+<div id="Accounts" class="tabcontent">
   <ul>
 <?php 
-
 if (isset($_GET['q']) and !empty($_GET['q'])) {
 	$q = htmlspecialchars($_GET['q']);
   $search_result = $conn->query('SELECT * FROM( select id as uid, firstname, lastname, profile_picture, null as tag, null as 
   upload_location from users union select null as uid, null as firstname, null as lastname, null as profile_picture, tag, upload_location from post ) AS t WHERE firstname LIKE "%'.$q.'%" OR lastname LIKE "%'.$q.'%" OR tag LIKE "%'.$q.'%" OR upload_location LIKE "%'.$q.'%"');
 
   while($search_user = $search_result->fetch()) { ?>
-    <li style="font-size: 20px;"><a href="index.php"><img style="width: 50px; height:50px; border-radius: 100%;" src="<?php echo $search_user['profile_picture']; ?>" alt="avatar">
+    <li style="font-size: 20px;"><a href="index.php" ><img style="width: 50px; height:50px; border-radius: 100%;" src="<?php echo $search_user['profile_picture']; ?>" alt="avatar">
       <?=$search_user['firstname'].' '.$search_user['lastname']?></a><br><br></li>
   <?php }} ?>
 </ul> 
+
 </div>
 
-<div id="Paris" class="tabcontent">
-  <h3>#tags</h3>
-
+<!--Tags-->
+<div id="Tags" class="tabcontent">
   <ul>
   <?php 
 
@@ -68,8 +80,9 @@ if (isset($_GET['q']) and !empty($_GET['q'])) {
   </ul> 
 </div>
 
-<div id="Tokyo" class="tabcontent">
-  <h3>Locations</h3>
+
+<!--Location-->
+<div id="Locations" class="tabcontent">
   <ul>
   <?php 
 
