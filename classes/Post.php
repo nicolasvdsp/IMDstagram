@@ -1,6 +1,52 @@
 <?php 
 
 class Post {
+
+    public function setText($text) {
+        $this->text = $text;
+        return $this;
+    }
+    
+    public function getText() {
+        return $this->text;
+    }
+
+    public function setImage($image) {
+        $this->image = $image;
+        return $this;
+    }
+    
+    public function getImage() {
+        return $this->image;
+    }
+
+    public function setUserId($userId) {
+        $this->userId = $userId;
+        return $this;
+    }
+    
+    public function getUserId() {
+        return $this->userId;
+    }
+
+    public function setUploadLocation($uploadLocation) {
+        $this->uploadLocation = $uploadLocation;
+        return $this;
+    }
+    
+    public function getUploadLocation() {
+        return $this->uploadLocation;
+    }
+
+    public function setTagsId($tagsId) {
+        $this->tagsId = $tagsId;
+        return $this;
+    }
+    
+    public function getTagsId() {
+        return $this->tagsId;
+    }
+
     public function getAllPosts(){
         $conn = Db::getConnection();
         $statement = $conn->prepare("SELECT * FROM posts ORDER BY created_time DESC");
@@ -54,16 +100,24 @@ class Post {
         return $username;
     }
 
-    public function createPost( $picture, $description, $tag, $location, $users_id) {
+    public function createPost() {
         $conn = Db::getConnection();
-        $statement = $conn->prepare("INSERT INTO posts (text, image, users_id, upload_location, tag) VALUES (:description, :picture, :users_id, :location, :tag)");
-        $statement->bindValue('description', $description);
-        $statement->bindValue('picture', $picture);
-        $statement->bindValue('users_id', $users_id);
-        $statement->bindValue('location', $location);
-        $statement->bindValue('tag', $tag);
-        $statement->execute();
-        header('location: index.php');
+        $statement = $conn->prepare("INSERT INTO posts (text, image, users_id, upload_location, tags_id) VALUES (:text, :image, :users_id, :location, :tags_id)");
+        
+        $text = $this->getText();
+        $image = $this->getImage();
+        $users_id = $this->getUserId();
+        $location = $this->getUploadLocation();
+        $tags_id = $this->getTagsId();
+
+        
+        $statement->bindValue(":text", $text);
+        $statement->bindValue(":image", $image);
+        $statement->bindValue(":users_id", $users_id);
+        $statement->bindValue(":location", $location);
+        $statement->bindValue(":tags_id", $tags_id);
+        $result = $statement->execute();
+        var_dump($result);
     }
 
     public static function loadFilters() {

@@ -3,6 +3,7 @@
     include_once(__DIR__ . "/classes/Db.php");
     include_once(__DIR__ . "/classes/User.php");
     include_once(__DIR__ . "/classes/Post.php");
+    include_once(__DIR__ . "/classes/Tag.php");
 
     session_start();
     if(!isset($_SESSION['id'])) {
@@ -13,6 +14,7 @@
     }
 
     if(!empty($_POST)) {
+        $t = new Tag;
         $p = new Post;
 
         $file = $_FILES['postPicture'];
@@ -56,12 +58,23 @@
        //Uploads file if no errors occured
        if($uploadOk === 1) {
             if(move_uploaded_file($fileTmpName, $fileTarget)) {
-                $postPicture = basename($fileName);
-                $postDescription = $_POST['postDescription'];
-                $postUsers_id = $userData['id'];
-                $postLocation = $_POST['location'];
-                $postTag = $_POST['tags'];
-                $p->createPost($postPicture, $postDescription, $postTag, $postLocation, $postUsers_id);
+                $tagName_post = $_POST['tags'];
+                $checkedTagName = $t->checkIfExistingTag($tagName_post);
+                if($checkedTagName){
+                    $newTag = $t->getTagIdByTagName($tagName_post);
+                    $p->setTagsId($newTag['id']);
+                } else {
+                    $t->setTagsName($tagName_post);
+                    $newTag = $t->getTagIdByTagName($tagName_post);
+                    $p->setTagsId($newTag['id']);
+                }
+
+                $p->setImage(basename($fileName));
+                $p->setText($_POST['postDescription']);
+                $p->setUserId($sessionId);
+                $p->setUploadLocation($_POST['location']);
+                $p->createPost();
+                header('location: index.php');
             }
        }   
     }
