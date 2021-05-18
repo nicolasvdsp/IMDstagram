@@ -239,7 +239,7 @@ body {
 .post__comments__list li {
     border-left: 1px solid var(--softGrey);
     padding-left: 15px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 .post__comments__list div {
     display: flex;
@@ -253,6 +253,11 @@ body {
     width: 20px;
     object-fit: cover;
     margin-right: 10px;
+}
+
+.load__btn{
+    font-weight: bold;
+    color: var(--dinkRed);
 }
 
 /* ----- END OF POST COMMENTS -----*/
@@ -319,7 +324,7 @@ body {
     max-width: 500px;
     background-color: white;
     border-radius: 10px;
-    padding: 15px 15px 50px 15px;
+    padding: 15px 15px 30px 15px;
 }
 
 .user__head {
@@ -399,6 +404,62 @@ body {
 
 /* ----- END OF TAG PAGE ----- */
 
+/* ----- COMMENTS DETAIL PAGE ----- */
+
+@media (min-width: 750px){
+    .comments__post{
+        padding-top: 10px;
+    }
+    
+    .detail__post{
+        width: 750px;
+        height: 525px;
+        background-color: white;
+        border-radius: 10px;
+        margin-bottom: 0px;
+        padding: 15px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(4, 1fr);
+        grid-column-gap: 0px;
+        grid-row-gap: 0px;
+    }
+
+    .detail__head{
+        grid-area: 1 / 2 / 2 / 3;
+        width: 280px;
+        height: 50px;
+    }
+
+    .detail__image{
+        grid-area: 1 / 1 / 5 / 2;
+        width: 450px;
+        align-self: center;
+        padding-right: 20px;
+    }
+
+
+    .detail__text{
+        grid-area: 2 / 2 / 3 / 3;
+        height: 75px;
+        overflow: auto;
+    }
+
+    .detail__foot{
+        grid-area: 4 / 2 / 5 / 3;
+        height: 50px;
+    }
+
+    .detail__comments__form{
+        grid-area: 3 / 2 / 4 / 3;
+        overflow: auto;
+        height: 300px;
+    }
+
+
+}
+
+/* ----- END OF COMMENTS DETAIL PAGE ----- */
 
 
 /* ----- HOVERBUBBLE -----*/
