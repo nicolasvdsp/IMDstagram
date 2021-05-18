@@ -101,7 +101,7 @@
                                     </div>
                                     <p><?php echo htmlspecialchars($comment['text']); ?></p>
                                 </li>
-                                <li><a href="comments.php?id=<?php echo $post['id']; ?>" >Load more</a></li>
+                                <a class="load__btn" href="comments.php?id=<?php echo $post['id']; ?>" >Load more</a>
                             <?php  endforeach;  ?>
                         </ul>
                     </div>
