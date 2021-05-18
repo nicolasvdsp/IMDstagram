@@ -9,6 +9,7 @@
     if(!empty($_POST)) {
 
         $comment = new Comment();
+        //$_POST['postId'] komt van app.js lijn 22 formData.append("postId", postId); (het deel tussen aanhalingstekens)
         $comment->setPostId($_POST['postId']);
         $comment->setText($_POST['text']);
         $comment->setUserId($sessionId); //$_SESSION

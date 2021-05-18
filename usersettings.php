@@ -73,6 +73,8 @@
         }
 
         $userData = User::getUserDataFromId($sessionId);
+
+        $feedbackSuccess = "Wijzig-dinken opgeslagen";
     }
 
 ?><!DOCTYPE html>
@@ -88,10 +90,8 @@
     <link rel="shortcut icon" type="image/svg" href="assets/favicon.svg">
 </head>
 <body>
-    <div class="header">
-        <img class="logo" src="./assets/logo_dinkstagram.svg" alt="Logo Dinkstagram"/>
-        <a href="#"><img class="search" src="./assets/icon_search.svg" alt="Search button"/></a>
-    </div>
+    
+    <?php include "header.php" ?>
 
     <div class="login">
         <form action="" method="POST" enctype="multipart/form-data" >
@@ -112,31 +112,29 @@
                 </div>    
             </div> 
             <div class="form__input">
-                <label for="firstName">First name</label>
-                <input type="text" id="firstName" name="updateFirstname" value="<?php echo htmlspecialchars($userData['firstname']); ?>" placeholder="<?php echo htmlspecialchars($userData['firstname']); ?>">
+                <label for="firstName">Voornaam</label>
+                <input type="text" id="firstName" name="updateFirstname" value="<?php echo htmlspecialchars($userData['firstname']); ?>" placeholder="Vul je voornaam in">
             </div> 
             <div class="form__input">
                 <label for="lastName">Last name</label>
-                <input type="text" id="lastName" name="updateLastname" value="<?php echo htmlspecialchars($userData['lastname']); ?>" placeholder="<?php echo htmlspecialchars($userData['lastname']); ?>">
+                <input type="text" id="lastName" name="updateLastname" value="<?php echo htmlspecialchars($userData['lastname']); ?>" placeholder="Vul je achternaam in">
             </div> 
             <div class="form__input">
                 <label for="email">Email</label>
-                <input type="text" id="email" name="updateEmail" value="<?php echo htmlspecialchars($userData['email']); ?>" placeholder="<?php echo htmlspecialchars($userData['email']); ?>">
+                <input type="text" id="email" name="updateEmail" value="<?php echo htmlspecialchars($userData['email']); ?>" placeholder="Vul je email-adres in">
             </div> 
             <div class="form__input">
                 <label for="password">Password</label>
                 <input type="text" id="password" name="updatePassword" placeholder="• • • • • • • • • •">
             </div>
+            <?php if(isset($feedbackSuccess)): ?>
+                <p class="feedback success"><?php echo $feedbackSuccess; ?></p>
+            <?php endif; ?>
             <input class="btn--login" type="submit" value="Wijzigingen opslaan" name="submitUpdates">
         </form>
         <a href="logout.php" class="login-register"> <span>Uitloggen</span></a>
     </div>
 
-    <nav class="navbar">
-            <a class="navbar__btn" href="index.php">Home</a>
-            <a class="navbar__btn" href="add.php">Add</a>
-            <a class="navbar__btn" href="usersettings.php">User</a>
-            
-        </nav>
+    <?php include "navbar.php" ?>
 </body>
 </html>

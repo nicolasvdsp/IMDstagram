@@ -74,7 +74,7 @@
     }
 
     public function updateDetails($firstname, $lastname, $email, $biography, $sessionId){
-        $conn = new PDO('mysql:host=localhost;dbname=dinkstagram;port=8889', "root", "root");
+        $conn = Db::getConnection();
         $statement = $conn->prepare("UPDATE users SET firstname = :firstname, lastname = :lastname, email = :email, bio = :biography WHERE id = :sessionId");
         $statement->bindValue(":firstname", $firstname);
         $statement->bindValue(":lastname", $lastname);

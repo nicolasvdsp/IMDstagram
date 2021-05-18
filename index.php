@@ -4,6 +4,7 @@
     include_once(__DIR__ . "/classes/User.php");
     include_once(__DIR__ . "/classes/Post.php");
     include_once(__DIR__ . "/classes/Comment.php");
+    include_once(__DIR__ . "/classes/Like.php");
     
     session_start();
     if(!isset($_SESSION['id'])) {
@@ -34,17 +35,18 @@
         <section class="posts">
             <?php foreach($allPosts as $post): ?>  
             <?php $allComments = Comment::getAll($post['id']); ?>
+            <?php $allLikes = Like::getAll($post['id']); ?>
                 <div class="post">
                 <!-- Head of the post -->
                     <div class="post__head">
                         <img class="post__userImage" src="profile_pictures/<?php echo $p->getUserdataByPostId($post['id'])['profile_picture']; ?>" alt="Profile Picture"/>
                         <a href="profile.php?id=<?php echo $post['users_id']; ?>" class="post__userName" rel="author"><?php echo $p->getUserdataByPostId($post['id'])['firstname'] . " " . substr($p->getUserdataByPostId($post['id'])['lastname'], 0, 1) . "."; ?></a>
-                        <?php echo ''/*'post id: ' . $post['id'];*/ ?></div>
+                        <?php /*echo '|         post id: ' . $post['id'];*/ ?></div>
 
                 <!-- Content of the post -->
                     <div class="post__content">
                         <p class="post__text"><?php echo htmlspecialchars($post['text']); ?></p>
-                        <img class="post__image" src="post_pictures/<?php echo $p->getUserdataByPostId($post['id'])['image'];; ?>" alt="Post Image"/>
+                        <img class="post__image" src="post_pictures/<?php echo $p->getUserdataByPostId($post['id'])['image']; ?>" alt="Post Image"/>
                         <?php if (!empty($post['tags_id'])): ?>
                         <a href="tags.php?id=<?php echo $p->getTagsByPostId($post['id'])['tags_id'] ?>" class="post__tag"><?php echo "#".$p->getTagsByPostId($post['id'])['tags_name']; ?></a>
                         <?php endif; ?>
@@ -53,9 +55,24 @@
 
                 <!-- Foot of the post -->
                     <div class="post__foot">
-                        <div class="post__foot__likes">
-                            <a href="#"><img src="assets/icon_likes.svg" alt="Number of likes"/></a>
-                            <span>5</span>
+                        <div class="likesContainer">
+                            <div class="post__foot__likes">
+                                <?php if(Like::isPostLiked($user['id'], $post['id'])): ?>
+                                    <a href="#" id="btnAddLike" data-postid="<?php echo $post['id']; ?>" data-isliked="false" data-username="<?php echo $userData['firstname']; ?>" data-userid="<?php echo $userData['id']; ?>"><img class="iconLike" src="assets/icon_likes.svg" alt="Number of likes"/></a>
+                                <?php else: ?>
+                                    <a href="#" id="btnAddLike" data-postid="<?php echo $post['id']; ?>" data-isliked="true" data-username="<?php echo $userData['firstname']; ?>" data-userid="<?php echo $userData['id']; ?>"><img class="iconLike" src="assets/icon_likes-toggled.svg" alt="Number of likes"  style="width: 23px"/></a>
+                                <?php endif; ?>
+                                <span class="likeCount"><?php echo count($allLikes); ?></span>
+                            </div>
+                            <ul class="hoverBubble">
+                                <?php foreach($allLikes as $like): ?>
+                                    <?php if($like['user_id'] == $sessionId): ?>
+                                        <li data-likeuserid="current-user"><?php echo htmlspecialchars($like['firstname']) ?></li>
+                                    <?php else: ?>
+                                        <li data-likeuserid="<?php echo $like['user_id']; ?>"><?php echo htmlspecialchars($like['firstname']); ?></li>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+                            </ul>
                         </div>
                         <div class="post__foot__comments">
                             <a href="#"><img src="assets/icon_comments.svg" alt="Number of comments"/></a>
@@ -68,7 +85,7 @@
                         <div class="post__comments__form">
                             <div class="form__input comments__container">
                                 <input type="text" id="commentText" placeholder="What's on your mind">
-                                <a style="display:none" href="#" class="btn" id="btnAddComment" data-postid="<?php echo $post['id']; ?>" data-username="<?php echo $userData['firstname']; ?>" data-profilepicture="<?php echo $userData['profile_picture']; ?>">+</a>
+                                <a style="display:none" href="#" class="btn" id="btnAddComment" data-postid="<?php echo $post['id']; ?>" data-username="<?php echo htmlspecialchars($userData['firstname']); ?>" data-profilepicture="<?php echo htmlspecialchars($userData['profile_picture']); ?>">+</a>
                             </div>
                         </div>  
                 
@@ -77,9 +94,9 @@
                                 <li>
                                     <div>
                                         <img src="profile_pictures/<?php echo $comment['profile_picture']; ?>" alt="Profile picture">
-                                        <span><?php echo '- ' . $comment['firstname']; ?></span>
+                                        <span><?php echo '- ' . htmlspecialchars($comment['firstname']); ?></span>
                                     </div>
-                                    <p><?php echo $comment['text']; ?></p>
+                                    <p><?php echo htmlspecialchars($comment['text']); ?></p>
                                 </li>
                             <?php  endforeach;  ?>
                         </ul>
@@ -92,5 +109,6 @@
         <?php include "navbar.php" ?>
         
         <script src="javascript/app.js"></script>
+        <script src="ajax/savelike.js"></script>
 </body>
 </html>

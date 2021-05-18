@@ -13,8 +13,7 @@
             $id = User::getIdByEmail($user->getEmail());
             $user->startSession($id);   
         } else{
-            echo "kaas";
-            $errorLogin = "Email en wachtwoord komen niet overeen";
+            $errorLogin = "Geen geldige combinatie";
         }
     }
 
@@ -46,7 +45,7 @@
                 <input type="password" id="password" name="password" placeholder="• • • • • • • • • •">
             </div> 
             <?php if(isset($errorLogin)): ?>
-                <p class="fail"><?php echo $errorLogin; ?></p>
+                <p class="feedback fail"><?php echo $errorLogin; ?></p>
             <?php endif; ?>
 
             <input class="btn--login" type="submit" value="Dink in">
