@@ -33,7 +33,7 @@
 
         <section class="posts">
             <?php foreach($allPosts as $post): ?>  
-            <?php $allComments = Comment::getAll($post['id']); ?>
+            <?php $allComments = Comment::getSome($post['id']); ?>
                 <div class="post">
                 <!-- Head of the post -->
                     <div class="post__head">
@@ -77,13 +77,18 @@
                                     </div>
                                     <p><?php echo $comment['text']; ?></p>
                                 </li>
+                                <li><a href="comments.php?id=<?php echo $post['id']; ?>" >Load more</a></li>
                             <?php  endforeach;  ?>
                         </ul>
                     </div>
                 </div>
+
+                <!-- detail comments -->
        
             <?php endforeach; ?>
         </section>
+
+        
         
         <?php include "navbar.php" ?>
         

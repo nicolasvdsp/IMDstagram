@@ -64,4 +64,13 @@
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);
             return $result;
         }
+
+        public static function getSome($postId) {
+            $conn = Db::getConnection();
+            $statement = $conn->prepare('SELECT * FROM users INNER JOIN comments ON users.id = comments.user_id WHERE post_id = :postId LIMIT 1');
+            $statement->bindValue(":postId", $postId);
+            $statement->execute();
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        }
     }
