@@ -73,20 +73,29 @@
         $statement->execute();
     }
 
-    public function updateDetails($firstname, $lastname, $email, $biography, $sessionId){
+    public function setBiography($biography) {
+        $this->biography = $biography;
+        return $this;
+}
+
+    public function getBiography() {
+        return $this->biography;
+    }
+
+    public function updateDetails($sessionId){
         $conn = Db::getConnection();
         $statement = $conn->prepare("UPDATE users SET firstname = :firstname, lastname = :lastname, email = :email, bio = :biography WHERE id = :sessionId");
+        
+        $firstname = $this->getFirstName();
+        $lastname = $this->getLastname();
+        $email = $this->getEmail();
+        $biography = $this->getBiography();
+        
         $statement->bindValue(":firstname", $firstname);
         $statement->bindValue(":lastname", $lastname);
         $statement->bindValue(":email", $email);
         $statement->bindValue(":biography", $biography);
         $statement->bindValue(":sessionId", $sessionId);
-        
-
-        $this->firstname = $firstname;
-        $this->lastname = $lastname;
-        $this->email = $email;
-        $this->biography = $biography;
 
         $statement->execute();
     }

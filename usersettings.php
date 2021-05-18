@@ -62,11 +62,11 @@
     }
     
     if(!empty($_POST['submitUpdates'])) {
-        $firstname = $_POST['updateFirstname'];
-        $lastname = $_POST['updateLastname'];
-        $email = $_POST['updateEmail'];
-        $biography = $_POST['updateBiography'];
-        $user->updateDetails($firstname, $lastname, $email, $biography, $sessionId);
+        $user->setFirstName($firstname = $_POST['updateFirstname']);
+        $user->setLastname($_POST['updateLastname']);
+        $user->setEmail($_POST['updateEmail']);
+        $user->setBiography($_POST['updateBiography']);
+        $user->updateDetails($sessionId);
         
         if(!empty($_POST['updatePassword'])){
             $user->updatePassword($_POST['updatePassword'], $sessionId);
