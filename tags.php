@@ -13,7 +13,6 @@
     
     $tagsId = $_GET['id'];
     $posts = (new Post)->getPostsByTagId($tagsId);
-    $allPosts = (new Post)->getAllPosts();
 ?>
 
 <!DOCTYPE html>
