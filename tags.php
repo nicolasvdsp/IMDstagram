@@ -44,7 +44,9 @@
                 <!-- Content of the post -->
                     <div class="post__content">
                         <p class="post__text"><?php echo htmlspecialchars($post['text']); ?></p>
-                        <img class="post__image" src="post_pictures/<?php echo $post['image'];; ?>" alt="Post Image"/>
+                        <a href="comments.php?id=<?php echo $post['id']; ?>">
+                            <img class="post__image" src="post_pictures/<?php echo $post['image'];; ?>" alt="Post Image"/>
+                        </a>
                         <a href="tags.php?id=<?php echo $post['tags_id']; ?>" class="post__tag"><?php echo "#".$post['tags_name']; ?></a>
                     </div>
                 </div>

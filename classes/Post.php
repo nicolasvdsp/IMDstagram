@@ -27,6 +27,15 @@ class Post {
         return $result;
     }
 
+    public function getPost($postId){
+        $conn = Db::getConnection();
+        $statement = $conn->prepare("SELECT * FROM posts WHERE id = :id");
+        $statement->bindValue(':id', $postId);
+        $statement->execute();
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
     public function getTagsByPostId($postId){
         $conn = Db::getConnection();
         $statement = $conn->prepare("SELECT * FROM tags INNER JOIN posts ON tags.id = posts.tags_id WHERE posts.id = :postId");

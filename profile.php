@@ -55,7 +55,10 @@ $posts = (new Post)->getAllPostsOfUser($usersId);
     
     <div class="post__collection">
       <?php foreach ($posts as $post) : ?>
-        <img class="profile__image" src="post_pictures/<?php echo $post['image']; ?>" alt="Post Image" />
+        <a href="comments.php?id=<?php echo $post['id']; ?>">
+          <img class="profile__image" src="post_pictures/<?php echo $post['image']; ?>" alt="Post Image" />
+        </a>
+        
       <?php endforeach; ?>
     </div>
     </div>
