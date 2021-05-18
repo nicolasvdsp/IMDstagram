@@ -232,7 +232,7 @@ body {
 .post__comments__list li {
     border-left: 1px solid var(--softGrey);
     padding-left: 15px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 .post__comments__list div {
     display: flex;

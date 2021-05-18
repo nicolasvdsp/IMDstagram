@@ -34,7 +34,8 @@
 
         <section class="posts">
             <?php foreach($allPosts as $post): ?>  
-            <?php $allComments = Comment::getSome($post['id']); ?>
+            <?php $someComments = Comment::getSome($post['id']); ?>
+            <?php $allComments = Comment::getAll($post['id']); ?>
             <?php $allLikes = Like::getAll($post['id']); ?>
                 <div class="post">
                 <!-- Head of the post -->
@@ -46,7 +47,9 @@
                 <!-- Content of the post -->
                     <div class="post__content">
                         <p class="post__text"><?php echo htmlspecialchars($post['text']); ?></p>
-                        <img class="post__image" src="post_pictures/<?php echo $p->getUserdataByPostId($post['id'])['image']; ?>" alt="Post Image"/>
+                        <a href="comments.php?id=<?php echo $post['id']; ?>">
+                            <img class="post__image" src="post_pictures/<?php echo $p->getUserdataByPostId($post['id'])['image']; ?>" alt="Post Image"/>
+                        </a>
                         <?php if (!empty($post['tags_id'])): ?>
                         <a href="tags.php?id=<?php echo $p->getTagsByPostId($post['id'])['tags_id'] ?>" class="post__tag"><?php echo "#".$p->getTagsByPostId($post['id'])['tags_name']; ?></a>
                         <?php endif; ?>
@@ -90,7 +93,7 @@
                         </div>  
                 
                         <ul class="post__comments__list">
-                            <?php  foreach($allComments as $comment):  ?>
+                            <?php  foreach($someComments as $comment):  ?>
                                 <li>
                                     <div>
                                         <img src="profile_pictures/<?php echo $comment['profile_picture']; ?>" alt="Profile picture">
