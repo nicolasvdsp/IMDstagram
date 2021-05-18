@@ -65,7 +65,7 @@
             }
        }   
     }
-    
+        $allFilters = Post::loadFilters();
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -73,6 +73,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cssgram/0.1.10/cssgram.min.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="shortcut icon" type="image/svg" href="assets/favicon.svg">
     <title>Add a post</title>
@@ -81,13 +82,23 @@
         <?php include "header.php" ?>
 
         <section class="posts">
-            <figure class="prevContainer">
-                <img class="prev" src="" alt="">
-            </figure>
-
+            
             <form action="" method="POST" enctype="multipart/form-data">
+                <figure class="prevContainer">
+                    <img class="prev" src="" alt="">
+                </figure>
+            
                 <input class="post__addImage" type="file" id="postPicture" name="postPicture" class="post__addImage">
     
+                <div class="form__input">
+                    <label for="filter">Filter</label>
+                    <select name="filter" id="filter">
+                        <?php foreach($allFilters as $filter): ?>
+                            <option value="<?php echo $filter['filter']; ?>"><?php echo $filter['name']; ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+
                 <div class="form__input">
                     <label for="postDescription">Beschrijving</label>
                     <?php if(!empty($_POST)): ?>
@@ -127,5 +138,6 @@
         <?php include "navbar.php" ?>
 
     <script src="javascript/add_post.js"></script>
+
 </body>
 </html>

@@ -38,7 +38,7 @@ body {
     font-weight: bold;
     margin-bottom: 15px;
 }
-.form__input input, .form__input textarea {
+.form__input input, .form__input textarea, .form__input select {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     border: none;
     display: block;
@@ -47,10 +47,11 @@ body {
     margin-bottom: 15px;
     text-indent: 15px;
 }
-.form__input input {
+.form__input input, .form__input select {
     height: 40px;
     width: 100%;
 }
+
 .form__input input:focus, .form__input textarea:focus {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     outline: none;
@@ -203,6 +204,7 @@ body {
 
 
 /* ----- NEW POSTS ------*/
+
 .post__addImage {
     margin: 30px 0;
 }
@@ -220,6 +222,14 @@ body {
 }
 .prevContainer {
     border-radius: 10px;
+    width: 285px;
+    overflow: hidden;
+}
+
+._1977 img, .aden img, .brannan img, .brooklyn img, .clarendon img, .earlybird img, .gingham img, .hudson img, .inkwell img, .kelvin img, .lark img, .lofi img, .mayfair img, .moon img, .nashville img, .perpetua img, .reyes img, .rise img, .slumber img, .toaster img, .valencia img, .walden img, .willow img, .xpro2 img {
+    width: 285px;
+    border-radius: 10xp;
+    overflow: hidden;
 }
 
 /* 

@@ -65,4 +65,12 @@ class Post {
         $statement->execute();
         header('location: index.php');
     }
+
+    public static function loadFilters() {
+        $conn = Db::getConnection();
+        $statement = $conn->prepare("SELECT * FROM filters");
+        $statement->execute();
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
 }
