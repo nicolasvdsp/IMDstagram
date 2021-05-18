@@ -24,9 +24,7 @@
             $error = $th->getMessage();
         }
     }
-?>
-
-<!DOCTYPE html>
+?><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -35,6 +33,7 @@
     <title>Register</title>
     <link rel="stylesheet" type="text/css" href="css/reset.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="shortcut icon" type="image/svg" href="assets/favicon.svg">
 </head>
 <body>
 
@@ -57,29 +56,45 @@
         <form action="" method="POST">
             <div class="form__input">
                 <label for="firstName">First name</label>
+                <?php if(!empty($_POST)): ?>
+                <input type="text" id="firstName" name="firstname" placeholder="Tony" value="<?php echo htmlspecialchars($_POST['firstname']); ?>">
+                <?php else: ?>
                 <input type="text" id="firstName" name="firstname" placeholder="Tony">
+                <?php endif; ?>
             </div> 
             <div class="form__input">
                 <label for="lastName">Last name</label>
-                <input type="text" id="lastName" name="lastname" placeholder="Miauwkes">
+                <?php if(!empty($_POST)): ?>
+                <input type="text" id="lastname" name="lastname" placeholder="Miauwkes" value="<?php echo htmlspecialchars($_POST['lastname']); ?>">
+                <?php else: ?>
+                <input type="text" id="lastname" name="lastname" placeholder="Miauwkes">
+                <?php endif; ?>
             </div> 
             <div class="form__input">
                 <label for="email">Email</label>
+                <?php if(!empty($_POST)): ?>
+                <input type="text" id="email" name="email" placeholder="vjtony@w&m.be" value="<?php echo htmlspecialchars($_POST['email']); ?>">
+                <?php else: ?>
                 <input type="text" id="email" name="email" placeholder="vjtony@w&m.be">
+                <?php endif; ?>
             </div> 
             <div class="form__input">
                 <label for="password">Password</label>
-                <input type="text" id="password" name="password" placeholder="• • • • • • • • • •">
+                <div class="input--btn">
+                    <input type="password" id="password" name="password"  class="password" placeholder="• • • • • • • • • •">
+                    <a href="#" class="form__hideShow hideShow">Show</a>
+                </div>
             </div> 
             <div class="form__input">
                 <label for="passwordRepeat">Password repeat</label>
-                <input type="text" id="passwordRepeat" name="passwordRepeat" placeholder="• • • • • • • • • •">
+                <input type="password" id="passwordRepeat" name="passwordRepeat" class="passwordRep" placeholder="• • • • • • • • • •">
+                <a href="#" class="form__hideShow hideShowRep">Show</a>
             </div> 
-            <input class="btn--login" type="submit" value="Dink in">
+            <input class="btn--login" type="submit" value="Dink euh registreren">
         </form>
-        <a href="login.php" class="login-register">You already have an account? <span>Dink in here!</span></a>
+        <a href="login.php" class="login-register">Heb je reeds een dink-account? <span>Dink hier in!</span></a>
     </div>
 
-
+<script src="javascript/password.js"></script>
 </body>
 </html>

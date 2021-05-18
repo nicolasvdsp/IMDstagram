@@ -1,25 +1,26 @@
-<?php
-include_once(__DIR__ . "/Db.php");
-class User{
-    /* --- GETTERS - SETTERS - UPDATERS --- */
-    public function setFirstName($firstname) {
-        if(!empty($firstname)){
-            $this->firstname = $firstname;
-            return $this;
-        } else {
-            $errorFn = "Vul je voornaam in a.u.b.";
+    <?php
+    include_once(__DIR__ . "/Db.php");
+    class User{
+        /* --- GETTERS - SETTERS - UPDATERS --- */
+        public function setFirstName($firstname) {
+            if(!empty($firstname)){
+                $this->firstname = $firstname;
+                return $this;
+            } else {
+                throw new Exception("vul je voornaam in");
+                //$errorFn = "Vul je voornaam in a.u.b.";
+            }
         }
-    }
-    public function getFirstName() {
-        return $this->firstname;
-    }
-    public function updateFirstName($firstname, $id) {
-        $conn = Db::getConnection();
-        $statement = $conn->prepare("UPDATE users SET firstname = :firstname WHERE id = :id");
-        $statement->bindValue(":firstname", $firstname);
-        $statement->bindValue(":id", $id);
-        $statement->execute();
-    }
+        public function getFirstName() {
+            return $this->firstname;
+        }
+        public function updateFirstName($firstname, $id) {
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("UPDATE users SET firstname = :firstname WHERE id = :id");
+            $statement->bindValue(":firstname", $firstname);
+            $statement->bindValue(":id", $id);
+            $statement->execute();
+        }
 
 
     public function setLastname($lastname) {
@@ -27,18 +28,12 @@ class User{
             $this->lastname = $lastname;
             return $this;
         } else {
-            $errorLn = "Vul je achternaam in a.u.b.";
+            throw new Exception("vul je achternaam in");
+            //$errorLn = "Vul je achternaam in a.u.b.";
         }
     }
     public function getLastname() {
         return $this->lastname;
-    }
-    public function updateLastName($lastname, $id) {
-        $conn = Db::getConnection();
-        $statement = $conn->prepare("UPDATE users SET lastname = :lastname WHERE id = :id");
-        $statement->bindValue(":lastname", $lastname);
-        $statement->bindValue(":id", $id);
-        $statement->execute();
     }
 
 
@@ -53,13 +48,6 @@ class User{
     public function getEmail() {
         return $this->email;
     }
-    public function updateEmail($email, $id) {
-        $conn = Db::getConnection();
-        $statement = $conn->prepare("UPDATE users SET email = :email WHERE id = :id");
-        $statement->bindValue(":email", $email);
-        $statement->bindValue(":id", $id);
-        $statement->execute();
-    }
 
 
     public function setPassword($password) {
@@ -73,13 +61,52 @@ class User{
         return $this->password;
     }
 
-
-    public function updateBiography($biography, $id){
+    public function updatePassword($password, $id) {
+        $option = [
+            'cost' => 12,
+        ];
+        $newPassword = password_hash($password, PASSWORD_DEFAULT, $option);
         $conn = Db::getConnection();
-        $statement = $conn->prepare("UPDATE users SET bio = :biography WHERE id = :id");
-        $statement->bindValue(":biography", $biography);
+        $statement = $conn->prepare("UPDATE users SET password = :password WHERE id = :id");
+        $statement->bindValue(":password", $newPassword);
         $statement->bindValue(":id", $id);
         $statement->execute();
+    }
+
+    public function updateDetails($firstname, $lastname, $email, $biography, $sessionId){
+        $conn = Db::getConnection();
+        $statement = $conn->prepare("UPDATE users SET firstname = :firstname, lastname = :lastname, email = :email, bio = :biography WHERE id = :sessionId");
+        $statement->bindValue(":firstname", $firstname);
+        $statement->bindValue(":lastname", $lastname);
+        $statement->bindValue(":email", $email);
+        $statement->bindValue(":biography", $biography);
+        $statement->bindValue(":sessionId", $sessionId);
+        
+
+        $this->firstname = $firstname;
+        $this->lastname = $lastname;
+        $this->email = $email;
+        $this->biography = $biography;
+
+        $statement->execute();
+    }
+
+
+    public function setProfilePicture($profilePicture) {
+        $this->profilePicture = $profilePicture;
+        return $this;
+    }
+    public function getProfilePicture() {
+        return $this->profilePicture;
+    }
+
+    public function uploadProfilePicture($profilePicture, $id) {
+        $conn = Db::getConnection();
+        $statement = $conn->prepare("UPDATE users SET profile_picture = :profilePicture WHERE id = :id");
+        $statement->bindValue(":profilePicture", $profilePicture);
+        $statement->bindValue(":id", $id);
+        $statement->execute();
+        header('location: usersettings.php');
     }
 
     
@@ -99,8 +126,6 @@ class User{
         $statement->bindValue(":email", $email);
         $statement->bindValue(":password", $password);
         $statement->execute();
-        
-        //$this->startSession($email);
     }
 
     public function canLogin($email, $password) {
@@ -148,38 +173,4 @@ class User{
         $_SESSION['id'] = $e;
         header('location: index.php');
     }
-
-    // public function checkPassword($password, $passwordRepeat) {
-    //     $option = [
-    //         'cost' => 12,
-    //     ];
-    //     $passwordRepeatHashed = password_hash($passwordRepeat, PASSWORD_DEFAULT, $option);
-    //     if($password === $passwordRepeatHashed){
-    //         return true;
-    //     }
-    // }
-
-
-
-
-
-    // public function setEmail($email) {
-    //     $conn = Db::getConnection();
-    //     $statement = $conn->prepare('SELECT * FROM users WHERE email = :email');
-    //     $statement->bindValue(':email', $email);
-    //     $statement->execute();
-    //     $result = count($statement->fetchAll());
-    //     echo $result;
-
-    //     if(!empty($email) && $result === 0){
-    //         $this->email = $email;
-    //         echo $email;
-    //         return $this;
-    //     } else {
-    //         $errorFn = "Vul je emailadress in a.u.b.";
-    //     }
-    // }
-    // public function getEmail() {
-    //     return $this->email;
-    // }
 }

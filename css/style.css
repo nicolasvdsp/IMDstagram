@@ -3,12 +3,16 @@
     --dinkRed_25: #f16a5840;
     --dinkRed_50: #f16a5880;
     --hoverRed: #c74332;
+    --softGrey: #a0a3af;
+    --dinkGreen_25: #02b79940;
+    --dinkGreen_50: #02b79980;
+    --dinkGreen: #02b799;
 }
 
 body {
     background-color: #f1f1f1;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    padding: 30px 25px 60px 25px;
+    padding: 80px 25px 100px 25px;
 }
 
 
@@ -20,35 +24,57 @@ body {
     justify-content: center;    
 }
 
-.logo--login{
+.logo--login {
     margin-top: 100px;
-    margin-bottom: 120px;
+    margin-bottom: 60px;
     width: 225px;
 }
 .form__input * {
     display: block;
     width: 275px;
 }
-.form__input label{
+.form__input label {
     font-size: 14px;
     font-weight: bold;
     margin-bottom: 15px;
 }
-.form__input input, .form__input textarea{
+.form__input input, .form__input textarea {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     border: none;
     display: block;
-    border-radius: 10px;
-    height: 40px;
     width: 100%;
+    border-radius: 10px;
     margin-bottom: 15px;
     text-indent: 15px;
 }
-.form__input input:focus, .form__input textarea:focus{
+.form__input input {
+    height: 40px;
+    width: 100%;
+}
+.form__input input:focus, .form__input textarea:focus {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     outline: none;
     text-indent: 15px;
 }
+.form__image {
+    width: 200px;
+    height: 200px;
+    border-radius: 100%;
+    margin-bottom: 20px;
+    object-fit: cover;
+}
+
+.form__hideShow {
+    position: relative;
+    width: 45px;
+    top: -46px;
+    left: 220px;
+    padding: 3px;
+    background-color: var(--dinkRed);
+    color: white;
+    border-radius: 5px;
+}
+
 .btn--login {
     background-color: var(--dinkRed);
     height: 40px;
@@ -66,18 +92,50 @@ body {
     display: flex;
     justify-content: space-between;
 }
-.login-register span{
+.login-register span {
     color: var(--dinkRed);
 }
 
 /* ----- END OF LOGIN -----*/
 
-/* ---- HOMESCREEN ----- */
+/* ---- HEADER ----- */
 .header {
+    background-color: white;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 60px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 15px 20px;
+    filter: drop-shadow(0px -4px 8px rgb(0,0,0,0.25));
+    z-index: 10;
 }
-/* ----- END OF HOMESCREEN ----- */
+
+.search {
+    height: 20px;
+    justify-content: space-between;
+    /* margin: 5px 0px; */
+}
+
+.header__user, .search {
+    display: flex;
+    align-items: center;
+}
+
+.header__profilePicture {
+    border-radius: 100%;
+    height: 30px;
+    width: 30px;
+    object-fit: cover;
+    margin-right: 15px;
+    margin-left: 45px;
+}
+/* ----- END OF HEADER ----- */
+
+
 
 
 /* ----- POST ----- */
@@ -128,17 +186,21 @@ body {
     align-items: flex-start;
 }
 
-.post__likes, .post__comments {
+.post__foot__likes, .post__foot__comments {
     display: flex;
     align-items: center;
 }
 
-.post__likes {
+.post__foot__likes {
     margin-right: 20px;
 }
 
-.post__likes a, .post__comments a {
+.post__foot__likes a, .post__foot__comments a {
     margin-right: 5px;
+}
+
+.file {
+    padding-bottom: 20px;
 }
 
 /* ----- END OF POST ----- */
@@ -159,6 +221,34 @@ body {
 }
 
 /* ----- END OF NEW POSTS -----*/
+
+
+/* ----- POST COMMENTS -----*/
+.comments__container {
+    margin-top: 10px;
+    border-top: 1px rgb(160, 163, 175) solid;
+}
+
+.post__comments__list li {
+    border-left: 1px solid var(--softGrey);
+    padding-left: 15px;
+    margin-bottom: 30px;
+}
+.post__comments__list div {
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+.post__comments__list img {
+    border-radius: 100%;
+    height: 20px;
+    width: 20px;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+/* ----- END OF POST COMMENTS -----*/
 
 
 /* ----- NAVBAR ----- */
@@ -200,7 +290,7 @@ body {
     background-position-x: 15px;
     background-position-y: 10px;
 }
-.navbar__btn:nth-of-type(2){
+.navbar__btn:nth-of-type(2) {
     background-image: url(../assets/icon_add.svg);
 }
  .navbar__btn:nth-of-type(3) {
@@ -208,7 +298,158 @@ body {
 }
 /* ----- END OF NAVBAR ----- */
 
+/* ----- PROFILE PAGE ----- */
 
+.user__profile {
+    padding-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.user__content {
+    max-width: 500px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 15px 15px 50px 15px;
+}
+
+.user__head {
+    display: flex;
+    align-items: center;
+}
+
+.user__information {
+    padding: 10px 45px 20px 45px;
+    border-bottom: solid rgba(0, 0, 0, 0.164) 1px;
+}
+
+.post__collection {
+    display: grid;
+    grid-template-columns: 230px 230px;
+    padding: 10px;
+}
+
+.profile__image {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    width: 225px;
+    height: 180px;
+    object-fit: cover;
+    box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.082);
+}
+
+.user__userName {
+    margin-left: 15px;
+    font-weight: bold;
+}
+
+.user__lastName {
+    margin-left: 5px;
+    font-weight: bold;
+}
+
+.user__bio {
+    margin-bottom: 5px;
+}
+
+.user__website {
+    color: rebeccapurple;
+}
+
+.user__self {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.user__btn {
+    background-color: var(--dinkRed);
+    color: white;
+    border-radius: 5px;
+    padding: 5px 10px;
+    
+}
+
+@media (max-width: 600px) {
+    .post__collection {
+        display: grid;
+        grid-template-columns: 230px;
+        padding: 10px;
+    }
+}
+
+/* ----- END OF PROFILE PAGE ----- */
+
+/* ----- TAG PAGE ----- */
+
+.tags__head {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.6em;
+}
+
+/* ----- END OF TAG PAGE ----- */
+
+
+
+/* ----- HOVERBUBBLE -----*/
+.likesContainer {
+    position: relative;
+}
+.hoverBubble {
+    visibility: hidden;
+    width: 120px;
+    background-color: rgba(0, 0, 0, 0.63);
+    padding: 10px 10px;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 10;
+
+    top: -5px;
+    right: 120%
+}
+.hoverBubble li {
+    color: white;
+}
+
+.post__foot__likes:hover ~ .hoverBubble {
+    visibility: visible;
+}
+
+.hoverBubble::after {
+    content: " ";
+    position: absolute;
+    top: 15px;
+    left: 100%;
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent transparent rgba(0, 0, 0, 0.63);
+}
+
+.hide {
+    display: none;
+}
+
+.feedback {
+    margin-top: 40px;
+    padding: 8px 8px 8px 20px;
+    color: white;
+    border-radius: 5px;
+}
+.fail {
+    background-color: var(--dinkRed_50);
+}
+.success {
+    background-color: var(--dinkGreen_50);
+}
+/* .iconLike:hover .hoverBubble {
+    visibility: visible; */
+/* } */
+
+/* ----- END OF HOVERBUBBLE -----*/
 
 /* ----- FIX AUTO-ADJUSTING TEXTAREA ----- */
 
