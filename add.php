@@ -81,8 +81,12 @@
         <?php include "header.php" ?>
 
         <section class="posts">
+            <figure class="prevContainer">
+                <img class="prev" src="" alt="">
+            </figure>
+
             <form action="" method="POST" enctype="multipart/form-data">
-                <input class="post__addImage .file" type="file" id="postPicture" name="postPicture" class="post__addImage" href="#">
+                <input class="post__addImage" type="file" id="postPicture" name="postPicture" class="post__addImage">
     
                 <div class="form__input">
                     <label for="postDescription">Beschrijving</label>
@@ -121,6 +125,7 @@
         </section>
     
         <?php include "navbar.php" ?>
-    
+
+    <script src="javascript/add_post.js"></script>
 </body>
 </html>

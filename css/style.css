@@ -175,7 +175,7 @@ body {
     border-radius: 50px;
 }
 
-.post__image, .post__addImage {
+.post__image {
     width: 295px;
     border-radius: 5px;
 }
@@ -199,26 +199,33 @@ body {
     margin-right: 5px;
 }
 
-.file {
-    padding-bottom: 20px;
-}
-
 /* ----- END OF POST ----- */
 
 
 /* ----- NEW POSTS ------*/
 .post__addImage {
+    margin: 30px 0;
+}
+.post__prevImage {
+    border-radius: 10px;
     background-color: var(--dinkRed_25);
-    height: 295px;
+    height: 185px;
+    width: 285px;
     display: flex;
     justify-content: center;
     align-items: center;
+    object-fit: cover;
     transition: 0.1s ease-in-out;
+    
+}
+.prevContainer {
+    border-radius: 10px;
 }
 
+/* 
 .post__addImage:hover {
     background-color: var(--dinkRed_50);
-}
+} */
 
 /* ----- END OF NEW POSTS -----*/
 
