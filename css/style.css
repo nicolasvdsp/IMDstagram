@@ -228,7 +228,10 @@ body {
 
 ._1977 img, .aden img, .brannan img, .brooklyn img, .clarendon img, .earlybird img, .gingham img, .hudson img, .inkwell img, .kelvin img, .lark img, .lofi img, .mayfair img, .moon img, .nashville img, .perpetua img, .reyes img, .rise img, .slumber img, .toaster img, .valencia img, .walden img, .willow img, .xpro2 img {
     width: 285px;
-    border-radius: 10xp;
+}
+._1977, .aden, .brannan, .brooklyn, .clarendon, .earlybird, .gingham, .hudson, .inkwell, .kelvin, .lark, .lofi, .mayfair, .moon, .nashville, .perpetua, .reyes, .rise, .slumber, .toaster, .valencia, .walden, .willow, .xpro2 {
+    width: 285px;
+    border-radius: 5px;
     overflow: hidden;
 }
 

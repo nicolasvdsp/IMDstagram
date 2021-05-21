@@ -16,7 +16,7 @@
 
     $p = new Post;
     $allPosts = $p->getAllPosts();
-    var_dump($allPosts);
+    //var_dump($allPosts);
 
 ?><!DOCTYPE html>
 <html lang="en">
