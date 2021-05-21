@@ -2,10 +2,15 @@
     --dinkRed: #f16958;
     --dinkRed_25: #f16a5840;
     --dinkRed_50: #f16a5880;
+    --dinkRed_75: #f16a58bf;
     --hoverRed: #c74332;
+    --softGrey_25: #a0a3af40;
+    --softGrey_50: #a0a3af80;
     --softGrey: #a0a3af;
+    --hardGrey: #8b8c91;
     --dinkGreen_25: #02b79940;
     --dinkGreen_50: #02b79980;
+    --dinkGreen_75: #02b799bf;
     --dinkGreen: #02b799;
 }
 
@@ -198,6 +203,15 @@ body {
 
 .post__foot__likes a, .post__foot__comments a {
     margin-right: 5px;
+}
+
+.post__tag{
+    color: var(--dinkRed);
+    padding: 4px;
+    border-radius: 5px;
+    display: inline-block;
+    margin-top: 5px;
+    
 }
 
 /* ----- END OF POST ----- */
