@@ -73,6 +73,7 @@
                 $p->setText($_POST['postDescription']);
                 $p->setUserId($sessionId);
                 $p->setUploadLocation($_POST['location']);
+                $p->setFilter($_POST['filter']);
                 $p->createPost();
                 header('location: index.php');
             }

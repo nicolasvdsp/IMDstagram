@@ -47,9 +47,18 @@ class Post {
         return $this->tagsId;
     }
 
+    public function setFilter($filter) {
+        $this->filter = $filter;
+        return $this;
+    }
+    
+    public function getFilter() {
+        return $this->filter;
+    }
+
     public function getAllPosts(){
         $conn = Db::getConnection();
-        $statement = $conn->prepare("SELECT * FROM posts ORDER BY created_time DESC");
+        $statement = $conn->prepare("SELECT * FROM filters INNER JOIN posts ON filters.id = posts.filter_id ORDER BY created_time DESC");
         $statement->execute();
         $allPosts = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $allPosts;
@@ -102,13 +111,14 @@ class Post {
 
     public function createPost() {
         $conn = Db::getConnection();
-        $statement = $conn->prepare("INSERT INTO posts (text, image, users_id, upload_location, tags_id) VALUES (:text, :image, :users_id, :location, :tags_id)");
+        $statement = $conn->prepare("INSERT INTO posts (text, image, users_id, upload_location, tags_id, filter_id) VALUES (:text, :image, :users_id, :location, :tags_id, (SELECT id FROM filters WHERE filter = :filter))");
         
         $text = $this->getText();
         $image = $this->getImage();
         $users_id = $this->getUserId();
         $location = $this->getUploadLocation();
         $tags_id = $this->getTagsId();
+        $filter = $this->getFilter();
 
         
         $statement->bindValue(":text", $text);
@@ -116,6 +126,8 @@ class Post {
         $statement->bindValue(":users_id", $users_id);
         $statement->bindValue(":location", $location);
         $statement->bindValue(":tags_id", $tags_id);
+        $statement->bindValue(":filter", $filter);
+        
         $result = $statement->execute();
         var_dump($result);
     }

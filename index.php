@@ -16,7 +16,7 @@
 
     $p = new Post;
     $allPosts = $p->getAllPosts();
-    //var_dump($allPosts[3]['id']);
+    var_dump($allPosts);
 
 ?><!DOCTYPE html>
 <html lang="en">
@@ -26,6 +26,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="css/reset.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cssgram/0.1.10/cssgram.min.css">
     <title>Dinkstagram</title>
     <link rel="shortcut icon" type="image/svg" href="assets/favicon.svg">
 </head>
@@ -45,10 +46,13 @@
                         <?php /*echo '|         post id: ' . $post['id'];*/ ?></div>
 
                 <!-- Content of the post -->
+                    
                     <div class="post__content">
                         <p class="post__text"><?php echo htmlspecialchars($post['text']); ?></p>
                         <a href="comments.php?id=<?php echo $post['id']; ?>">
-                            <img class="post__image" src="post_pictures/<?php echo $p->getUserdataByPostId($post['id'])['image']; ?>" alt="Post Image"/>
+                            <figure class="<?php echo $post['filter']; ?>">
+                                <img class="post__image" src="post_pictures/<?php echo $p->getUserdataByPostId($post['id'])['image']; ?>" alt="Post Image"/>
+                            </figure>
                         </a>
                         <?php if (!empty($post['tags_id'])): ?>
                         <a href="tags.php?id=<?php echo $p->getTagsByPostId($post['id'])['tags_id'] ?>" class="post__tag"><?php echo "#".$p->getTagsByPostId($post['id'])['tags_name']; ?></a>
