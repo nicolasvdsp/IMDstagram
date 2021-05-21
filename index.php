@@ -85,6 +85,9 @@
                             <a href="#"><img src="assets/icon_comments.svg" alt="Number of comments"/></a>
                             <span class="commentCount"><?php echo count($allComments); ?></span>
                         </div>
+                        <div class="post__foot__timeElapsed">
+                            <span><?php echo Post::timeElapsedSince($post['created_time']) . ' geleden'; ?></span>
+                        </div>
                     </div>
 
                 <!-- Comment section -->

@@ -188,17 +188,27 @@ body {
 
 .post__foot {
     margin-top: 20px;
-    display: flex;
-    align-items: flex-start;
+    /* display: flex;
+    align-items: flex-start; */
+    display: grid;
+    grid-template-columns: 5%, 5%, 5%, 5%, 80%;
 }
 
-.post__foot__likes, .post__foot__comments {
+.post__foot__likes, .post__foot__comments, .post__foot_timeElapsed {
     display: flex;
     align-items: center;
 }
 
 .post__foot__likes {
-    margin-right: 20px;
+    grid-column: 1/2;
+}
+.post__foot__comments {
+    grid-column: 2/3;
+}
+.post__foot__timeElapsed {
+    grid-column: 3/6;
+    text-align: right;
+    font-weight: 500;
 }
 
 .post__foot__likes a, .post__foot__comments a {

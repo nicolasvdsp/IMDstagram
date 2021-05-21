@@ -139,4 +139,27 @@ class Post {
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
+
+    //https://stackoverflow.com/questions/2915864/php-how-to-find-the-time-elapsed-since-a-date-time
+    public static function timeElapsedSince($createdTime){
+        $time = strtotime($createdTime);
+        //echo time();
+        $time = time() - $time  + 7200;
+        //echo $time;
+        $time = ($time<1)? 1 : $time;
+        $tokens = array (
+            31536000 => 'jaar',
+            2592000 => 'm',
+            604800 => 'w',
+            86400 => 'd',
+            3600 => 'u',
+            60 => 'm',
+            1 => 's'
+        );
+        foreach($tokens as $unit => $text) {
+            if($time < $unit) continue;
+            $numberOfUnits = floor($time / $unit);
+            return $numberOfUnits . $text;
+        };
+    }
 }
