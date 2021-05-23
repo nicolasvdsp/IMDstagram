@@ -58,7 +58,7 @@
        //Uploads file if no errors occured
        if($uploadOk === 1) {
             if(move_uploaded_file($fileTmpName, $fileTarget)) {
-                $tagName_post = $_POST['tags'];
+                $tagName_post = str_replace('#', '', $_POST['tags']);
                 $checkedTagName = $t->checkIfExistingTag($tagName_post);
                 if($checkedTagName){
                     $newTag = $t->getTagIdByTagName($tagName_post);
@@ -129,9 +129,9 @@
                 <div class="form__input">
                     <label for="tags">Tags</label>
                     <?php if(!empty($_POST)): ?>
-                        <input type="text" id="tags" name="tags" value="<?php echo htmlspecialchars($_POST['tags']); ?>" placeholder="Voeg trendy tags toe">
+                        <input type="text" id="tags" name="tags" value="<?php echo htmlspecialchars($_POST['tags']); ?>" placeholder="Voeg een trendy tag toe">
                     <?php else: ?>
-                        <input type="text" id="tags" name="tags" placeholder="voeg trendy tags toe">
+                        <input type="text" id="tags" name="tags" placeholder="voeg een trendy tag toe">
                     <?php endif; ?>
                 </div> 
 
