@@ -152,6 +152,7 @@
         <?php include "navbar.php" ?>
 
     <script src="javascript/add_post.js"></script>
+    <script src="javascript/location.js"></script>
 
 </body>
 </html>

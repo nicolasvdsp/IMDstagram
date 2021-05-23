@@ -186,6 +186,24 @@ body {
     border-radius: 5px;
 }
 
+.post__content__info {
+    display: flex;
+    justify-content: space-between;
+}
+
+.post__tag{
+    color: var(--dinkRed);
+    padding: 4px;
+    border-radius: 5px;
+    display: inline-block;
+    margin-top: 5px;
+}
+
+.post__location {
+    padding: 4px;
+    margin-top: 5px;
+}
+
 .post__foot {
     margin-top: 20px;
     /* display: flex;
@@ -215,14 +233,6 @@ body {
     margin-right: 5px;
 }
 
-.post__tag{
-    color: var(--dinkRed);
-    padding: 4px;
-    border-radius: 5px;
-    display: inline-block;
-    margin-top: 5px;
-    
-}
 
 /* ----- END OF POST ----- */
 
@@ -236,7 +246,7 @@ body {
     border-radius: 10px;
     background-color: var(--dinkRed_25);
     height: 185px;
-    width: 285px;
+    width: 295px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -246,15 +256,15 @@ body {
 }
 .prevContainer {
     border-radius: 10px;
-    width: 285px;
+    width: 295px;
     overflow: hidden;
 }
 
 ._1977 img, .aden img, .brannan img, .brooklyn img, .clarendon img, .earlybird img, .gingham img, .hudson img, .inkwell img, .kelvin img, .lark img, .lofi img, .mayfair img, .moon img, .nashville img, .perpetua img, .reyes img, .rise img, .slumber img, .toaster img, .valencia img, .walden img, .willow img, .xpro2 img {
-    width: 285px;
+    width: 295px;
 }
 ._1977, .aden, .brannan, .brooklyn, .clarendon, .earlybird, .gingham, .hudson, .inkwell, .kelvin, .lark, .lofi, .mayfair, .moon, .nashville, .perpetua, .reyes, .rise, .slumber, .toaster, .valencia, .walden, .willow, .xpro2 {
-    width: 285px;
+    width: 295px;
     border-radius: 5px;
     overflow: hidden;
 }

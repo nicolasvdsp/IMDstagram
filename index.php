@@ -54,9 +54,17 @@
                                 <img class="post__image" src="post_pictures/<?php echo $p->getUserdataByPostId($post['id'])['image']; ?>" alt="Post Image"/>
                             </figure>
                         </a>
-                        <?php if($p->getTagsByPostId($post['id'])['tags_name'] != ""): ?>
-                            <a href="tags.php?id=<?php echo $p->getTagsByPostId($post['id'])['tags_id'] ?>" class="post__tag"><?php echo "#".$p->getTagsByPostId($post['id'])['tags_name']; ?></a>
-                        <?php endif; ?>
+                        <div class="post__content__info">
+                            <?php if($p->getTagsByPostId($post['id'])['tags_name'] != ""): ?>
+                                <a href="tags.php?id=<?php echo $p->getTagsByPostId($post['id'])['tags_id'] ?>" class="post__tag"><?php echo "#".$p->getTagsByPostId($post['id'])['tags_name']; ?></a>
+                            <?php else: ?>
+                                <a href="#"></a>
+                            <?php endif; ?>
+                            <a href="#" class="post__location"><?php echo $post['upload_location']; ?></a>    
+                        </div>
+                                
+                        
+                        
                         
                     </div>
 
