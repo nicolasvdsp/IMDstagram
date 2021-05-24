@@ -2,6 +2,8 @@
 include_once(__DIR__ . "/classes/Db.php");
 include_once(__DIR__. "/classes/User.php");
 include_once(__DIR__ . "/classes/Post.php");
+//include_once(__DIR__ . "/classes/Search.php");
+
 
 ini_set('display_errors', true);
 
@@ -16,8 +18,7 @@ if(!isset($_SESSION['id'])) {
     $sessionId = $_SESSION['id'];
 }
 
-$tagsId = $_GET['id'];
-$posts = (new Post)->getPostsByTagId($tagsId);
+
 
 ?>
 <!DOCTYPE html>
@@ -39,7 +40,7 @@ $posts = (new Post)->getPostsByTagId($tagsId);
     </form>
 </section>
 
-
+<!--Search tabs-->
 <div class="tab">
   <button class="tablinks" onclick="openCity(event, 'Accounts')">Accounts</button>
   <button class="tablinks" onclick="openCity(event, 'Tags')">#Tags</button>

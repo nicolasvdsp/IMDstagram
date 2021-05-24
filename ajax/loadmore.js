@@ -1,14 +1,3 @@
-/*document.querySelector("#loadBtn").addEventListener("click", function(){
-
-    let postid = this.dataset.postid;
- 
-    console.log(postid);
-
-
-
-    
-});*/
-
 $(document).ready(function(){
     $("#loadBtn").click(function(){
      loadmore();

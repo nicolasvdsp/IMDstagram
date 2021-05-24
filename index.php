@@ -15,13 +15,14 @@
 
     //POST
     $conn = Db::getConnection();
-    $statement = $conn->prepare("SELECT * FROM post ORDER BY created_time DESC limit 2");
+    $statement = $conn->prepare("SELECT * FROM post ORDER BY created_time DESC limit 20");
     $statement->execute();
     $posts = $statement->fetchAll();
 
     foreach($posts as $post){
 
     }
+
 
     //LOAD MORE
 
@@ -82,7 +83,9 @@
             <?php endforeach; ?>
 
         <input type="hidden" id="result_no" value="2">
-        <input href="#" type="button" id="loadBtn" data-postid="1" value="Load More">
+        <input href="#" type="button" class="loading" id="loadBtn" data-postid="1" value="Load More">
+
+
 
         </section>
 
