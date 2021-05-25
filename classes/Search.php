@@ -33,7 +33,7 @@ class Search{
     public function searchLocation($searchLocation){
         $conn = Db::getConnection();
         $search_result = $conn->prepare('SELECT * FROM( select id as uid, firstname, lastname, profile_picture, null as tag, null as 
-        upload_location from users union select null as uid, null as firstname, null as lastname, null as profile_picture, tag, upload_location from post ) AS t WHERE location LIKE :search');
+        upload_location from users union select null as uid, null as firstname, null as lastname, null as profile_picture, tag, upload_location from post ) AS t WHERE upload_location LIKE :search');
         $searchItem = "%".$searchLocation."%";
         $search_result->bindParam(":search", $searchItem);
         $search_result->execute();

@@ -2,7 +2,7 @@
 include_once(__DIR__ . "/classes/Db.php");
 include_once(__DIR__. "/classes/User.php");
 include_once(__DIR__ . "/classes/Post.php");
-//include_once(__DIR__ . "/classes/Search.php");
+include_once(__DIR__ . "/classes/Search.php");
 
 
 ini_set('display_errors', true);
@@ -18,7 +18,14 @@ if(!isset($_SESSION['id'])) {
     $sessionId = $_SESSION['id'];
 }
 
+$search = new Search();
 
+if(!empty($_GET)) {
+  $user = $search->searchUser($_GET['q']);
+  $tag = $search->searchTag($_GET['q']);
+  $location = $search->searchLocation($_GET['q']);
+
+}
 
 ?>
 <!DOCTYPE html>
@@ -34,7 +41,8 @@ if(!isset($_SESSION['id'])) {
 </div>
 
 <section class="posts">
-    <form method="GET">
+    <!--Zoekformulier-->
+    <form action="" method="GET">
         <input type="search" name="q" placeholder="Search ..." />
         <input type="submit" value="Enter" />
     </form>
@@ -50,34 +58,24 @@ if(!isset($_SESSION['id'])) {
 <!--Accounts-->
 <div id="Accounts" class="tabcontent">
   <ul>
-<?php 
-if (isset($_GET['q']) and !empty($_GET['q'])) {
-	$q = htmlspecialchars($_GET['q']);
-  $search_result = $conn->query('SELECT * FROM( select id as uid, firstname, lastname, profile_picture, null as tag, null as 
-  upload_location from users union select null as uid, null as firstname, null as lastname, null as profile_picture, tag, upload_location from post ) AS t WHERE firstname LIKE "%'.$q.'%" OR lastname LIKE "%'.$q.'%" OR tag LIKE "%'.$q.'%" OR upload_location LIKE "%'.$q.'%"');
-
-  while($search_user = $search_result->fetch()) { ?>
-    <li style="font-size: 20px;"><a href="index.php" ><img style="width: 50px; height:50px; border-radius: 100%;" src="<?php echo $search_user['profile_picture']; ?>" alt="avatar">
-      <?=$search_user['firstname'].' '.$search_user['lastname']?></a><br><br></li>
-  <?php }} ?>
-</ul> 
+  <?php if(isset($user)): ?>
+  <?php foreach($user as $account) { ?>
+        <li style="font-size: 20px;"><a href="index.php" ><img style="width: 50px; height:50px; border-radius: 100%;" src="<?php echo $account['profile_picture']; ?>" alt="avatar">
+          <?=$account['firstname'].' '.$account['lastname']?></a><br><br></li>
+      <?php } ?>
+    <?php endif; ?>
+  </ul> 
 
 </div>
 
 <!--Tags-->
 <div id="Tags" class="tabcontent">
   <ul>
-  <?php 
-
-  if (isset($_GET['q']) and !empty($_GET['q'])) {
-    $q = htmlspecialchars($_GET['q']);
-    $search_result = $conn->query('SELECT * FROM( select id as uid, firstname, lastname, profile_picture, null as tag, null as 
-    upload_location from users union select null as uid, null as firstname, null as lastname, null as profile_picture, tag, upload_location from post ) AS t WHERE firstname LIKE "%'.$q.'%" OR lastname LIKE "%'.$q.'%" OR tag LIKE "%'.$q.'%" OR upload_location LIKE "%'.$q.'%"');
-
-    while($search_user = $search_result->fetch()) { ?>
-    <li>#<?=$search_user['tag']?><br><br></li>
-
-  <?php }} ?>
+  <?php if(isset($tag)): ?>
+  <?php foreach($tag as $tags) { ?>
+    <li><a href="">#<?=$tags['tag']?></a><br><br></li>    
+    <?php } ?>
+  <?php endif; ?>
   </ul> 
 </div>
 
@@ -85,18 +83,11 @@ if (isset($_GET['q']) and !empty($_GET['q'])) {
 <!--Location-->
 <div id="Locations" class="tabcontent">
   <ul>
-  <?php 
-
-  if (isset($_GET['q']) and !empty($_GET['q'])) {
-    $q = htmlspecialchars($_GET['q']);
-    $search_result = $conn->query('SELECT * FROM( select id as uid, firstname, lastname, profile_picture, null as tag, null as 
-    upload_location from users union select null as uid, null as firstname, null as lastname, null as profile_picture, tag, upload_location from post ) AS t WHERE firstname LIKE "%'.$q.'%" OR lastname LIKE "%'.$q.'%" OR tag LIKE "%'.$q.'%" OR upload_location LIKE "%'.$q.'%"');
-
-    while($search_user = $search_result->fetch()) { ?>
-    <li><?=$search_user['upload_location']?><br><br></li>
-  
-  <?php }} ?>
-
+  <?php if(isset($location)): ?>
+  <?php foreach($location as $locations) { ?>
+    <li><a href="">#<?=$locations['upload_location']?></a><br><br></li>    
+    <?php } ?>
+  <?php endif; ?>
   </ul> 
 
 </div>
