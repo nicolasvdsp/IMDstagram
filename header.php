@@ -9,5 +9,9 @@
             <a  class="search" href="#"><img src="./assets/icon_search.svg" alt="Search button"/></a>
             <img class="header__profilePicture" src="profile_pictures/<?php echo $user['profile_picture']; ?>" alt="Profile picture">
             <a href="<?php echo "profile.php?id=".$user['id']; ?>" class="header__username"><?php echo htmlspecialchars($user['firstname']); ?></a>
+
+            <a href="search.php"><img class="search" src="./assets/icon_search.svg" alt="Search button" /></a>
+            <a href="followers.php">+ friends</a>
+            <a href="#"><img class="search" src="./assets/icon_search.svg" alt="Search button" /></a>
         </div>
 </div>
