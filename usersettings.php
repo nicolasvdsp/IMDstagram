@@ -62,19 +62,25 @@
     }
     
     if(!empty($_POST['submitUpdates'])) {
-        $user->setFirstName($firstname = $_POST['updateFirstname']);
-        $user->setLastname($_POST['updateLastname']);
-        $user->setEmail($_POST['updateEmail']);
-        $user->setBiography($_POST['updateBiography']);
-        $user->updateDetails($sessionId);
-        
-        if(!empty($_POST['updatePassword'])){
-            $user->updatePassword($_POST['updatePassword'], $sessionId);
-        }
-
-        $userData = User::getUserDataFromId($sessionId);
-
-        $feedbackSuccess = "Wijzig-dinken opgeslagen";
+        try {
+            $user->setFirstName($firstname = $_POST['updateFirstname']);
+            $user->setLastname($_POST['updateLastname']);
+            $user->setEmail($_POST['updateEmail']);
+            $user->setBiography($_POST['updateBiography']);
+            $user->setUserId($sessionId);
+            $user->updateDetails();
+            
+            if(!empty($_POST['updatePassword'])){
+                $user->updatePassword($_POST['updatePassword'], $sessionId);
+            }
+            
+            $userData = User::getUserDataFromId($sessionId);
+            
+            $feedbackSuccess = "Wijzig-dinken opgeslagen";
+            
+            } catch (\Throwable $th) {
+                $error = $th->getMessage();
+            }
     }
 
 ?><!DOCTYPE html>
@@ -129,6 +135,9 @@
             </div>
             <?php if(isset($feedbackSuccess)): ?>
                 <p class="feedback success"><?php echo $feedbackSuccess; ?></p>
+            <?php endif; ?>
+            <?php if(isset($error)): ?>
+                <p class="feedback fail"><?php echo $error; ?></p>
             <?php endif; ?>
             <input class="btn--login" type="submit" value="Wijzigingen opslaan" name="submitUpdates">
         </form>

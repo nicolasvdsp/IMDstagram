@@ -549,16 +549,20 @@ body {
 }
 
 .feedback {
-    margin-top: 40px;
-    padding: 8px 8px 8px 20px;
+    padding: 8px 0px 12px 0px;
     color: white;
-    border-radius: 5px;
+    border-radius: 7px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .fail {
+    color: white;
     background-color: var(--dinkRed_50);
 }
 .success {
     background-color: var(--dinkGreen_50);
+    /* color: var(--dinkGreen); */
 }
 /* .iconLike:hover .hoverBubble {
     visibility: visible; */

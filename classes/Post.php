@@ -1,6 +1,12 @@
 <?php 
 
 class Post {
+    private $text;
+    private $image;
+    private $userId;
+    private $uploadLocation;
+    private $tagsId;
+    private $filter;
 
     public function setText($text) {
         $this->text = $text;

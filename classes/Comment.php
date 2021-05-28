@@ -1,5 +1,9 @@
 <?php 
     class Comment {
+        private $text;
+        private $postId;
+        private $userId;
+
         public function setText($text) {
             if(!empty($text)) {
                 $this->text = $text;

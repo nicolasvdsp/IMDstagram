@@ -15,7 +15,8 @@
                 $user->setPassword($_POST['password']);
                 $user->register();
                 $id = User::getIdByEmail($user->getEmail());
-                $user->startSession($id);
+                $user->setUserId($id);
+                $user->startSession();
 
             } else {
                 $errorPasswords = "Wachtwoorden komen niet overeen";
@@ -36,19 +37,6 @@
     <link rel="shortcut icon" type="image/svg" href="assets/favicon.svg">
 </head>
 <body>
-
-<!--HIER WORDEN DE ERRORS IN DE DIV GETOOND-->
-<div class="errorMessage">
-    <?php
-        if(isset($error)): ?>
-        <div class="registerError" role="alert">
-            <p>
-                <?php echo $error; ?>
-            </p>
-        </div>
-        <?php endif; ?>
-</div>
-
 
 <!--REGISTRATION FORMULIER-->
 <div class="login">
@@ -90,6 +78,18 @@
                 <input type="password" id="passwordRepeat" name="passwordRepeat" class="passwordRep" placeholder="• • • • • • • • • •">
                 <a href="#" class="form__hideShow hideShowRep">Show</a>
             </div> 
+
+            <?php if(isset($error)): ?>
+                <div class="feedback fail">
+                    <p style="color: white"><?php echo $error; ?></p>
+                </div>
+            <?php endif; ?>
+            <!-- <?php //if(isset($errorPasswords)): ?>
+                <div class="feedback fail">
+                    <p style="color: white"><?php //echo $errorPasswords; ?></p>
+                </div>
+            <?php //endif; ?> -->
+
             <input class="btn--login" type="submit" value="Dink euh registreren">
         </form>
         <a href="login.php" class="login-register">Heb je reeds een dink-account? <span>Dink hier in!</span></a>

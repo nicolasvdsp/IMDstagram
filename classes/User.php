@@ -1,6 +1,15 @@
     <?php
     include_once(__DIR__ . "/Db.php");
     class User{
+        private $firstname;
+        private $lastname;
+        private $email;
+        private $password;
+        private $userId;
+        private $biography;
+        private $profilePicture;
+
+
         /* --- GETTERS - SETTERS - UPDATERS --- */
         public function setFirstName($firstname) {
             if(!empty($firstname)){
@@ -8,7 +17,6 @@
                 return $this;
             } else {
                 throw new Exception("vul je voornaam in");
-                //$errorFn = "Vul je voornaam in a.u.b.";
             }
         }
         public function getFirstName() {
@@ -29,7 +37,6 @@
             return $this;
         } else {
             throw new Exception("vul je achternaam in");
-            //$errorLn = "Vul je achternaam in a.u.b.";
         }
     }
     public function getLastname() {
@@ -42,7 +49,7 @@
             $this->email = $email;
             return $this;
         } else {
-            $errorFn = "Vul je emailadress in a.u.b.";
+            throw new Exception("vul je email in");
         }
     }
     public function getEmail() {
@@ -73,29 +80,40 @@
         $statement->execute();
     }
 
+    public function setUserId($userId) {
+        $this->userId = $userId;
+        return $this;
+    }
+    
+    public function getUserId() {
+        return $this->userId;
+    }
+
     public function setBiography($biography) {
         $this->biography = $biography;
         return $this;
-}
+    }
 
     public function getBiography() {
         return $this->biography;
     }
 
-    public function updateDetails($sessionId){
+    public function updateDetails(){
         $conn = Db::getConnection();
-        $statement = $conn->prepare("UPDATE users SET firstname = :firstname, lastname = :lastname, email = :email, bio = :biography WHERE id = :sessionId");
+        $statement = $conn->prepare("UPDATE users SET firstname = :firstname, lastname = :lastname, email = :email, bio = :biography WHERE id = :userId");
         
         $firstname = $this->getFirstName();
         $lastname = $this->getLastname();
         $email = $this->getEmail();
         $biography = $this->getBiography();
+        $userId = $this->getUserId();
         
         $statement->bindValue(":firstname", $firstname);
         $statement->bindValue(":lastname", $lastname);
         $statement->bindValue(":email", $email);
         $statement->bindValue(":biography", $biography);
-        $statement->bindValue(":sessionId", $sessionId);
+        $statement->bindValue(":userId", $userId);
+        
 
         $statement->execute();
     }
@@ -177,9 +195,11 @@
 
     }
 
-    public function startSession($e) {
+    public function startSession() {
+        $sessionId = $this->getUserId();
+
         session_start();
-        $_SESSION['id'] = $e;
+        $_SESSION['id'] = $sessionId;
         header('location: index.php');
     }
 }

@@ -1,5 +1,7 @@
 <?php 
 Class Tag {
+    private $tagsName;
+
     public function setTagsName($tagsName) {
         $this->tagsName = $tagsName;
 

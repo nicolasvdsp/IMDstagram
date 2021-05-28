@@ -1,5 +1,8 @@
 <?php 
     class Like {
+        private $postId;
+        private $userId;
+        private $isLiked;
 
         public function setPostId($postId) {
             $this->postId = $postId;

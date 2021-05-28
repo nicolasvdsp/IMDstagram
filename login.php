@@ -5,15 +5,20 @@
     include_once(__DIR__ . "/classes/Db.php");
     
     if(!empty($_POST)) {
-        $user = new User();
-        $user->setEmail($_POST['email']);
-        $user->setPassword($_POST['password']);
+        try {
+            $user = new User();
+            $user->setEmail($_POST['email']);
+            $user->setPassword($_POST['password']);
 
-        if($user->canLogin($_POST['email'], $_POST['password'])) {
-            $id = User::getIdByEmail($user->getEmail());
-            $user->startSession($id);   
-        } else{
-            $errorLogin = "Geen geldige combinatie";
+            if($user->canLogin($_POST['email'], $_POST['password'])) {
+                $id = User::getIdByEmail($user->getEmail());
+                $user->setUserId($id);
+                $user->startSession();   
+            } else{
+                $errorLogin = "Geen geldige combinatie";
+            }
+        } catch (\Throwable $th) {
+            $errorEmail = $th->getMessage();
         }
     }
 
@@ -46,6 +51,9 @@
             </div> 
             <?php if(isset($errorLogin)): ?>
                 <p class="feedback fail"><?php echo $errorLogin; ?></p>
+            <?php endif; ?>
+            <?php if(isset($errorEmail)): ?>
+                <p class="feedback fail"><?php echo $errorEmail; ?></p>
             <?php endif; ?>
 
             <input class="btn--login" type="submit" value="Dink in">
