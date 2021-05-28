@@ -27,7 +27,7 @@ body {
     border-radius: 10px;
 }
 
-.friends button{
+input{
     background-color: #f16958; 
     border: none;
     color: white;

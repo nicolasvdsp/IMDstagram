@@ -12,8 +12,9 @@ if (!isset($_SESSION['id'])) {
     $userData = User::getUserDataFromId($sessionId);
 }
 
-$allusers = Followers::Users();
-
+$allusers = Friends::Users();
+$following = Friends::Following($sessionId);
+$followers = Friends::Followers($sessionId);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,7 +43,10 @@ $allusers = Followers::Users();
             <ul>
                 <?php
                 foreach ($allusers as $users) { ?>
-                    <li> <?php echo $users['firstname'] . ' ' . $users['lastname'] ?> <button>follow</button>
+                    <li> <?php echo $users['firstname'] . ' ' . $users['lastname'] ?>
+                        <form method="POST" action="" class="btn">
+                            <input type="button" name="follow" value="follow" />
+                        </form>
                     </li>
                 <?php } ?>
             </ul>
@@ -51,13 +55,22 @@ $allusers = Followers::Users();
         <section>
 
             <div class="myFollowers">
-                <h1>Volgers</h1>
-                <li>naam + achternaam</li>
+                <h1>Followers</h1>
+                <?php
+                foreach ($followers as $follower) { ?>
+                    <li> <?php echo $follower['firstname'] . ' ' . $follower['lastname'] ?>
+                    </li>
+                <?php } ?>
+
             </div>
 
             <div class="myFollowing">
-                <h2>Volgend</h2>
-                <li>naam + achternaam</li>
+                <h1>Following</h1>
+                <?php
+                foreach ($following as $follow) { ?>
+                    <li> <?php echo $follow['firstname'] . ' ' . $follow['lastname'] ?>
+                    </li>
+                <?php } ?>
             </div>
 
             <br><br>
@@ -65,7 +78,7 @@ $allusers = Followers::Users();
             <h1>Aantal vriendschappen:
                 <?php
                 //Als je buddies hebt, komt deze in je lijst te staan
-                $countUsers = Followers::countUsers();
+                $countUsers = Friends::countUsers();
                 echo "$countUsers ";
                 ?>
             </h1>
