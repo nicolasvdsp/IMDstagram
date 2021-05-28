@@ -16,7 +16,9 @@ $allusers = Friends::Users();
 $following = Friends::Following($sessionId);
 $followers = Friends::Followers($sessionId);
 $request = Friends::SendRequest($sessionId);
-var_dump($request);
+$getrequest = Friends::GetRequest($sessionId);
+$acceptrequest = Friends::AcceptRequest($sessionId);
+$deleterequest = Friends::DeleteRequest($sessionId);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -54,11 +56,7 @@ var_dump($request);
                 <?php } ?>
             </ul>
         </section>
-
-
-
         <section>
-
             <div class="myFollowers">
                 <h1>Followers</h1>
                 <?php
@@ -66,9 +64,7 @@ var_dump($request);
                     <li> <?php echo $follower['firstname'] . ' ' . $follower['lastname'] ?>
                     </li>
                 <?php } ?>
-
             </div>
-
             <div class="myFollowing">
                 <h1>Following</h1>
                 <?php
@@ -77,12 +73,23 @@ var_dump($request);
                     </li>
                 <?php } ?>
             </div>
-
-            <br><br>
-
-
         </section>
-
+        <section>
+            <h1>New friends</h1>
+            <?php
+            foreach ($getrequest as $getrequest) { ?>
+                <li> <?php echo $getrequest['firstname'] . ' ' . $getrequest['lastname'] ?>
+                    <form method="POST" action="<?php $_PHP_SELF ?>" class="btn">
+                        <input type="hidden" id="id" name="accept" value="<?php echo $getrequest['id'] ?>">
+                        <input type="submit" value="Accept" />
+                    </form>
+                    <form method="POST" action="<?php $_PHP_SELF ?>" class="btn">
+                        <input type="hidden" id="id" name="delete" value="<?php echo $getrequest['id'] ?>">
+                        <input type="submit" value="Delete" />
+                    </form>
+                </li>
+            <?php } ?>
+        </section>
     </div>
 
 

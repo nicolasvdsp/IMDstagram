@@ -28,7 +28,7 @@ class Friends
     public static function Following($id)
     {
         $conn = Db::getConnection();
-        $search_result = $conn->prepare('SELECT firstname, lastname FROM users INNER JOIN friendships on friendships.friend_id=users.id WHERE friendships.user_id LIKE :id');
+        $search_result = $conn->prepare('SELECT firstname, lastname FROM users INNER JOIN friendships on friendships.friend_id=users.id WHERE friendships.user_id LIKE :id AND status = 1');
         $search_result->bindParam(":id", $id);
         $search_result->execute();
         $value = $search_result->fetchAll();
@@ -40,7 +40,7 @@ class Friends
     public static function Followers($id)
     {
         $conn = Db::getConnection();
-        $search_result = $conn->prepare('SELECT firstname, lastname FROM users INNER JOIN friendships on friendships.user_id=users.id WHERE friendships.friend_id LIKE :id');
+        $search_result = $conn->prepare('SELECT firstname, lastname FROM users INNER JOIN friendships on friendships.user_id=users.id WHERE friendships.friend_id LIKE :id AND status = 1');
         $search_result->bindParam(":id", $id);
         $search_result->execute();
         $value = $search_result->fetchAll();
@@ -48,14 +48,20 @@ class Friends
     }
 
     //Verzoek krijgen
-    public static function GetRequest()
+    public static function GetRequest($id)
     {
+        $conn = Db::getConnection();
+        $statement = $conn->prepare("SELECT firstname, lastname, users.id FROM users INNER JOIN friendships on friendships.user_id=users.id WHERE friend_id = :user AND status = 0");
+        $statement->bindValue(':user', $id);
+        $statement->execute();
+        $value = $statement->fetchAll();
+        return $value;
     }
 
     //Verzoek sturen
     public static function SendRequest($id)
     {
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        if (isset($_POST['id'])) {
             $request = $_POST["id"];
         }
         if (!empty($request)) {
@@ -74,9 +80,31 @@ class Friends
         }
     }
 
-    //Verzoek accepteren
+    //Verzoek accepteren STATUS = 1
+    public static function AcceptRequest($id)
+    {
+        if (isset($_POST['accept'])) {
+            $request = $_POST["accept"];
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("UPDATE friendships SET status = 1 WHERE friend_id = :id AND user_id = :friend");
+            $statement->bindValue(":friend", $request);
+            $statement->bindValue(":id", $id);
+            $statement->execute();
+        }
+    }
 
-    //Verzoek verwijderen
+    //Verzoek verwijderen 
+    public static function DeleteRequest($id)
+    {
+        if (isset($_POST['delete'])) {
+            $request = $_POST["delete"];
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("DELETE FROM friendships WHERE friend_id = :id AND user_id = :friend");
+            $statement->bindValue(":friend", $request);
+            $statement->bindValue(":id", $id);
+            $statement->execute();
+        }
+    }
 
     //Volger krijgen
 
