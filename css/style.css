@@ -11,7 +11,36 @@ body {
     padding: 30px 25px 60px 25px;
 }
 
+.friends{
+    display: grid;
+    grid-template-columns: 2fr 5fr;
+}
 
+.friends h1{
+    font-size: 2em;
+}
+
+.friends ul li{
+    margin: 20px;
+    padding: 10px;
+    background-color: lightgray;
+    border-radius: 10px;
+}
+
+.friends button{
+    background-color: #f16958; 
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 10px;
+
+    }
 
 /* ----- LOGIN -----*/
 .login {

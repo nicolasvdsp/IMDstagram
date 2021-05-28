@@ -24,7 +24,6 @@ $allusers = Followers::Users();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="css/reset.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
-
     <title>Followers</title>
 </head>
 
@@ -37,17 +36,16 @@ $allusers = Followers::Users();
     </div>
     <br><br>
 
-    <div class="followers">
+    <div class="friends">
         <section>
             <h1>All users</h1>
             <ul>
                 <?php
                 foreach ($allusers as $users) { ?>
-                    <li> <?php echo $users['firstname'] ?> <button>follow</button>
+                    <li> <?php echo $users['firstname'] . ' ' . $users['lastname'] ?> <button>follow</button>
                     </li>
                 <?php } ?>
             </ul>
-
         </section>
 
         <section>
