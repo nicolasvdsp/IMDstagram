@@ -11,7 +11,6 @@ if (!isset($_SESSION['id'])) {
     $sessionId = $_SESSION['id'];
     $userData = User::getUserDataFromId($sessionId);
 }
-
 $allusers = Friends::Users();
 $following = Friends::Following($sessionId);
 $followers = Friends::Followers($sessionId);
@@ -19,13 +18,8 @@ $request = Friends::SendRequest($sessionId);
 $getrequest = Friends::GetRequest($sessionId);
 $acceptrequest = Friends::AcceptRequest($sessionId);
 $deleterequest = Friends::DeleteRequest($sessionId);
-
-
-$myFollowers = Friends::countFollowers($sessionId);
-
-
-
-
+//$myFollowers = Friends::countFollowers($sessionId);
+//$myFollowings = Friends::countFollowing($sessionId);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -54,8 +48,8 @@ $myFollowers = Friends::countFollowers($sessionId);
         <table style="height: 397px;" width="450px;">
             <tbody>
                 <tr>
-                    <td style="height: 50px; width: 193px;"><h1><?php echo $myFollowers; ?></h1></td>
-                    <td style="height: 50px; width: 194px;"><h1><?php echo $myFollowers; ?></h1></td>
+                    <td style="height: 50px; width: 193px;"><h1><?php //echo $myFollowers; ?></h1></td>
+                    <td style="height: 50px; width: 194px;"><h1><?php// echo $myFollowings; ?></h1></td>
                 </tr>
                 <tr>
                     <td style="height: 50px; width: 193px;"><h1>Followers</h1></td>

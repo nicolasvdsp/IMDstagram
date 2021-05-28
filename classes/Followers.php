@@ -34,8 +34,6 @@ class Friends
         $search_result->execute();
         $value = $search_result->fetchAll();
 
-        var_dump($value);
-
         return $value;
     }
 
@@ -113,10 +111,10 @@ class Friends
     }
 
     //Aantal volgers
-    public static function countFollowers(){
+   /* public static function countFollowers(){
         $conn = Db::getConnection();
         $statement = $conn->prepare("SELECT COUNT(*) FROM friendships WHERE status = :accepted");
-        $statement->bindValue(":accepted", 1);
+        $statement->bindValue(':accepted', 1);
         $statement->execute();
         $result = $statement->fetchColumn();
         
@@ -124,5 +122,13 @@ class Friends
     }
 
     //Aantal volgend
-
+    public static function countFollowing(){
+        $conn = Db::getConnection();
+        $statement = $conn->prepare("SELECT COUNT(*)  FROM users WHERE status = :accepted");
+        $statement->bindValue(':accepted', 1);
+        $statement->execute();
+        $result = $statement->fetchColumn();
+        
+        return $result;    }
+*/
 }
