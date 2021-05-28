@@ -24,7 +24,6 @@ if(!empty($_GET)) {
   $user = $search->searchUser($_GET['q']);
   $tag = $search->searchTag($_GET['q']);
   $location = $search->searchLocation($_GET['q']);
-
 }
 
 ?>
@@ -60,7 +59,7 @@ if(!empty($_GET)) {
   <ul>
   <?php if(isset($user)): ?>
   <?php foreach($user as $account) { ?>
-        <li style="font-size: 20px;"><a href="index.php" ><img style="width: 50px; height:50px; border-radius: 100%;" src="<?php echo $account['profile_picture']; ?>" alt="avatar">
+        <li style="font-size: 20px;"><a href="profile.php?id=<?php echo $post['users_id']?>" ><img style="width: 50px; height:50px; border-radius: 100%;" src="<?php echo $account['profile_picture']; ?>" alt="avatar">
           <?=$account['firstname'].' '.$account['lastname']?></a><br><br></li>
       <?php } ?>
     <?php endif; ?>
@@ -73,7 +72,7 @@ if(!empty($_GET)) {
   <ul>
   <?php if(isset($tag)): ?>
   <?php foreach($tag as $tags) { ?>
-    <li><a href="">#<?=$tags['tag']?></a><br><br></li>    
+    <li><a href="index.php">#<?=$tags['tags_name']?></a><br><br></li>    
     <?php } ?>
   <?php endif; ?>
   </ul> 
@@ -85,7 +84,7 @@ if(!empty($_GET)) {
   <ul>
   <?php if(isset($location)): ?>
   <?php foreach($location as $locations) { ?>
-    <li><a href="">#<?=$locations['upload_location']?></a><br><br></li>    
+    <li class="search_location"><a href=""><img src="./assets/icon_location.png" alt="location-icon"><?=$locations['upload_location']?></a><br><br></li>    
     <?php } ?>
   <?php endif; ?>
   </ul> 

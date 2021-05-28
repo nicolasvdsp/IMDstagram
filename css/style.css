@@ -241,8 +241,19 @@ body {
 }
  .navbar__btn:nth-of-type(3) {
     background-image: url(../assets/icon_user.svg);
+    
 }
 /* ----- END OF NAVBAR ----- */
+
+
+/* ----- START OF SEARCH ----- */
+
+#Locations img{
+    width: 20px;
+    height: 20px;
+}
+
+/* ----- END OF SEARCH ----- */
 
 
 
