@@ -1,8 +1,8 @@
-<?php 
+<?php
 
-    ini_set('display_errors', true);
-    include_once(__DIR__ . "/classes/User.php");
-    include_once(__DIR__ . "/classes/Db.php");
+ini_set('display_errors', true);
+include_once(__DIR__ . "/classes/User.php");
+include_once(__DIR__ . "/classes/Db.php");
 
     session_start();
     if(!isset($_SESSION['id'])) {
@@ -83,8 +83,20 @@
             }
     }
 
-?><!DOCTYPE html>
+    $user = new User();
+    $user->updateFirstname($_POST['updateFirstname'], $sessionId);
+    $user->updateLastname($_POST['updateLastname'], $sessionId);
+    $user->updateEmail($_POST['updateEmail'], $sessionId);
+    $user->updateBiography($_POST['updateBiography'], $sessionId);
+    // $user->updateEmail($_POST['updateEmail']);
+
+    $userData = User::getUserDataFromId($sessionId);
+}
+
+?>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -95,6 +107,7 @@
     <link rel="stylesheet" type="text/css" href="css/temporary.css">
     <link rel="shortcut icon" type="image/svg" href="assets/favicon.svg">
 </head>
+
 <body>
     
     <?php include "header.php" ?>
@@ -146,4 +159,5 @@
 
     <?php include "navbar.php" ?>
 </body>
+
 </html>

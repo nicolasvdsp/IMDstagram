@@ -1,0 +1,26 @@
+        //ZOEKFUNCTIE
+        
+        $conn = Db::getConnection();
+         if(isset($_POST["submit-search"])){
+        $search = $_POST["search'"];
+        $statement = $conn->prepare("SELECT * FROM 'users' WHERE firstname='$search'");
+
+        $statement->setFetchMode(PDO::FETCH_OBJ);
+        $statement->execute();
+
+        if($row = $statement->fetch()){
+            ?>
+            <br><br><br>
+            <table>
+                <tr>
+                    <th>Firstname</th>
+                </tr>
+
+                <tr><?php echo $row->firstname; }?></tr>
+
+            </table>
+            <?
+        
+          else{
+            echo "Geen resultaten gevonden.";
+        } ?>

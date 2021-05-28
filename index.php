@@ -20,6 +20,7 @@
 
 ?><!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -30,6 +31,7 @@
     <title>Dinkstagram</title>
     <link rel="shortcut icon" type="image/svg" href="assets/favicon.svg">
 </head>
+
 <body>
         <?php include "header.php" ?>
 
@@ -125,6 +127,12 @@
                 <!-- detail comments -->
        
             <?php endforeach; ?>
+
+            <input type="hidden" id="result_no" value="2">
+            <input href="#" type="button" class="loading" id="loadBtn" data-postid="1" value="Load More">
+
+
+
         </section>
 
         
@@ -134,4 +142,5 @@
         <script src="javascript/app.js"></script>
         <script src="ajax/savelike.js"></script>
 </body>
+
 </html>
