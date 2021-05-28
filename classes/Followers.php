@@ -2,31 +2,30 @@
 include_once(__DIR__ . "/Db.php");
 
 
-class Followers{
+class Followers
+{
 
-        //Aantal vriendschappen weergeven
-        public static function countUsers(){
+    //Aantal vriendschappen weergeven
+    public static function countUsers()
+    {
+        $conn = Db::getConnection();
+        $statement = $conn->prepare("SELECT count(*) FROM friendships");
+        $statement->execute();
+        $countUsers = $statement->fetchColumn();
+        return $countUsers;
+    }
 
-            $conn = Db::getConnection();
-            $statement = $conn->prepare("SELECT count(*) FROM friendships");
-            $statement->execute() ;
-            $countUsers = $statement->fetchColumn();
-            
-            return $countUsers;
-    
-        }
 
-        //Verzoek krijgen
+    //Verzoek krijgen
 
-        //Verzoek sturen
+    //Verzoek sturen
 
-        //Verzoek accepteren
+    //Verzoek accepteren
 
-        //Verzoek verwijderen
+    //Verzoek verwijderen
 
-        //Volger krijgen
+    //Volger krijgen
 
-        //Volgend krijgen
+    //Volgend krijgen
 
 }
-
