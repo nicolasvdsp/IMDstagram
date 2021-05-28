@@ -15,6 +15,8 @@ if (!isset($_SESSION['id'])) {
 $allusers = Friends::Users();
 $following = Friends::Following($sessionId);
 $followers = Friends::Followers($sessionId);
+$request = Friends::SendRequest($sessionId);
+var_dump($request);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -44,13 +46,16 @@ $followers = Friends::Followers($sessionId);
                 <?php
                 foreach ($allusers as $users) { ?>
                     <li> <?php echo $users['firstname'] . ' ' . $users['lastname'] ?>
-                        <form method="POST" action="" class="btn">
-                            <input type="button" name="follow" value="follow" />
+                        <form method="POST" action="<?php $_PHP_SELF ?>" class="btn">
+                            <input type="hidden" id="id" name="id" value="<?php echo $users['id'] ?>">
+                            <input type="submit" value="Follow" />
                         </form>
                     </li>
                 <?php } ?>
             </ul>
         </section>
+
+
 
         <section>
 
@@ -75,13 +80,7 @@ $followers = Friends::Followers($sessionId);
 
             <br><br>
 
-            <h1>Aantal vriendschappen:
-                <?php
-                //Als je buddies hebt, komt deze in je lijst te staan
-                $countUsers = Friends::countUsers();
-                echo "$countUsers ";
-                ?>
-            </h1>
+
         </section>
 
     </div>

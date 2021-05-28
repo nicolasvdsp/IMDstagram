@@ -48,8 +48,31 @@ class Friends
     }
 
     //Verzoek krijgen
+    public static function GetRequest()
+    {
+    }
 
     //Verzoek sturen
+    public static function SendRequest($id)
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $request = $_POST["id"];
+        }
+        if (!empty($request)) {
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("SELECT * FROM friendships WHERE user_id = :user AND friend_id = :friend");
+            $statement->bindValue(':user', $id);
+            $statement->bindValue(':friend', $request);
+            $statement->execute();
+            $value = $statement->fetchAll();
+            if (empty($value)) {
+                $statement = $conn->prepare("INSERT INTO friendships (user_id, friend_id, status) VALUES (:user, :friend, 0)");
+                $statement->bindValue(':user', $id);
+                $statement->bindValue(':friend', $request);
+                $statement->execute();
+            }
+        }
+    }
 
     //Verzoek accepteren
 
