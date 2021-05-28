@@ -420,6 +420,7 @@ input{
 }
  .navbar__btn:nth-of-type(3) {
     background-image: url(../assets/icon_user.svg);
+    
 }
 /* ----- END OF NAVBAR ----- */
 
@@ -634,7 +635,16 @@ input{
     visibility: visible; */
 /* } */
 
-/* ----- END OF HOVERBUBBLE -----*/
+/* ----- START OF SEARCH ----- */
+
+#Locations img{
+    width: 20px;
+    height: 20px;
+}
+
+/* ----- END OF SEARCH ----- */
+
+
 
 /* ----- FIX AUTO-ADJUSTING TEXTAREA ----- */
 
