@@ -48,13 +48,7 @@ foreach ($posts as $post) {
         <a href="followers.php">+ friends</a>
     </div>
     <br><br>
-    <div class="followers">
-        <h1 style="font-size: 50px;">14 volgers</h1>
-    </div>
-
-    <div class="following">
-        <h1 style="font-size: 50px;">3 volgend</h1>
-    </div>
+   
 
 
 

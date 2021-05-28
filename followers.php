@@ -19,6 +19,13 @@ $request = Friends::SendRequest($sessionId);
 $getrequest = Friends::GetRequest($sessionId);
 $acceptrequest = Friends::AcceptRequest($sessionId);
 $deleterequest = Friends::DeleteRequest($sessionId);
+
+
+$myFollowers = Friends::countFollowers($sessionId);
+
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,43 +44,47 @@ $deleterequest = Friends::DeleteRequest($sessionId);
     <div class="header">
         <a href="index.php"><img class="logo" src="./assets/logo_dinkstagram.svg" alt="Logo Dinkstagram" /></a>
         <a href="search.php"><img class="search" src="./assets/icon_search.svg" alt="Search button" /></a>
-        <a href="followers.php">+ friends</a>
+        <a class="add_friends" href="followers.php">+ friends</a>
     </div>
     <br><br>
 
+
     <div class="friends">
         <section>
-            <h1>All users</h1>
-            <ul>
-                <?php
-                foreach ($allusers as $users) { ?>
-                    <li> <?php echo $users['firstname'] . ' ' . $users['lastname'] ?>
-                        <form method="POST" action="<?php $_PHP_SELF ?>" class="btn">
-                            <input type="hidden" id="id" name="id" value="<?php echo $users['id'] ?>">
-                            <input type="submit" value="Follow" />
-                        </form>
-                    </li>
-                <?php } ?>
-            </ul>
+        <table style="height: 397px;" width="450px;">
+            <tbody>
+                <tr>
+                    <td style="height: 50px; width: 193px;"><h1><?php echo $myFollowers; ?></h1></td>
+                    <td style="height: 50px; width: 194px;"><h1><?php echo $myFollowers; ?></h1></td>
+                </tr>
+                <tr>
+                    <td style="height: 50px; width: 193px;"><h1>Followers</h1></td>
+                    <td style="height: 50px; width: 194px;"><h1>Following</h1></td>
+                </tr>
+                <tr>
+                    <td style="width: 193px;">
+                        <div class="myFollowers">
+                            <?php
+                            foreach ($followers as $follower) { ?>
+                                <li> <?php echo $follower['firstname'] . ' ' . $follower['lastname'] ?>
+                                </li>
+                            <?php } ?>
+                        </div>
+                    </td>
+                <td style="width: 194px;">
+                    <div class="myFollowing">
+                            <?php
+                            foreach ($following as $follow) { ?>
+                                <li> <?php echo $follow['firstname'] . ' ' . $follow['lastname'] ?>
+                                </li>
+                            <?php } ?>
+                    </div>
+                </td>
+                </tr>
+            </tbody>
+        </table>
         </section>
-        <section>
-            <div class="myFollowers">
-                <h1>Followers</h1>
-                <?php
-                foreach ($followers as $follower) { ?>
-                    <li> <?php echo $follower['firstname'] . ' ' . $follower['lastname'] ?>
-                    </li>
-                <?php } ?>
-            </div>
-            <div class="myFollowing">
-                <h1>Following</h1>
-                <?php
-                foreach ($following as $follow) { ?>
-                    <li> <?php echo $follow['firstname'] . ' ' . $follow['lastname'] ?>
-                    </li>
-                <?php } ?>
-            </div>
-        </section>
+
         <section>
             <h1>New friends</h1>
             <?php
@@ -89,6 +100,23 @@ $deleterequest = Friends::DeleteRequest($sessionId);
                     </form>
                 </li>
             <?php } ?>
+        </section>
+
+
+
+        <section>
+            <h1>All users</h1>
+            <ul>
+                <?php
+                foreach ($allusers as $users) { ?>
+                    <li> <?php echo $users['firstname'] . ' ' . $users['lastname'] ?>
+                        <form method="POST" action="<?php $_PHP_SELF ?>" class="btn">
+                            <input type="hidden" id="id" name="id" value="<?php echo $users['id'] ?>">
+                            <input type="submit" value="Follow" />
+                        </form>
+                    </li>
+                <?php } ?>
+            </ul>
         </section>
     </div>
 

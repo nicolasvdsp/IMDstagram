@@ -29,9 +29,13 @@ class Friends
     {
         $conn = Db::getConnection();
         $search_result = $conn->prepare('SELECT firstname, lastname FROM users INNER JOIN friendships on friendships.friend_id=users.id WHERE friendships.user_id LIKE :id AND status = 1');
+
         $search_result->bindParam(":id", $id);
         $search_result->execute();
         $value = $search_result->fetchAll();
+
+        var_dump($value);
+
         return $value;
     }
 
@@ -41,9 +45,11 @@ class Friends
     {
         $conn = Db::getConnection();
         $search_result = $conn->prepare('SELECT firstname, lastname FROM users INNER JOIN friendships on friendships.user_id=users.id WHERE friendships.friend_id LIKE :id AND status = 1');
+
         $search_result->bindParam(":id", $id);
         $search_result->execute();
         $value = $search_result->fetchAll();
+
         return $value;
     }
 
@@ -106,8 +112,17 @@ class Friends
         }
     }
 
-    //Volger krijgen
+    //Aantal volgers
+    public static function countFollowers(){
+        $conn = Db::getConnection();
+        $statement = $conn->prepare("SELECT COUNT(*) FROM friendships WHERE status = :accepted");
+        $statement->bindValue(":accepted", 1);
+        $statement->execute();
+        $result = $statement->fetchColumn();
+        
+        return $result;
+    }
 
-    //Volgend krijgen
+    //Aantal volgend
 
 }
