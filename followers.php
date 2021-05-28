@@ -12,6 +12,7 @@ if (!isset($_SESSION['id'])) {
     $userData = User::getUserDataFromId($sessionId);
 }
 
+$allusers = Followers::Users();
 
 ?>
 <!DOCTYPE html>
@@ -36,31 +37,47 @@ if (!isset($_SESSION['id'])) {
     </div>
     <br><br>
 
-    <form action="" method="POST">
-        <button>Follow</button>
-        <button>Unfollow</button>
-    </form>
+    <div class="followers">
+        <section>
+            <h1>All users</h1>
+            <ul>
+                <?php
+                foreach ($allusers as $users) { ?>
+                    <li> <?php echo $users['firstname'] ?> <button>follow</button>
+                    </li>
+                <?php } ?>
+            </ul>
 
+        </section>
 
-    <div class="myFollowers">
-        <h1>Volgers</h1>
-        <li>naam + achternaam</li>
+        <section>
+
+            <div class="myFollowers">
+                <h1>Volgers</h1>
+                <li>naam + achternaam</li>
+            </div>
+
+            <div class="myFollowing">
+                <h2>Volgend</h2>
+                <li>naam + achternaam</li>
+            </div>
+
+            <br><br>
+
+            <h1>Aantal vriendschappen:
+                <?php
+                //Als je buddies hebt, komt deze in je lijst te staan
+                $countUsers = Followers::countUsers();
+                echo "$countUsers ";
+                ?>
+            </h1>
+        </section>
+
     </div>
 
-    <div class="myFollowing">
-        <h2>Volgend</h2>
-        <li>naam + achternaam</li>
-    </div>
 
-    <br><br>
 
-    <h1>Aantal vriendschappen:
-        <?php
-        //Als je buddies hebt, komt deze in je lijst te staan
-        $countUsers = Followers::countUsers();
-        echo "$countUsers ";
-        ?>
-    </h1>
+
 
     <nav class="navbar">
         <a class="navbar__btn" href="index.php">Home</a>
